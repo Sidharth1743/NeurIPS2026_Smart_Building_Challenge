@@ -10,7 +10,7 @@
 set -euo pipefail
 . "$(dirname "$0")/common.sh"
 SET="$1"; OUT="$2"; MODEL="${3:--}"; shift 3 || shift $#
-PL="${PUFFERLIB:-${SB_PL_ROOT:-/data/puffer-work}/plverify}"
+PL="${PUFFERLIB:-${SB_PL_ROOT:-${XDG_CACHE_HOME:-$HOME/.cache}/sb/pufferlib}/plverify}"
 BIN="${SB_BIN:-puffer}"
 N=$(ls "$ART/$SET"/*.sbb | wc -l)
 M=""; [ "$MODEL" != "-" ] && M="$MODEL"

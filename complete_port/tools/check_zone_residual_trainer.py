@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """One graph smoke and checkpoint round-trip, inside the existing trainer gate."""
+import os
+PL_ROOT = os.environ.get("SB_PL_ROOT", os.path.expanduser("~/.cache/sb/pufferlib"))  # release: root of the PufferLib checkouts
 import argparse, math, re, shlex, struct, subprocess
 from pathlib import Path
 CP=Path(__file__).resolve().parents[1]
@@ -31,7 +33,7 @@ def main():
       '--base.async=1','--base.eval_episodes=0','--base.cudagraphs=1','--base.checkpoint_optim=1',
       '--base.checkpoint_interval=1','--vec.total_agents=24']
     docker=['docker','run','--rm','--gpus',f'device={a.gpu}',
-      '-v','/data/puffer-work:/work','-v',f'{CP}/artifacts:/art','-v',f'{CP}/results:/res',
+      '-v',PL_ROOT + ":/work",'-v',f'{CP}/artifacts:/art','-v',f'{CP}/results:/res',
       '-w','/work/plverify','-e','SB_CREDIT=8','-e','SB_DETAIL_METRICS=1','-e','SB_ZONE_STATS=1',
       '-e','SB_ZONE_EMPTY_OBS='+empty,'pufferai/puffertank:5.0']
     def run(name,total,extra=()):

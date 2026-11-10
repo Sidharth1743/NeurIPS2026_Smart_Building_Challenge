@@ -31,13 +31,17 @@ leads our public leaderboard entry. Both are shipped, each named with the measur
 | driver / runtime | a driver new enough for CUDA 13, plus `nvidia-container-toolkit` |
 | container | `pufferai/puffertank:5.0`, pulled by `./run.sh setup`. The host `nvcc` is not used: it is too old for this code |
 | Python | 3.12 in `starter-kit/.venv` (the organiser simulator needs `numba`, which has no 3.13 wheels), 3.11 or newer for our tools |
+| `uv` | creates both Python environments; `pip install uv` or the standalone installer |
+| `tectonic` | only for `./run.sh paper`; any LaTeX with `natbib` and `unsrtnat` would do |
 | PufferLib | a checkout of `6ffa5b10dbbbe4d1e8288367c7d9d3acd3bad4a2` plus `complete_port/patches/pufferlib_core.diff`, created by `./run.sh setup` |
 | disk | 10 GB for the code and the 30 baked scenarios, 30 GB if you also bake the evaluation sets |
+| write access | `~/.cache/sb/pufferlib` for the PufferLib checkout; `SB_PL_ROOT` moves it |
 | network | the first `setup` clones PufferLib and the starter kit; after that everything is local. Both clones retry three times over HTTP/1.1, and `SB_PL_ROOT` can point at a directory that already holds `plclean` |
 
-CPU-only review is possible for the paper and for the analysis of the shipped scores. Training,
-evaluation and the bit-exactness gates need the GPU. The gates were last run end to end from a
-clean copy on a 12 GB RTX 3060: 67 passed, 0 failed, 33 minutes (`docs/VERIFICATION.md`).
+No GPU is needed to read most of this repository. `./run.sh doctor`, both PDFs, every `README.md`,
+`experiments/scores/*/score.json` and the whole experiment archive work on any machine. Training,
+evaluation and the bit-exactness gates need the GPU. The gates were last run end to end from a clean
+copy on a 12 GB RTX 3060: 67 passes, 0 failures, 34 minutes (`docs/VERIFICATION.md`).
 
 ---
 
@@ -48,7 +52,7 @@ Everything runs from the repository root. Each command prints what it is doing a
 ```bash
 ./run.sh setup      # container, Python 3.12 oracle env, PufferLib at the pinned commit + our patch
 ./run.sh data       # bake the 30 shipped scenarios into artifacts/train (4.6 GB, 5 to 10 min)
-./run.sh verify     # build both simulator variants and run the 35 bit-exactness gates (~20 min)
+./run.sh verify     # build both simulator variants and run the 35 gate groups (35 to 50 min)
 ./run.sh train      # PPO, 30 scenarios, 960 agents, 199.9M steps
 ./run.sh eval       # deterministic fp64 month for every scenario in a set
 ./run.sh score      # the 90-month panel for one checkpoint, with per-step recordings
@@ -58,7 +62,7 @@ Everything runs from the repository root. Each command prints what it is doing a
 |---|---|---|
 | `setup` | `docker pull`, `uv sync` in `starter-kit/`, `git clone` + `deploy_to_pufferlib.sh --apply-patch` | 10 min once |
 | `data` | `tools/bake_training_set.sh`, then `tools/make_artifacts.sh` (oracle traces and CPU references) | 5 to 10 min |
-| `verify` | `tools/verify_all.sh --trainer`, ends with `ALL CHECKS PASSED` | 18 to 25 min |
+| `verify` | `tools/verify_all.sh --trainer`, ends with `ALL CHECKS PASSED` | 35 to 50 min |
 | `train` | `PUFFERLIB=... tools/train.sh` with `config/smart_buildings.ini` | see below |
 | `eval` | `tools/eval_policy.sh <set> <out.json> <checkpoint>` | 2 min per 18 scenarios |
 | `score` | `tools/score_eval90.py` over three parts, merged by `tools/merge_eval_json.py` | 10 min per 90 months |
@@ -213,8 +217,9 @@ Final checkpoint, then the score.
 
 ## Licences and citation
 
-Our code is Apache-2.0. `starter-kit/` is the organisers' Apache-2.0 work and stays unmodified.
-`kaggle_evaluation/` is theirs as well. The paper is the authors'.
+Our code and this archive are **CC BY 4.0**, the licence the competition sets for entries: reuse
+it, cite it, and say what you changed. `starter-kit/` and `kaggle_evaluation/` are the organisers'
+Apache-2.0 work and keep their own terms, and `starter-kit/` is cloned unmodified.
 
 ```bibtex
 @inproceedings{siddharth2026smartbuildings,

@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import os
+PL_ROOT = os.environ.get("SB_PL_ROOT", os.path.expanduser("~/.cache/sb/pufferlib"))  # release: root of the PufferLib checkouts
 import re
 import shlex
 import shutil
@@ -18,7 +19,7 @@ def main():
     p.add_argument('--gpu', required=True)
     p.add_argument('--name', required=True)
     p.add_argument('--fixture', required=True)
-    p.add_argument('--checkout', default='/data/puffer-work/plverify')
+    p.add_argument('--checkout', default=PL_ROOT + "/plverify")
     p.add_argument('--restore-gpu', default=os.environ.get('SB_VERIFY_CROSS_GPU'))
     a = p.parse_args()
     out = CP / 'results' / a.name

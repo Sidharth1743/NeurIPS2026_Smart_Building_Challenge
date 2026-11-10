@@ -1,3 +1,9 @@
+> **This page is the port's development notes.** It describes `complete_port/` as it was
+> built, and it names files of the working tree (`results/`, `AGENTS.md`, `plan.md`) that are
+> not part of this repository. Start at [`../README.md`](../README.md); the runs are in
+> [`../experiments/`](../experiments/README.md) and the gate record in
+> [`../docs/VERIFICATION.md`](../docs/VERIFICATION.md).
+
 # complete_port: Smart Buildings simulator on the GPU (PufferLib 5.0)
 
 GPU port of the starter-kit simulator, checked against the unmodified Python simulator (the oracle). One

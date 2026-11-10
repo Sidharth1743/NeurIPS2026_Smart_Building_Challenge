@@ -34,7 +34,7 @@ edits are applied to the copies in this release, never to the originals.
 Overrides, all optional:
 
 - `SB_CP` (Python) and `SB_CP` (shell) point at `complete_port/`.
-- `SB_PL_ROOT` points at the directory that holds the PufferLib checkouts (default `/data/puffer-work`, created by `./run.sh setup`).
+- `SB_PL_ROOT` points at the directory that holds the PufferLib checkouts (default `~/.cache/sb/pufferlib`, created by `./run.sh setup`; set it if `$HOME` is not writable).
 - `PUFFERLIB` points at one patched checkout, as `tools/train.sh` already required.
 - `SB_ROOT` is the workspace root, used by `tools/score_cpu_pid.py`.
 

@@ -10,11 +10,11 @@ authors:
     given-names: "Sidharthan"
     affiliation: "Independent Researcher"
     email: "sid250581@gmail.com"
-license: Apache-2.0
+license: CC-BY-4.0
 version: "1.0.0"
 date-released: "2026-11-10"
 type: software
-repository-code: "https://github.com/Sidharth1743/smart-buildings-2026"
+repository-code: "https://github.com/Sidharth1743/NeurIPS2026_Smart_Building_Challenge"
 keywords:
   - reinforcement learning
   - hvac control

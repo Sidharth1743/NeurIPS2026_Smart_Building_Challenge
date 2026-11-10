@@ -4,6 +4,7 @@ import argparse
 import collections
 import json
 import os
+PL_ROOT = os.environ.get("SB_PL_ROOT", os.path.expanduser("~/.cache/sb/pufferlib"))  # release: root of the PufferLib checkouts
 from pathlib import Path
 import re
 import subprocess
@@ -93,7 +94,7 @@ def main():
         run([py, str(CP / "pysim/dump_step.py"), str(cfg_d), str(out / f"trace_{d}.step"), "16"], cwd=SK)
 
     docker = ["docker", "run", "--rm", "--gpus", f"device={a.gpu}",
-              "-v", f"{CP}:/cp", "-v", "/data/puffer-work:/work",
+              "-v", f"{CP}:/cp", "-v", PL_ROOT + ":/work",
               "-v", f"{out}:/check", "-w", "/work/plverify", "pufferai/puffertank:5.0"]
     for d in range(7):
         text = run(docker + ["env", f"SB_GATE_START_OFFSET={d * 288}", "SB_GRAPH=1",

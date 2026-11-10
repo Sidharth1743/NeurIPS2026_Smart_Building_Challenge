@@ -5,7 +5,7 @@
 set -e
 . "$(dirname "$0")/common.sh"
 NAME="$1"; shift
-PL="${PUFFERLIB:-${SB_PL_ROOT:-/data/puffer-work}/plverify}"
+PL="${PUFFERLIB:-${SB_PL_ROOT:-${XDG_CACHE_HOME:-$HOME/.cache}/sb/pufferlib}/plverify}"
 R="$CP/results/runs/$NAME"; mkdir -p "$R"
 echo "$*" > "$R/args.txt"
 touch "$R/.start"

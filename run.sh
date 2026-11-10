@@ -12,7 +12,7 @@
 #   ./run.sh doctor      print what is installed and what is missing
 #
 # Environment overrides, all optional:
-#   SB_PL_ROOT   where the PufferLib checkouts live          (default /data/puffer-work)
+#   SB_PL_ROOT   where the PufferLib checkouts live          (default ~/.cache/sb/pufferlib)
 #   PUFFERLIB    one patched checkout                        (default $SB_PL_ROOT/plverify)
 #   SB_GPU       which device to use, e.g. 0                 (default all)
 #   SB_IMAGE     container image                             (default pufferai/puffertank:5.0)
@@ -21,7 +21,7 @@ set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CP="$HERE/complete_port"
 SK="$HERE/starter-kit"
-PL_ROOT="${SB_PL_ROOT:-/data/puffer-work}"
+PL_ROOT="${SB_PL_ROOT:-${XDG_CACHE_HOME:-$HOME/.cache}/sb/pufferlib}"
 PL="${PUFFERLIB:-$PL_ROOT/plverify}"
 IMAGE="${SB_IMAGE:-pufferai/puffertank:5.0}"
 KIT_SHA="$(sed -n 's/^- commit: `\(.*\)`.*/\1/p' "$HERE/STARTER_KIT.md" 2>/dev/null | head -1)"
@@ -77,8 +77,11 @@ setup)
   fi
   say "python 3.12 oracle environment (numba has no 3.13 wheels)"
   ( cd "$SK" && uv sync --extra dev --python 3.12 )
-  say "pufferlib at the pinned base commit"
-  mkdir -p "$PL_ROOT"
+  say "pufferlib at the pinned base commit, under $PL_ROOT"
+  mkdir -p "$PL_ROOT" 2>/dev/null || {
+    echo "cannot create $PL_ROOT. Set SB_PL_ROOT to a directory you can write, for example" >&2
+    echo "  export SB_PL_ROOT=\$HOME/pufferlib" >&2
+    exit 1; }
   BASE="$(cat "$CP/patches/pufferlib_base_commit.txt")"
   if [ ! -d "$PL_ROOT/plclean/.git" ]; then
     # HTTP/1.1 and a shallow, blob-less clone: the full history is 100+ MB and the HTTP/2 stream
