@@ -1,3 +1,7 @@
+> The CSV tables this page names are rebuilt by the scripts in this folder from the
+> checkpoint's per-step recording, which is 7.6 GB and is not shipped. The scores themselves
+> are in `../panel90_r139/` and `../panel54/`.
+
 # 07 — Appendix: the r116 recipe on the same 90 scenarios
 
 The results section reports r122. This appendix documents the other recipe in the project, r116, on the identical 90 deterministic months, so the comparison is paired scenario by scenario. Both were scored with the same scorer (fp64, deterministic, `SB_RECORD`) on the same 90 blobs; the only difference is the checkpoint. r116 is not a weaker baseline: it was the selected research baseline, and this is the only place in the project where the same policy recipe was trained at two different scales.

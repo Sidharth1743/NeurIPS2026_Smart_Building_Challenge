@@ -1,3 +1,7 @@
+> The CSV tables this page names are rebuilt by the scripts in this folder from the
+> checkpoint's per-step recording, which is 7.6 GB and is not shipped. The scores themselves
+> are in `../panel90_r139/` and `../panel54/`.
+
 # 09 — Behaviour of the reported checkpoint (199,065,600)
 
 ## Heads by role, all 90 months

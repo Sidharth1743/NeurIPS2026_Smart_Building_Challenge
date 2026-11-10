@@ -1,3 +1,7 @@
+> The CSV tables this page names are rebuilt by the scripts in this folder from the
+> checkpoint's per-step recording, which is 7.6 GB and is not shipped. The scores themselves
+> are in `../panel90_r139/` and `../panel54/`.
+
 # 05 — Zones: r139 @199,065,600
 
 The comfort term is zero when a zone is unoccupied, so the scored regret is the deficit on occupied steps. The per-zone band deficit is decoded from the canonical observation (`max(Hs−T,0)+max(T−Cs,0)`) and validated against the recorded comfort parts. Free float (empty building) is reported separately; it is not scored.

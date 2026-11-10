@@ -1,3 +1,7 @@
+> The CSV tables this page names are rebuilt by the scripts in this folder from the
+> checkpoint's per-step recording, which is 7.6 GB and is not shipped. The scores themselves
+> are in `../panel90_r139/` and `../panel54/`.
+
 # 01 — Score decomposition: r139 @199,065,600
 
 The checkpoint 199,065,600 of the r139 recipe, on the same 90 held-out months as the parent analysis. `score = −0.6·productivity + 0.2·energy + 0.2·carbon`; lower is better. Terms are the normalised competition quantities, and the identity was re-checked on all 90 rows (max error 1.0e-07).

@@ -1,3 +1,7 @@
+> The CSV tables this page names are rebuilt by the scripts in this folder from the
+> checkpoint's per-step recording, which is 7.6 GB and is not shipped. The scores themselves
+> are in `../panel90_r139/` and `../panel54/`.
+
 # 02 — Score decomposition
 
 `score = −0.6·productivity + 0.2·energy + 0.2·carbon`, with productivity stored signed (negative = comfort regret) and both energy and carbon already normalised. Lower is better; the ideal is 0. The identity was re-checked on all 450 policy×scenario rows (max error 2.9e-07).

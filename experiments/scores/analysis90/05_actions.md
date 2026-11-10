@@ -1,3 +1,7 @@
+> The CSV tables this page names are rebuilt by the scripts in this folder from the
+> checkpoint's per-step recording, which is 7.6 GB and is not shipped. The scores themselves
+> are in `../panel90_r139/` and `../panel54/`.
+
 # 05 — Actions: what the policy does with 75–209 actuators
 
 The paper's RL demo restricted the action space to **2 setpoints** (supply-air and hot-water temperature, Appendix J). This policy controls every native actuator the gateway exposes, and the recording shows what it does with them. `loc.bin` is the executed mean action per canonical head per step (2 per zone, 4 per AHU, 3 plant); `conc.bin` is the Beta concentration (α+β, capped at 12) of the same head. The baseline has no action recording, so every comparison here is among the four learned checkpoints.

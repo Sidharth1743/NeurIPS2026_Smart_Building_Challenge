@@ -1,3 +1,7 @@
+> The CSV tables this page names are rebuilt by the scripts in this folder from the
+> checkpoint's per-step recording, which is 7.6 GB and is not shipped. The scores themselves
+> are in `../panel90_r139/` and `../panel54/`.
+
 # r139 @199,065,600 — checkpoint breakdown (parts 1–3)
 
 The r139 recipe trained on the 30-scenario batch, 199.9M steps annealed to zero, seed 75. Checkpoint

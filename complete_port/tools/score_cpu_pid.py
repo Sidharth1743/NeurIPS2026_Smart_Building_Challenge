@@ -12,6 +12,7 @@ Writes <out>/<building>__<weather>/summary.json and reward_components.csv.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import multiprocessing as mp
 import os
@@ -82,7 +83,14 @@ def run_one(args):
 
 
 def main():
-    lst, out, workers, steps = sys.argv[1], Path(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4])
+    ap = argparse.ArgumentParser(
+        description='Official pid_water baseline on a scenario list, one month each, in parallel.')
+    ap.add_argument('list', help='text file, one scenario directory per line (each holds config.gin)')
+    ap.add_argument('out', help='output directory: <out>/<building>__<weather>/{summary.json,reward_components.csv}')
+    ap.add_argument('workers', type=int, nargs='?', default=4, help='parallel scenarios (default 4)')
+    ap.add_argument('steps', type=int, nargs='?', default=8640, help='steps per scenario (default 8640, one month)')
+    a = ap.parse_args()
+    lst, out, workers, steps = a.list, Path(a.out), a.workers, a.steps
     out.mkdir(parents=True, exist_ok=True)
     dirs = [l.strip() for l in Path(lst).read_text().splitlines() if l.strip()]
     jobs = [(d, None, str(out), steps) for d in dirs]

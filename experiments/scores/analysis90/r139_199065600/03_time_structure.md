@@ -1,3 +1,7 @@
+> The CSV tables this page names are rebuilt by the scripts in this folder from the
+> checkpoint's per-step recording, which is 7.6 GB and is not shipped. The scores themselves
+> are in `../panel90_r139/` and `../panel54/`.
+
 # 03 — Time structure: r139 @199,065,600
 
 Same clock for every episode: 8,640 five-minute steps starting Sunday 06:00. Bins: weekday night 19–06, weekday morning 06–12, afternoon 12–16, evening 16–19, weekend day, weekend night. Day 0 is an 18-hour Sunday.

@@ -1,3 +1,7 @@
+> The CSV tables this page names are rebuilt by the scripts in this folder from the
+> checkpoint's per-step recording, which is 7.6 GB and is not shipped. The scores themselves
+> are in `../panel90_r139/` and `../panel54/`.
+
 # 04 — Time structure
 
 Every episode is 8,640 steps of 5 minutes starting **Sunday 06:00**. The clock is rebuilt from the step index, so it is identical for all 90 scenarios and for the baseline. Bins: weekday night 19–06, weekday morning 06–12, afternoon 12–16, evening 16–19, weekend day 06–19, weekend night. Day 0 of the episode is an 18-hour Sunday; the other 29 days are full days.

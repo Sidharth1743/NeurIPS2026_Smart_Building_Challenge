@@ -94,8 +94,10 @@ kaggle_evaluation/         the scoring gateway, as shipped by the organisers
 data/                      what a scenario is, the scenario lists, blob hashes, the data card
 experiments/               the ablation library, the reported runs, the score panels, the ledger
 paper/                     the paper source, the figures and both compiled PDFs
-docs/                      hardware, release edits, licences
-MANIFEST.md, SHA256SUMS    every file, its size and its digest
+docs/                      hardware, the verification record, release edits, the manifest
+NOTICE                     attribution and licence of the parts written by others
+docs/MANIFEST.md           every file, its size and its digest
+SHA256SUMS                 the same digests in `sha256sum -c` form
 ```
 
 ---
@@ -219,10 +221,11 @@ Final checkpoint, then the score.
 
 Our code and this archive are **CC BY 4.0**, the licence the competition sets for entries: reuse
 it, cite it, and say what you changed. `starter-kit/` and `kaggle_evaluation/` are the organisers'
-Apache-2.0 work and keep their own terms, and `starter-kit/` is cloned unmodified.
+Apache-2.0 work and keep their own terms, and `starter-kit/` is cloned unmodified. `NOTICE`
+records the attribution and the licence of each part.
 
 ```bibtex
-@inproceedings{siddharth2026smartbuildings,
+@inproceedings{sidharthan2026smartbuildings,
   title  = {One Shared PPO Policy for Heterogeneous Commercial Building HVAC Control},
   author = {Sidharthan S},
   booktitle = {NeurIPS 2026 Smart Buildings Challenge},

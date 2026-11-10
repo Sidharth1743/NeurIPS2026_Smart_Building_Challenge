@@ -52,4 +52,5 @@ The release adds only the entry point, the documents and the archives:
 | `experiments/_tools/tb_to_csv.py` | event file to CSV, standard library only |
 | `experiments/scores/*/README.md`, `metrics.json` | the merged `pid_water` rows, which the workspace kept only per scenario |
 | `paper/build.sh` | rebuilds both PDFs |
-| `MANIFEST.md`, `SHA256SUMS` | every file, its size and its digest |
+| `docs/MANIFEST.md`, `SHA256SUMS` | every file, its size and its digest |
+| `NOTICE` | attribution for the organisers' gateway and simulator |

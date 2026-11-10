@@ -1,3 +1,7 @@
+> The CSV tables this page names are rebuilt by the scripts in this folder from the
+> checkpoint's per-step recording, which is 7.6 GB and is not shipped. The scores themselves
+> are in `../panel90_r139/` and `../panel54/`.
+
 # 06 — Zones: where the scored comfort regret lives
 
 Comfort is a building mean of a per-zone quantity, and it is **zero when a zone is unoccupied**. The canonical observation carries, per zone slot, the temperature and both setpoints (`T`, `Hs`, `Cs`); decoding them reproduces the recorded `comfort_dev_K` (0.414305 vs 0.414324) and the worst-zone maximum (20.916 K both). The band deficit is `D = max(Hs − T, 0) + max(T − Cs, 0)` in kelvin.

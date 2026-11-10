@@ -1,3 +1,7 @@
+> The CSV tables this page names are rebuilt by the scripts in this folder from the
+> checkpoint's per-step recording, which is 7.6 GB and is not shipped. The scores themselves
+> are in `../panel90_r139/` and `../panel54/`.
+
 # 03 — Terms and fuel
 
 Terms are the competition's normalised quantities; `score = −0.6·productivity + 0.2·energy + 0.2·carbon`. Two extra physical units are derived so the terms can be read as a building result, not only as a number:
