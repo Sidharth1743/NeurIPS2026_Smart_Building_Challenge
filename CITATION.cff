@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper."
+title: "One Shared PPO Policy for Heterogeneous Commercial Building HVAC Control"
+abstract: >-
+  A single Proximal Policy Optimization policy that controls commercial building HVAC
+  systems across unseen building layouts and climates, trained only on the joint comfort,
+  cost and carbon reward of the NeurIPS 2026 Smart Buildings Challenge.
+authors:
+  - family-names: "S"
+    given-names: "Siddharth"
+    affiliation: "Independent Researcher"
+    email: "sid250581@gmail.com"
+license: Apache-2.0
+version: "1.0.0"
+date-released: "2026-11-10"
+type: software
+repository-code: "https://github.com/Sidharth1743/smart-buildings-2026"
+keywords:
+  - reinforcement learning
+  - hvac control
+  - building control
+  - proximal policy optimization
+  - benchmark

@@ -1,0 +1,442 @@
+{
+ "scenarios": {
+  "building_train_4__atlanta_4": {
+   "episodes": 1,
+   "mean_reward": -0.007200447373,
+   "productivity": -0.0004215334193,
+   "energy_cost": 0.02806233615,
+   "carbon": 0.006675371435
+  },
+  "building_train_4__atlanta_7": {
+   "episodes": 1,
+   "mean_reward": -0.004022222266,
+   "productivity": -0.0002493760257,
+   "energy_cost": 0.0136363944,
+   "carbon": 0.005726588424
+  },
+  "building_train_4__denver_1": {
+   "episodes": 1,
+   "mean_reward": -0.01270769041,
+   "productivity": -0.001925471588,
+   "energy_cost": 0.01800199971,
+   "carbon": 0.03975998983
+  },
+  "building_train_4__denver_4": {
+   "episodes": 1,
+   "mean_reward": -0.003987255238,
+   "productivity": -0.0002735338057,
+   "energy_cost": 0.01429086644,
+   "carbon": 0.004824803676
+  },
+  "building_train_4__fairbanks_3": {
+   "episodes": 1,
+   "mean_reward": -0.01414322417,
+   "productivity": -0.001803336898,
+   "energy_cost": 0.01912418194,
+   "carbon": 0.04618189484
+  },
+  "building_train_4__fairbanks_6": {
+   "episodes": 1,
+   "mean_reward": -0.00256139316,
+   "productivity": -0.0003391015634,
+   "energy_cost": 0.007115506567,
+   "carbon": 0.004674161319
+  },
+  "building_train_4__minneapolis_1": {
+   "episodes": 1,
+   "mean_reward": -0.02551947363,
+   "productivity": -0.005150068551,
+   "energy_cost": 0.03389875218,
+   "carbon": 0.07824834436
+  },
+  "building_train_4__minneapolis_2": {
+   "episodes": 1,
+   "mean_reward": -0.01552577228,
+   "productivity": -0.001929852646,
+   "energy_cost": 0.02116151713,
+   "carbon": 0.05067775026
+  },
+  "building_train_4__minneapolis_3": {
+   "episodes": 1,
+   "mean_reward": -0.006062269107,
+   "productivity": -0.0001657702815,
+   "energy_cost": 0.01155648567,
+   "carbon": 0.01825752296
+  },
+  "building_train_4__minneapolis_4": {
+   "episodes": 1,
+   "mean_reward": -0.004661560719,
+   "productivity": -0.0001194112556,
+   "energy_cost": 0.01689878479,
+   "carbon": 0.006050757132
+  },
+  "building_train_4__minneapolis_5": {
+   "episodes": 1,
+   "mean_reward": -0.005493276828,
+   "productivity": -0.0001867973479,
+   "energy_cost": 0.02155012637,
+   "carbon": 0.005355804693
+  },
+  "building_train_4__minneapolis_6": {
+   "episodes": 1,
+   "mean_reward": -0.004625944833,
+   "productivity": -8.346393588e-05,
+   "energy_cost": 0.01836853288,
+   "carbon": 0.004510778934
+  },
+  "building_train_4__minneapolis_7": {
+   "episodes": 1,
+   "mean_reward": -0.003349752106,
+   "productivity": -0.0002206734353,
+   "energy_cost": 0.009009888396,
+   "carbon": 0.007076863199
+  },
+  "building_train_4__minneapolis_8": {
+   "episodes": 1,
+   "mean_reward": -0.008150100187,
+   "productivity": -0.0006979303434,
+   "energy_cost": 0.01189087052,
+   "carbon": 0.02676583827
+  },
+  "building_train_4__phoenix_2": {
+   "episodes": 1,
+   "mean_reward": -0.004349220864,
+   "productivity": -0.0001694828388,
+   "energy_cost": 0.01650157943,
+   "carbon": 0.004736029077
+  },
+  "building_train_4__phoenix_7": {
+   "episodes": 1,
+   "mean_reward": -0.005320335969,
+   "productivity": -0.0001638368267,
+   "energy_cost": 0.02075038478,
+   "carbon": 0.005359731615
+  },
+  "building_train_4__singapore_2": {
+   "episodes": 1,
+   "mean_reward": -0.008068374786,
+   "productivity": -0.0002975244133,
+   "energy_cost": 0.03170247748,
+   "carbon": 0.007746764459
+  },
+  "building_train_4__singapore_5": {
+   "episodes": 1,
+   "mean_reward": -0.008193845345,
+   "productivity": -0.0001868288091,
+   "energy_cost": 0.0326337181,
+   "carbon": 0.007775025908
+  },
+  "building_train_5__atlanta_4": {
+   "episodes": 1,
+   "mean_reward": -0.00575017582,
+   "productivity": -0.0001556796633,
+   "energy_cost": 0.02277987637,
+   "carbon": 0.005503862165
+  },
+  "building_train_5__atlanta_7": {
+   "episodes": 1,
+   "mean_reward": -0.003340060603,
+   "productivity": -0.0001141275789,
+   "energy_cost": 0.01024360303,
+   "carbon": 0.006114361342
+  },
+  "building_train_5__denver_1": {
+   "episodes": 1,
+   "mean_reward": -0.01728819864,
+   "productivity": -0.005215481855,
+   "energy_cost": 0.02173246257,
+   "carbon": 0.04906202108
+  },
+  "building_train_5__denver_4": {
+   "episodes": 1,
+   "mean_reward": -0.003049946913,
+   "productivity": -8.069052274e-05,
+   "energy_cost": 0.01026680786,
+   "carbon": 0.004740838893
+  },
+  "building_train_5__fairbanks_3": {
+   "episodes": 1,
+   "mean_reward": -0.02117459775,
+   "productivity": -0.009853723459,
+   "energy_cost": 0.02198356576,
+   "carbon": 0.05432813987
+  },
+  "building_train_5__fairbanks_6": {
+   "episodes": 1,
+   "mean_reward": -0.002512844856,
+   "productivity": -5.645595593e-05,
+   "energy_cost": 0.005834078882,
+   "carbon": 0.006560763344
+  },
+  "building_train_5__minneapolis_1": {
+   "episodes": 1,
+   "mean_reward": -0.0287756342,
+   "productivity": -0.006172839087,
+   "energy_cost": 0.03727752343,
+   "carbon": 0.08808209747
+  },
+  "building_train_5__minneapolis_2": {
+   "episodes": 1,
+   "mean_reward": -0.01856721254,
+   "productivity": -0.002077565994,
+   "energy_cost": 0.02497623861,
+   "carbon": 0.061627049
+  },
+  "building_train_5__minneapolis_3": {
+   "episodes": 1,
+   "mean_reward": -0.007490203524,
+   "productivity": -5.051408516e-05,
+   "energy_cost": 0.01261751913,
+   "carbon": 0.02468193322
+  },
+  "building_train_5__minneapolis_4": {
+   "episodes": 1,
+   "mean_reward": -0.003863110187,
+   "productivity": -8.130792412e-05,
+   "energy_cost": 0.01279991493,
+   "carbon": 0.00627172552
+  },
+  "building_train_5__minneapolis_5": {
+   "episodes": 1,
+   "mean_reward": -0.004123014212,
+   "productivity": -5.723741197e-05,
+   "energy_cost": 0.0161784105,
+   "carbon": 0.004264955409
+  },
+  "building_train_5__minneapolis_6": {
+   "episodes": 1,
+   "mean_reward": -0.003326410186,
+   "productivity": -1.776083081e-05,
+   "energy_cost": 0.01314505655,
+   "carbon": 0.003433681326
+  },
+  "building_train_5__minneapolis_7": {
+   "episodes": 1,
+   "mean_reward": -0.003640602423,
+   "productivity": -6.135184231e-05,
+   "energy_cost": 0.008173681796,
+   "carbon": 0.009845269844
+  },
+  "building_train_5__minneapolis_8": {
+   "episodes": 1,
+   "mean_reward": -0.01006426472,
+   "productivity": -0.000361741113,
+   "energy_cost": 0.01458329801,
+   "carbon": 0.03465281427
+  },
+  "building_train_5__phoenix_2": {
+   "episodes": 1,
+   "mean_reward": -0.003240936609,
+   "productivity": -1.750948104e-05,
+   "energy_cost": 0.01195594482,
+   "carbon": 0.004196198657
+  },
+  "building_train_5__phoenix_7": {
+   "episodes": 1,
+   "mean_reward": -0.004074707889,
+   "productivity": -7.803647895e-05,
+   "energy_cost": 0.01571610197,
+   "carbon": 0.00442326162
+  },
+  "building_train_5__singapore_2": {
+   "episodes": 1,
+   "mean_reward": -0.007125501695,
+   "productivity": -0.000488654885,
+   "energy_cost": 0.02742289938,
+   "carbon": 0.006738583092
+  },
+  "building_train_5__singapore_5": {
+   "episodes": 1,
+   "mean_reward": -0.007334650794,
+   "productivity": -0.0005190144875,
+   "energy_cost": 0.02832962759,
+   "carbon": 0.006786562037
+  },
+  "building_train_7__atlanta_4": {
+   "episodes": 1,
+   "mean_reward": -0.006014360441,
+   "productivity": -2.212344953e-05,
+   "energy_cost": 0.02417894825,
+   "carbon": 0.005826447159
+  },
+  "building_train_7__atlanta_7": {
+   "episodes": 1,
+   "mean_reward": -0.004333072704,
+   "productivity": -0.0006656416226,
+   "energy_cost": 0.01140684541,
+   "carbon": 0.008261583745
+  },
+  "building_train_7__denver_1": {
+   "episodes": 1,
+   "mean_reward": -0.02645341158,
+   "productivity": -0.01202572417,
+   "energy_cost": 0.02916232683,
+   "carbon": 0.06702772528
+  },
+  "building_train_7__denver_4": {
+   "episodes": 1,
+   "mean_reward": -0.003916741687,
+   "productivity": -0.0002118879638,
+   "energy_cost": 0.01209898666,
+   "carbon": 0.006849037483
+  },
+  "building_train_7__fairbanks_3": {
+   "episodes": 1,
+   "mean_reward": -0.02403901523,
+   "productivity": -0.006678637583,
+   "energy_cost": 0.02860121243,
+   "carbon": 0.07155799121
+  },
+  "building_train_7__fairbanks_6": {
+   "episodes": 1,
+   "mean_reward": -0.003438830552,
+   "productivity": -4.531373634e-05,
+   "energy_cost": 0.00704003172,
+   "carbon": 0.01001817081
+  },
+  "building_train_7__minneapolis_1": {
+   "episodes": 1,
+   "mean_reward": -0.05709930455,
+   "productivity": -0.0398982428,
+   "energy_cost": 0.04928784817,
+   "carbon": 0.1165140346
+  },
+  "building_train_7__minneapolis_2": {
+   "episodes": 1,
+   "mean_reward": -0.03542768589,
+   "productivity": -0.01959067024,
+   "energy_cost": 0.03418850899,
+   "carbon": 0.08417785168
+  },
+  "building_train_7__minneapolis_3": {
+   "episodes": 1,
+   "mean_reward": -0.01126061209,
+   "productivity": -0.001862183097,
+   "energy_cost": 0.01649651118,
+   "carbon": 0.03421992064
+  },
+  "building_train_7__minneapolis_4": {
+   "episodes": 1,
+   "mean_reward": -0.00448914978,
+   "productivity": -0.0003446105402,
+   "energy_cost": 0.01366562955,
+   "carbon": 0.007746283431
+  },
+  "building_train_7__minneapolis_5": {
+   "episodes": 1,
+   "mean_reward": -0.004291051919,
+   "productivity": -6.335801299e-05,
+   "energy_cost": 0.01670517027,
+   "carbon": 0.004560003523
+  },
+  "building_train_7__minneapolis_6": {
+   "episodes": 1,
+   "mean_reward": -0.003604273674,
+   "productivity": -6.118063902e-05,
+   "energy_cost": 0.01393439993,
+   "carbon": 0.003903408768
+  },
+  "building_train_7__minneapolis_7": {
+   "episodes": 1,
+   "mean_reward": -0.00524265049,
+   "productivity": -0.0006763283745,
+   "energy_cost": 0.01001732238,
+   "carbon": 0.01416693907
+  },
+  "building_train_7__minneapolis_8": {
+   "episodes": 1,
+   "mean_reward": -0.01758572227,
+   "productivity": -0.005098476075,
+   "energy_cost": 0.02138070576,
+   "carbon": 0.05125242472
+  },
+  "building_train_7__phoenix_2": {
+   "episodes": 1,
+   "mean_reward": -0.004035062547,
+   "productivity": -0.0002404575062,
+   "energy_cost": 0.01373392344,
+   "carbon": 0.005720005371
+  },
+  "building_train_7__phoenix_7": {
+   "episodes": 1,
+   "mean_reward": -0.004512433096,
+   "productivity": -4.570411693e-05,
+   "energy_cost": 0.01698278077,
+   "carbon": 0.005442310125
+  },
+  "building_train_7__singapore_2": {
+   "episodes": 1,
+   "mean_reward": -0.007134209613,
+   "productivity": -4.430276022e-06,
+   "energy_cost": 0.02856874838,
+   "carbon": 0.007088975515
+  },
+  "building_train_7__singapore_5": {
+   "episodes": 1,
+   "mean_reward": -0.007283993992,
+   "productivity": -6.355877531e-07,
+   "energy_cost": 0.0293195527,
+   "carbon": 0.007098442409
+  }
+ },
+ "n_scenarios_done": 54,
+ "n_scenarios": 54,
+ "complete": true,
+ "score": 0.009793441017351853,
+ "sources": {
+  "building_train_4__atlanta_4": "score.json",
+  "building_train_4__atlanta_7": "score.json",
+  "building_train_4__denver_1": "score.json",
+  "building_train_4__denver_4": "score.json",
+  "building_train_4__fairbanks_3": "score.json",
+  "building_train_4__fairbanks_6": "score.json",
+  "building_train_4__minneapolis_1": "score.json",
+  "building_train_4__minneapolis_2": "score.json",
+  "building_train_4__minneapolis_3": "score.json",
+  "building_train_4__minneapolis_4": "score.json",
+  "building_train_4__minneapolis_5": "score.json",
+  "building_train_4__minneapolis_6": "score.json",
+  "building_train_4__minneapolis_7": "score.json",
+  "building_train_4__minneapolis_8": "score.json",
+  "building_train_4__phoenix_2": "score.json",
+  "building_train_4__phoenix_7": "score.json",
+  "building_train_4__singapore_2": "score.json",
+  "building_train_4__singapore_5": "score.json",
+  "building_train_5__atlanta_4": "score.json",
+  "building_train_5__atlanta_7": "score.json",
+  "building_train_5__denver_1": "score.json",
+  "building_train_5__denver_4": "score.json",
+  "building_train_5__fairbanks_3": "score.json",
+  "building_train_5__fairbanks_6": "score.json",
+  "building_train_5__minneapolis_1": "score.json",
+  "building_train_5__minneapolis_2": "score.json",
+  "building_train_5__minneapolis_3": "score.json",
+  "building_train_5__minneapolis_4": "score.json",
+  "building_train_5__minneapolis_5": "score.json",
+  "building_train_5__minneapolis_6": "score.json",
+  "building_train_5__minneapolis_7": "score.json",
+  "building_train_5__minneapolis_8": "score.json",
+  "building_train_5__phoenix_2": "score.json",
+  "building_train_5__phoenix_7": "score.json",
+  "building_train_5__singapore_2": "score.json",
+  "building_train_5__singapore_5": "score.json",
+  "building_train_7__atlanta_4": "score.json",
+  "building_train_7__atlanta_7": "score.json",
+  "building_train_7__denver_1": "score.json",
+  "building_train_7__denver_4": "score.json",
+  "building_train_7__fairbanks_3": "score.json",
+  "building_train_7__fairbanks_6": "score.json",
+  "building_train_7__minneapolis_1": "score.json",
+  "building_train_7__minneapolis_2": "score.json",
+  "building_train_7__minneapolis_3": "score.json",
+  "building_train_7__minneapolis_4": "score.json",
+  "building_train_7__minneapolis_5": "score.json",
+  "building_train_7__minneapolis_6": "score.json",
+  "building_train_7__minneapolis_7": "score.json",
+  "building_train_7__minneapolis_8": "score.json",
+  "building_train_7__phoenix_2": "score.json",
+  "building_train_7__phoenix_7": "score.json",
+  "building_train_7__singapore_2": "score.json",
+  "building_train_7__singapore_5": "score.json"
+ }
+}

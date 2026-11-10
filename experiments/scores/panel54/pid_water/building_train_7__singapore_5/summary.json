@@ -1,0 +1,14 @@
+{
+ "scenario": "building_train_7__singapore_5",
+ "policy": "pid_water",
+ "steps": 8640,
+ "seconds": 372.679395198822,
+ "score": 0.04541451857973605,
+ "mean_reward": -0.04541451859969715,
+ "productivity": -0.04640512701621973,
+ "energy_cost": 0.0639489456112602,
+ "carbon": 0.023908266238760866,
+ "electricity_cost_sum": 3475.089095898904,
+ "gas_cost_sum": 161.525522711112,
+ "zone_temps_last": null
+}

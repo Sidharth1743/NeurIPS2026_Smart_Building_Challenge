@@ -1,0 +1,14 @@
+{
+ "scenario": "building_train_6__denver_1",
+ "policy": "pid_water",
+ "steps": 8640,
+ "seconds": 1264.135999917984,
+ "score": 0.08217914987666956,
+ "mean_reward": -0.08217914983180545,
+ "productivity": -0.11899489991382224,
+ "energy_cost": 0.020489036042178027,
+ "carbon": 0.03342201359970305,
+ "electricity_cost_sum": 800.1665463205427,
+ "gas_cost_sum": 990.2182408359658,
+ "zone_temps_last": null
+}

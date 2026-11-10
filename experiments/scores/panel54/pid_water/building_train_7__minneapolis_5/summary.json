@@ -1,0 +1,14 @@
+{
+ "scenario": "building_train_7__minneapolis_5",
+ "policy": "pid_water",
+ "steps": 8640,
+ "seconds": 374.8367118835449,
+ "score": 0.02304102694426276,
+ "mean_reward": -0.0230410269728052,
+ "productivity": -0.02838067669117326,
+ "energy_cost": 0.02306722133237055,
+ "carbon": 0.0069958833154234725,
+ "electricity_cost_sum": 1296.045129203936,
+ "gas_cost_sum": 28.653981436045797,
+ "zone_temps_last": null
+}

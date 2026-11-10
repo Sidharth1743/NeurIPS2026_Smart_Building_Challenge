@@ -1,0 +1,644 @@
+diff --git a/build.sh b/build.sh
+index 6822e9d..5f30e90 100755
+--- a/build.sh
++++ b/build.sh
+@@ -179,6 +179,44 @@ elif [ "$ENV" = "impulse_wars" ]; then
+     if [ -z "${MODE:-}" ] || [ "$MODE" = "native" ] || [ "$MODE" = "profile" ]; then
+         EXTRA_SRC="ocean/impulse_wars/impulse_wars_api.c"
+     fi
++elif [ "$ENV" = "crashit" ]; then
++    SRC_DIR="ocean/$ENV"
++    # Chipmunk2D physics (prebuilt WITHOUT -ffast-math -- the stock CMake
++    # flag miscompiles sleep-state checks; see crashit-rl/puffer/README.md).
++    # Training builds run in the crashit-puffer container: /work/chipmunk.
++    CHIPMUNK_DIR="${CHIPMUNK_DIR:-/work/chipmunk}"
++    if [ ! -f "$CHIPMUNK_DIR/lib/libchipmunk.a" ]; then
++        echo "Error: libchipmunk.a not found in $CHIPMUNK_DIR" >&2
++        echo "Build Chipmunk (minus -ffast-math) or set CHIPMUNK_DIR." >&2
++        exit 1
++    fi
++    INCLUDES+=(-I"$CHIPMUNK_DIR/include" -I./ocean/crashit/csim)
++    LINK_ARCHIVES+=("$CHIPMUNK_DIR/lib/libchipmunk.a")
++    # crashit.c is C99-clean under a C++ compiler too (checked), so it can
++    # ride EXTRA_SRC into the nvcc line like impulse_wars_api.c.
++    # Web builds excluded: the x86 archive cannot link under emscripten.
++    if [ -z "${MODE:-}" ] || [ "$MODE" = "native" ] || [ "$MODE" = "profile" ] || [ "$MODE" = "cpu" ]; then
++        EXTRA_SRC="ocean/crashit/csim/crashit.c"
++    fi
++elif [ "$ENV" = "smart_buildings" ]; then
++    SRC_DIR="ocean/$ENV"
++    INCLUDES+=(-I./ocean/smart_buildings/csim)
++    # csim is the verified C port (L0..L3 gates in complete_port). It is
++    # C99-clean under a C++ compiler (checked), so it rides EXTRA_SRC into the
++    # nvcc line like crashit.c / impulse_wars_api.c. Blobs are not compiled in:
++    # pass env.blob or env.blob_dir at run time (mmap, never a baked building id).
++    if [ -z "${MODE:-}" ] || [ "$MODE" = "native" ] || [ "$MODE" = "profile" ] || [ "$MODE" = "cpu" ]; then
++        EXTRA_SRC="ocean/smart_buildings/csim/sb_baked.c"
++        EXTRA_SRC="$EXTRA_SRC ocean/smart_buildings/csim/sb_chol.c"
++        EXTRA_SRC="$EXTRA_SRC ocean/smart_buildings/csim/sb_lu.c"
++        EXTRA_SRC="$EXTRA_SRC ocean/smart_buildings/csim/sb_fdm.c"
++        EXTRA_SRC="$EXTRA_SRC ocean/smart_buildings/csim/sb_rng.c"
++        EXTRA_SRC="$EXTRA_SRC ocean/smart_buildings/csim/sb_convect.c"
++        EXTRA_SRC="$EXTRA_SRC ocean/smart_buildings/csim/sb_occup.c"
++        EXTRA_SRC="$EXTRA_SRC ocean/smart_buildings/csim/sb_sim.c"
++        EXTRA_SRC="$EXTRA_SRC ocean/smart_buildings/csim/sb_reward.c"
++        EXTRA_SRC="$EXTRA_SRC ocean/smart_buildings/csim/sb_obs.c"
++    fi
+ elif [ "$ENV" = "nethack" ]; then
+     SRC_DIR="ocean/$ENV"
+     EXTRA_CFLAGS+=(-DPUFFER_NETHACK)
+@@ -423,14 +461,20 @@ fi
+ CUDA_HOME=${CUDA_HOME:-${CUDA_PATH:-$(dirname "$(dirname "$(which nvcc)")")}}
+ # NCCL include/lib fallback.
+ # Needed when NCCL is provided by the nvidia-nccl-cu12 wheel in the active venv.
+-NCCL_IFLAG=""
+-NCCL_LFLAG=""
+-for dir in /usr/include /usr/local/cuda/include; do
+-    if [ -f "$dir/nccl.h" ]; then NCCL_IFLAG="-I$dir"; break; fi
+-done
+-for dir in /usr/lib/x86_64-linux-gnu /usr/local/cuda/lib64; do
+-    if [ -f "$dir/libnccl.so" ] || [ -f "$dir/libnccl.so.2" ]; then NCCL_LFLAG="-L$dir"; break; fi
+-done
++# Respect NCCL_IFLAG / NCCL_LFLAG from the environment (e.g. an nccl wheel in a
++# venv); otherwise probe the usual system locations.
++NCCL_IFLAG="${NCCL_IFLAG:-}"
++NCCL_LFLAG="${NCCL_LFLAG:-}"
++if [ -z "$NCCL_IFLAG" ]; then
++    for dir in /usr/include /usr/local/cuda/include; do
++        if [ -f "$dir/nccl.h" ]; then NCCL_IFLAG="-I$dir"; break; fi
++    done
++fi
++if [ -z "$NCCL_LFLAG" ]; then
++    for dir in /usr/lib/x86_64-linux-gnu /usr/local/cuda/lib64; do
++        if [ -f "$dir/libnccl.so" ] || [ -f "$dir/libnccl.so.2" ]; then NCCL_LFLAG="-L$dir"; break; fi
++    done
++fi
+ if [ -z "$NCCL_IFLAG" ]; then
+     NCCL_IFLAG=$(python -c "import nvidia.nccl, os; print('-I' + os.path.join(nvidia.nccl.__path__[0], 'include'))" 2>/dev/null || echo "")
+ fi
+@@ -441,7 +485,13 @@ fi
+ export CCACHE_DIR="${CCACHE_DIR:-$HOME/.ccache}"
+ export CCACHE_BASEDIR="$(pwd)"
+ export CCACHE_COMPILERCHECK=content
+-NVCC="ccache $CUDA_HOME/bin/nvcc"
++# ccache is optional: use it only when it is actually on PATH (a bare
++# "ccache" prefix otherwise fails with 127 on hosts without it).
++if command -v ccache >/dev/null 2>&1; then
++    NVCC="ccache $CUDA_HOME/bin/nvcc"
++else
++    NVCC="$CUDA_HOME/bin/nvcc"
++fi
+ CC="${CC:-$(command -v ccache >/dev/null && echo 'ccache clang' || echo 'clang')}"
+ ARCH=${NVCC_ARCH:-native}
+ 
+diff --git a/src/algo.cu b/src/algo.cu
+index 13b2d97..fd478d7 100644
+--- a/src/algo.cu
++++ b/src/algo.cu
+@@ -1410,47 +1410,53 @@ __global__ void cache_imp_and_v(
+     value_out[idx] = logits[logits_base + A_total];
+ 
+     float new_lp = 0.0f;
+-    if (logstd.data) {
+-        for (int h = 0; h < NUM_ATNS; ++h) {
+-            float lp, ent;
+-            ppo_continuous_head(
+-                safe_continuous_mean(logits, logits_base + h),
+-                safe_continuous_logstd(logstd.data, h),
+-                actions[idx * NUM_ATNS + h], &lp, &ent);
+-            new_lp += lp;
+-        }
+-    } else {
+ #ifdef PUFFER_NETHACK
+-        int verb = (int)actions[idx * NUM_ATNS];
++    int verb = (int)actions[idx * NUM_ATNS];
+ #endif
+-        int logits_offset = 0;
+-        for (int h = 0; h < NUM_ATNS; ++h) {
+-            int A = act_sizes[h];
+-            float cache[PPO_MAX_HEAD_A];
+-            float lse = ppo_discrete_logsumexp(
+-                logits, logits_base, logits_offset, A,
+-                action_mask, at_base, cache);
+-            for (int a = 0; a < A; ++a) {
+-                logps[at_base + logits_offset + a] = cache[a] - lse;
++    int logits_offset = 0;
++    for (int h = 0; h < NUM_ATNS; ++h) {
++        int A = act_sizes[h];
++        if (A == 1) {
++            // Continuous head (Gaussian). Mask 0 = padding: no log-prob, and
++            // the sampled action for that head is ignored by the env.
++            float active = to_float(action_mask[at_base + logits_offset]);
++            if (logstd.data != NULL && active != 0.0f) {
++                float lp, ent;
++                ppo_continuous_head(
++                    safe_continuous_mean(logits, logits_base + logits_offset),
++                    safe_continuous_logstd(logstd.data, h),
++                    actions[idx * NUM_ATNS + h], &lp, &ent);
++                new_lp += lp;
++                logps[at_base + logits_offset] = lp;
++            } else {
++                logps[at_base + logits_offset] = 0.0f;
+             }
++            logits_offset += 1;
++            continue;
++        }
++        float cache[PPO_MAX_HEAD_A];
++        float lse = ppo_discrete_logsumexp(
++            logits, logits_base, logits_offset, A, action_mask, at_base, cache);
++        for (int a = 0; a < A; ++a) {
++            logps[at_base + logits_offset + a] = cache[a] - lse;
++        }
+ #ifdef PUFFER_NETHACK
+-            int used = nethack_head_used(verb, h);
+-            if (used) {
+-                int act = (int)actions[idx * NUM_ATNS + h];
+-                if (h == 0) {
+-                    float mix = 1.0f;
+-                    new_lp += nethack_verb_train_logp(
+-                        action_mask + at_base + logits_offset, A,
+-                        cache[act] - lse, &mix);
+-                } else {
+-                    new_lp += cache[act] - lse;
+-                }
++        int used = nethack_head_used(verb, h);
++        if (used) {
++            int act = (int)actions[idx * NUM_ATNS + h];
++            if (h == 0) {
++                float mix = 1.0f;
++                new_lp += nethack_verb_train_logp(
++                    action_mask + at_base + logits_offset, A,
++                    cache[act] - lse, &mix);
++            } else {
++                new_lp += cache[act] - lse;
+             }
++        }
+ #else
+-            new_lp += cache[(int)actions[idx * NUM_ATNS + h]] - lse;
++        new_lp += cache[(int)actions[idx * NUM_ATNS + h]] - lse;
+ #endif
+-            logits_offset += A;
+-        }
++        logits_offset += A;
+     }
+     new_lp_out[idx] = new_lp;
+     imp_out[idx] = from_float(__expf(new_lp - to_float(old_logprobs[idx])));
+@@ -1525,67 +1531,84 @@ __global__ void ppo_loss_compute(
+         float d_new_logp = d_ratio * ratio;
+         float total_entropy = 0.0f;
+ 
+-        if (a.is_continuous) {
+-            for (int h = 0; h < a.num_atns; ++h) {
+-                float mean = safe_continuous_mean(a.logits, logits_base + h);
+-                float c_logstd = safe_continuous_logstd(a.logstd, h);
+-                float c_action = finite_or_clamp(
+-                    g.actions[nt * a.num_atns + h], -1.0e6f, 1.0e6f);
+-                float lp, ent;
+-                ppo_continuous_head(mean, c_logstd, c_action, &lp, &ent);
+-                total_entropy += ent;
+-                float std = __expf(c_logstd);
+-                float var = std * std;
+-                float diff = c_action - mean;
+-                a.grad_logits[at_base + h] = d_new_logp * diff / var;
+-                a.grad_logstd[nt * a.num_atns + h] =
+-                    d_new_logp * (diff * diff / var - 1.0f) + d_entropy_term;
++        // Continuous heads train logstd; discrete heads leave its gradient at
++        // 0. Zero the whole row first: slots past NUM_ATNS exist only because
++        // the decoder emits one column per head class.
++        if (a.grad_logstd != NULL) {
++            for (int k = 0; k < a.A_total; ++k) {
++                a.grad_logstd[nt * a.A_total + k] = 0.0f;
+             }
+-        } else {
++        }
+ #ifdef PUFFER_NETHACK
+-            int verb = (int)g.actions[nt * a.num_atns];
+-            float verb_mix_scale = 1.0f;
++        int verb = (int)g.actions[nt * a.num_atns];
++        float verb_mix_scale = 1.0f;
+ #endif
+-            int logits_offset = 0;
+-            for (int h = 0; h < a.num_atns; ++h) {
+-                int A = a.act_sizes[h];
+-#ifdef PUFFER_NETHACK
+-                if (!nethack_head_used(verb, h)) {
+-                    for (int j = 0; j < A; ++j) {
+-                        a.grad_logits[at_base + logits_offset + j] = 0.0f;
++        int logits_offset = 0;
++        for (int h = 0; h < a.num_atns; ++h) {
++            int A = a.act_sizes[h];
++            if (A == 1) {
++                float active = to_float(a.action_mask[at_base + logits_offset]);
++                if (a.logstd != NULL && active != 0.0f) {
++                    float mean = safe_continuous_mean(
++                        a.logits, logits_base + logits_offset);
++                    float c_logstd = safe_continuous_logstd(a.logstd, h);
++                    float c_action = finite_or_clamp(
++                        g.actions[nt * a.num_atns + h], -1.0e6f, 1.0e6f);
++                    float lp, ent;
++                    ppo_continuous_head(mean, c_logstd, c_action, &lp, &ent);
++                    total_entropy += ent;
++                    float std = __expf(c_logstd);
++                    float var = std * std;
++                    float diff = c_action - mean;
++                    a.grad_logits[at_base + logits_offset] =
++                        d_new_logp * diff / var;
++                    if (a.grad_logstd != NULL) {
++                        a.grad_logstd[nt * a.A_total + h] =
++                            d_new_logp * (diff * diff / var - 1.0f)
++                            + d_entropy_term;
+                     }
+-                    logits_offset += A;
+-                    continue;
++                } else {
++                    a.grad_logits[at_base + logits_offset] = 0.0f;
+                 }
+-#endif
+-                int act = (int)g.actions[nt * a.num_atns + h];
+-                float ent = 0.0f;
++                logits_offset += 1;
++                continue;
++            }
++#ifdef PUFFER_NETHACK
++            if (!nethack_head_used(verb, h)) {
+                 for (int j = 0; j < A; ++j) {
+-                    float logp = a.grad_logits[at_base + logits_offset + j];
+-                    ent -= __expf(logp) * logp;
++                    a.grad_logits[at_base + logits_offset + j] = 0.0f;
+                 }
+-                total_entropy += ent;
++                logits_offset += A;
++                continue;
++            }
++#endif
++            int act = (int)g.actions[nt * a.num_atns + h];
++            float ent = 0.0f;
++            for (int j = 0; j < A; ++j) {
++                float logp = a.grad_logits[at_base + logits_offset + j];
++                ent -= __expf(logp) * logp;
++            }
++            total_entropy += ent;
+ #ifdef PUFFER_NETHACK
+-                float d_logp = d_new_logp;
+-                if (h == 0) {
+-                    nethack_verb_train_logp(
+-                        a.action_mask + at_base + logits_offset, A,
+-                        a.grad_logits[at_base + act],
+-                        &verb_mix_scale);
+-                    d_logp *= verb_mix_scale;
+-                }
++            float d_logp = d_new_logp;
++            if (h == 0) {
++                nethack_verb_train_logp(
++                    a.action_mask + at_base + logits_offset, A,
++                    a.grad_logits[at_base + act],
++                    &verb_mix_scale);
++                d_logp *= verb_mix_scale;
++            }
+ #else
+-                float d_logp = d_new_logp;
++            float d_logp = d_new_logp;
+ #endif
+-                for (int j = 0; j < A; ++j) {
+-                    float logp = a.grad_logits[at_base + logits_offset + j];
+-                    float p = __expf(logp);
+-                    a.grad_logits[at_base + logits_offset + j] =
+-                        ((j == act ? 1.0f : 0.0f) - p) * d_logp
+-                        + d_entropy_term * p * (-ent - logp);
+-                }
+-                logits_offset += A;
++            for (int j = 0; j < A; ++j) {
++                float logp = a.grad_logits[at_base + logits_offset + j];
++                float p = __expf(logp);
++                a.grad_logits[at_base + logits_offset + j] =
++                    ((j == act ? 1.0f : 0.0f) - p) * d_logp
++                    + d_entropy_term * p * (-ent - logp);
+             }
++            logits_offset += A;
+         }
+ 
+         float thread_loss = (pg_loss + a.vf_coef * v_loss
+diff --git a/src/pufferl.cu b/src/pufferl.cu
+index b6064df..39646b5 100644
+--- a/src/pufferl.cu
++++ b/src/pufferl.cu
+@@ -36,6 +36,7 @@
+ 
+ // Project
+ #include "ini.h"
++#include "tblog.h"
+ 
+ #ifdef PRECISION_FLOAT
+ typedef float precision_t;
+@@ -615,87 +616,96 @@ __global__ void sample_logits(
+     curandStatePhilox4_32_10_t state = rng_states[idx];
+     int logits_base = idx * fused_cols;
+     float total_log_prob = 0.0f;
+-
+-    if (is_continuous) {
+-        for (int h = 0; h < num_atns; h++) {
+-            float mean = safe_continuous_mean(logits, logits_base + h);
+-            float log_std = safe_continuous_logstd(logstd_data, h);
+-            float std = expf(log_std);
+-            float action = finite_or_clamp(
+-                mean + std * curand_normal(&state), -1.0e6f, 1.0e6f);
+-            // Preserve reduced-precision continuous semantics for logprob.
+-            precision_t stored_p = from_float(action);
+-            float stored = to_float(stored_p);
+-            float lp, ent;
+-            ppo_continuous_head(mean, log_std, stored, &lp, &ent);
+-            total_log_prob += lp;
++    int mask_base = idx * mask_stride;
++#ifdef PUFFER_NETHACK
++    int verb = (int)0;
++#endif
++    int logits_offset = 0;
++    for (int h = 0; h < num_atns; h++) {
++        int A = act_sizes[h];
++        if (A == 1) {
++            // Continuous head (Gaussian). act_sizes[h] == 1 is what marks a
++            // head continuous, exactly as the trainer's n_cont/n_disc split.
++            // A zero mask entry means padding: emit 0, contribute no log-prob.
++            float active = to_float(action_mask[mask_base + logits_offset]);
++            float action = 0.0f;
++            if (is_continuous && active != 0.0f) {
++                float mean = safe_continuous_mean(
++                    logits, logits_base + logits_offset);
++                float log_std = safe_continuous_logstd(logstd_data, h);
++                float std = expf(log_std);
++                float a = finite_or_clamp(
++                    mean + std * curand_normal(&state), -1.0e6f, 1.0e6f);
++                // Preserve reduced-precision continuous semantics for logprob.
++                precision_t stored_p = from_float(a);
++                float stored = to_float(stored_p);
++                float lp, ent;
++                ppo_continuous_head(mean, log_std, stored, &lp, &ent);
++                total_log_prob += lp;
++                action = stored;
++            }
+             int aidx = idx * num_atns + h;
+-            actions[aidx] = stored;
+-            env_actions[aidx] = stored;
++            actions[aidx] = action;
++            env_actions[aidx] = action;
++            logits_offset += 1;
++            continue;
+         }
+-    } else {
+-        int logits_offset = 0;
+-        int mask_base = idx * mask_stride;
+-        for (int h = 0; h < num_atns; h++) {
+-            int A = act_sizes[h];
+-            float cache[PPO_MAX_HEAD_A];
+-            float logsumexp = ppo_discrete_logsumexp(
+-                logits, logits_base, logits_offset, A, action_mask, mask_base, cache);
++        float cache[PPO_MAX_HEAD_A];
++        float logsumexp = ppo_discrete_logsumexp(
++            logits, logits_base, logits_offset, A, action_mask, mask_base, cache);
+ #ifdef PUFFER_NETHACK
+-            float inv_K = 0.0f;
+-            float eps = h == 0 ? nethack_verb_eps_load(
+-                action_mask + mask_base + logits_offset, A, &inv_K) : 0.0f;
++        float inv_K = 0.0f;
++        float eps = h == 0 ? nethack_verb_eps_load(
++            action_mask + mask_base + logits_offset, A, &inv_K) : 0.0f;
+ #endif
+-            float rand_val = curand_uniform(&state);
+-            float cumsum = 0.0f;
+-            int sampled = A - 1;
+-            for (int a = 0; a < A; a++) {
++        float rand_val = curand_uniform(&state);
++        float cumsum = 0.0f;
++        int sampled = A - 1;
++        for (int a = 0; a < A; a++) {
+ #ifdef PUFFER_NETHACK
+-                if (eps > 0.0f) {
+-                    cumsum += nethack_verb_eps_mix(expf(cache[a] - logsumexp),
+-                        action_mask[mask_base + logits_offset + a], eps, inv_K);
+-                } else
++            if (eps > 0.0f) {
++                cumsum += nethack_verb_eps_mix(expf(cache[a] - logsumexp),
++                    action_mask[mask_base + logits_offset + a], eps, inv_K);
++            } else
+ #endif
+-                {
+-                    cumsum += expf(cache[a] - logsumexp);
+-                }
+-                if (rand_val < cumsum) {
++            {
++                cumsum += expf(cache[a] - logsumexp);
++            }
++            if (rand_val < cumsum) {
++                sampled = a;
++                break;
++            }
++        }
++        // CDF fall-through (float rounding) lands on A - 1, which may be
++        // masked; snap to the last legal action. A legitimate A - 1 pick
++        // is always legal, so the snap is an exact no-op for it.
++        if (sampled == A - 1) {
++            for (int a = A - 1; a >= 0; a--) {
++                if (to_float(action_mask[mask_base + logits_offset + a]) != 0.0f) {
+                     sampled = a;
+                     break;
+                 }
+             }
+-            // CDF fall-through (float rounding) lands on A - 1, which may be
+-            // masked; snap to the last legal action. A legitimate A - 1 pick
+-            // is always legal, so the snap is an exact no-op for it.
+-            if (sampled == A - 1) {
+-                for (int a = A - 1; a >= 0; a--) {
+-                    if (to_float(action_mask[mask_base + logits_offset + a]) != 0.0f) {
+-                        sampled = a;
+-                        break;
+-                    }
+-                }
+-            }
+-            // Float32 preserves large categorical IDs that BF16 cannot represent.
+-            int aidx = idx * num_atns + h;
+-            float action = (float)sampled;
+-            actions[aidx] = action;
+-            env_actions[aidx] = action;
++        }
++        // Float32 preserves large categorical IDs that BF16 cannot represent.
++        int aidx = idx * num_atns + h;
++        float action = (float)sampled;
++        actions[aidx] = action;
++        env_actions[aidx] = action;
+ #ifdef PUFFER_NETHACK
+-            int verb = (int)actions[idx * num_atns];
+-            int used = nethack_head_used(verb, h);
+-            if (used) {
+-                if (eps > 0.0f) {
+-                    total_log_prob += logf((1.0f - eps)
+-                        * expf(cache[sampled] - logsumexp) + eps * inv_K);
+-                } else {
+-                    total_log_prob += cache[sampled] - logsumexp;
+-                }
++        int used = nethack_head_used(verb, h);
++        if (used) {
++            if (eps > 0.0f) {
++                total_log_prob += logf((1.0f - eps)
++                    * expf(cache[sampled] - logsumexp) + eps * inv_K);
++            } else {
++                total_log_prob += cache[sampled] - logsumexp;
+             }
++        }
+ #else
+-            total_log_prob += cache[sampled] - logsumexp;
++        total_log_prob += cache[sampled] - logsumexp;
+ #endif
+-            logits_offset += A;
+-        }
++        logits_offset += A;
+     }
+ 
+     logprobs[idx] = from_float(total_log_prob);
+@@ -1863,8 +1873,10 @@ PuffeRL* create_pufferl(Ini* ini, TrainContext* ctx) {
+         }
+         act_n += act_sizes[i];
+     }
+-    assert(!(n_cont > 0 && n_disc > 0)
+-        && "mixed continuous/discrete action spaces not supported");
++    // Mixed heads are supported: head h is Gaussian iff act_sizes[h] == 1 and
++    // a Bernoulli/Categorical otherwise. The observation and action vectors of
++    // a scenario are zero-padded to SB_OBS / SB_CONT+SB_DISC; the padding is
++    // masked out here (action_mask) so it never contributes to the loss.
+     bool is_continuous = n_cont > 0;
+     pufferl->is_continuous = is_continuous;
+     vec->num_policies = num_policies;
+@@ -1911,7 +1923,9 @@ PuffeRL* create_pufferl(Ini* ini, TrainContext* ctx) {
+     int input_size = OBS_SIZE;
+     int hidden_size = hypers.hidden_size;
+     int num_layers = hypers.num_layers;
+-    int decoder_output_size = is_continuous ? num_action_heads : act_n;
++    // One decoder column per head class (a continuous head is one class),
++    // plus the value column added by the decoder.
++    int decoder_output_size = act_n;
+     int minibatch_segments = hypers.minibatch_size / hypers.horizon;
+     int B_TT = minibatch_segments * hypers.horizon;
+     int horizon = hypers.horizon;
+@@ -3027,6 +3041,21 @@ TrainResult run_train(Ini* ini, TrainContext* ctx) {
+     }
+ 
+     PuffeRL* pufferl = create_pufferl(ini, ctx);
++    /* Continuation / fine-tune init (SB3 --init-from parity). Train mode
++     * historically ignored base.load_model_path (silent random restarts
++     * -- a full 30M run once duplicated another bit-for-bit because of
++     * it); load explicitly so training and the selfplay pool descend
++     * from it. Optimizer state starts cold (documented limitation). */
++    {
++        char load_buf[4096];
++        const char* load_path = puf_checkpoint_path_key(
++            ini, "load_model_path", load_buf, sizeof(load_buf));
++        if (load_path) {
++            pufferl_load_policy(pufferl, 0, load_path);
++            printf("loaded initial policy from %s\n", load_path);
++            fflush(stdout);
++        }
++    }
+     Selfplay selfplay = {0};
+     if (use_selfplay) {
+         char initial_checkpoint[4096];
+@@ -3067,6 +3096,15 @@ TrainResult run_train(Ini* ini, TrainContext* ctx) {
+     puf_log_history_init(&log_history, (int)train_epochs + 1);
+     TrainResult result = {0};
+     char final_checkpoint[4096] = {0};
++#ifdef PUFFER_CRASHIT
++    /* SB3-mirror bot curriculum + TensorBoard event log (crashit only). */
++    int crashit_rung = -1;
++    Tblog crashit_tb = {0};
++    int crashit_tb_open = 0;
++    int crashit_ladder_on =
++        puf_ini_get(ini, "ladder", "enabled") != 0;
++    int crashit_tb_on = puf_ini_get(ini, "tb", "enabled") != 0;
++#endif
+ 
+     for (long epoch = 0; epoch < train_epochs; epoch++) {
+         if (pufferl->hypers.async) {
+@@ -3134,6 +3172,31 @@ TrainResult run_train(Ini* ini, TrainContext* ctx) {
+             }
+         }
+ 
++#ifdef PUFFER_CRASHIT
++        /* SB3-mirror bot curriculum (train_ppo.py rung schedule): static ->
++         * easy -> medium -> hard at agent-step thresholds. Takes effect on
++         * subsequent resets (like CrashItEnv.set_bot_difficulty). */
++        if (crashit_ladder_on && PUF_BACKEND != PUF_GPU) {
++            long cstep = pufferl->global_step * pufferl->hypers.world_size;
++            int rung = 3;
++            if (cstep < puf_ini_get(ini, "ladder", "static_until"))
++                rung = 0;
++            else if (cstep < puf_ini_get(ini, "ladder", "easy_until"))
++                rung = 1;
++            else if (cstep < puf_ini_get(ini, "ladder", "medium_until"))
++                rung = 2;
++            if (rung != crashit_rung) {
++                for (int e = 0; e < pufferl->vec->size; e++)
++                    puf_set_bot_policy(&pufferl->vec->envs[e], rung);
++                printf("ladder: %ld agent steps -> bot rung %d "
++                       "(0=static,1=easy,2=medium,3=hard)\n",
++                       cstep, rung);
++                fflush(stdout);
++                crashit_rung = rung;
++            }
++        }
++#endif
++
+         if (last_log.size && wall_clock()
+                 < pufferl->last_log_time + 0.6 && epoch < train_epochs - 1) {
+             continue;
+@@ -3155,6 +3218,11 @@ TrainResult run_train(Ini* ini, TrainContext* ctx) {
+ 
+         vec_log(pufferl->vec, &new_log, 1);
+ 
++#ifdef PUFFER_CRASHIT
++        if (crashit_ladder_on)
++            dict_set(&new_log, "ladder/rung", (double)crashit_rung);
++#endif
++
+         float losses_host[NUM_LOSSES];
+         cudaMemcpy(losses_host, pufferl->losses, sizeof(losses_host),
+             cudaMemcpyDeviceToHost);
+@@ -3188,6 +3256,30 @@ TrainResult run_train(Ini* ini, TrainContext* ctx) {
+         int episodes = dict_get(&new_log, "env/n") > 0;
+         if (ctx->artifact_owner) {
+             puf_dashboard_print(ini, pufferl, &new_log, (int)pufferl->epoch);
++#ifdef PUFFER_CRASHIT
++            /* TensorBoard event log (one record per numeric key). */
++            if (crashit_tb_on) {
++                if (!crashit_tb_open) {
++                    if (tblog_open(&crashit_tb, log_dir) == 0)
++                        crashit_tb_open = 1;
++                    else
++                        crashit_tb_on = 0; /* open failed: stay quiet */
++                }
++                if (crashit_tb_open) {
++                    long long tstep =
++                        (long long)dict_get(&new_log, "agent_steps");
++                    double tnow = wall_clock();
++                    for (int di = 0; di < new_log.size; di++) {
++                        if (new_log.items[di].str)
++                            continue; /* numerics only */
++                        tblog_scalar(&crashit_tb, new_log.items[di].key,
++                                     tstep, tnow,
++                                     (float)new_log.items[di].value);
++                    }
++                    tblog_flush(&crashit_tb);
++                }
++            }
++#endif
+         }
+         result.cost = dict_get(&new_log, "uptime");
+         result.steps = dict_get(&new_log, "agent_steps");
+@@ -3208,6 +3300,10 @@ TrainResult run_train(Ini* ini, TrainContext* ctx) {
+     // TrainResult curve: bin-mean over log_history (same as artifact metrics).
+     DictItem* target = dict_find(&last_log, target_key);
+     result.score = target ? (float)target->value : 0;
++#ifdef PUFFER_CRASHIT
++    if (crashit_tb_open)
++        tblog_close(&crashit_tb);
++#endif
+ 
+     int points = use_selfplay ? 1 : puf_ini_get(ini, "sweep", "downsample");
+     assert(points >= 1 && points <= TRAIN_RESULT_MAX_POINTS

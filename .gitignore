@@ -1,0 +1,28 @@
+# ----- what the release generates at run time
+/complete_port/artifacts/
+/complete_port/results/
+/complete_port/csim/*.so
+/complete_port/csim/test_episodes
+/complete_port/csim/test_multi
+/complete_port/csim/test_step
+/complete_port/csim/test_step_batch
+/complete_port/csim/test_episode
+/complete_port/csim/test
+/complete_port/scratch/
+
+# ----- the two upstream checkouts, created by ./run.sh setup
+/starter-kit/
+/artifacts/
+
+# ----- the assembler, which is not part of the repository
+/build/
+
+# ----- python
+__pycache__/
+*.py[oc]
+.venv/
+*.egg-info/
+
+# ----- editors and OS
+.DS_Store
+*.swp

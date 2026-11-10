@@ -1,0 +1,520 @@
+│ comfort_dev_K                 3.065   worst_dev_K                  19.647    │
+│ out_of_band_frac              0.583   productivity                 -0.360    │
+│ energy_cost_norm              0.068   carbon_norm                   0.134    │
+│ elec_kwh                   6463.628   gas_kwh                   91990.742    │
+│ episode_score_scen_mean       0.219   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0          🐡      GPU:  99%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 483  93%    Losses       0.978    │
+│ Params           729.6K      Model         0ms   0%    policy       0.202    │
+│ Steps            285.7M      Env           0ms   0%    value        1.551    │
+│ SPS               13.6K      Copy          0ms   0%    entropy    101.673    │
+│ Epoch              4359    Train         310ms   6%    old_kl       0.166    │
+│ Uptime    0d 5h 39m 16s      Model       309ms   6%    kl           0.051    │
+│ To go     17m 36s 938ms      Misc          1ms   0%    clipfrac     0.240    │
+│                                                                              │
+│ perf                         -0.182   score                        -0.182    │
+│ episode_return            -1570.401   episode_length             8640.000    │
+│ comfort_dev_K                 2.248   worst_dev_K                  16.183    │
+│ out_of_band_frac              0.536   productivity                 -0.263    │
+│ energy_cost_norm              0.042   carbon_norm                   0.076    │
+│ elec_kwh                   5009.701   gas_kwh                   51683.715    │
+│ episode_score_scen_mean       0.222   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0         🐡       GPU: 100%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 375  93%    Losses       1.078    │
+│ Params           729.6K      Model         0ms   0%    policy       0.089    │
+│ Steps            285.7M      Env           0ms   0%    value        1.979    │
+│ SPS               13.9K      Copy          0ms   0%    entropy    101.452    │
+│ Epoch              4360    Train         309ms   6%    old_kl       0.204    │
+│ Uptime    0d 5h 39m 21s      Model       308ms   6%    kl           0.072    │
+│ To go     17m 06s 797ms      Misc          1ms   0%    clipfrac     0.264    │
+│                                                                              │
+│ perf                         -0.243   score                        -0.243    │
+│ episode_return            -2103.483   episode_length             8640.000    │
+│ comfort_dev_K                 2.918   worst_dev_K                  18.770    │
+│ out_of_band_frac              0.571   productivity                 -0.344    │
+│ energy_cost_norm              0.063   carbon_norm                   0.123    │
+│ elec_kwh                   6072.076   gas_kwh                   84024.297    │
+│ episode_score_scen_mean       0.220   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0        🐡        GPU:   1%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 322  93%    Losses       0.781    │
+│ Params           729.6K      Model         0ms   0%    policy       0.031    │
+│ Steps            285.8M      Env           0ms   0%    value        1.501    │
+│ SPS               14.1K      Copy          0ms   0%    entropy    101.241    │
+│ Epoch              4361    Train         309ms   6%    old_kl       0.178    │
+│ Uptime    0d 5h 39m 26s      Model       308ms   6%    kl           0.060    │
+│ To go     16m 50s 615ms      Misc          1ms   0%    clipfrac     0.234    │
+│                                                                              │
+│ perf                         -0.141   score                        -0.141    │
+│ episode_return            -1217.947   episode_length             8640.000    │
+│ comfort_dev_K                 1.779   worst_dev_K                  14.553    │
+│ out_of_band_frac              0.509   productivity                 -0.209    │
+│ energy_cost_norm              0.030   carbon_norm                   0.048    │
+│ elec_kwh                   4460.496   gas_kwh                   31737.256    │
+│ episode_score_scen_mean       0.221   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0       🐡         GPU:  98%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 377  93%    Losses       0.813    │
+│ Params           729.6K      Model         0ms   0%    policy       0.032    │
+│ Steps            285.9M      Env           0ms   0%    value        1.562    │
+│ SPS               13.9K      Copy          0ms   0%    entropy    101.021    │
+│ Epoch              4362    Train         310ms   6%    old_kl       0.235    │
+│ Uptime    0d 5h 39m 30s      Model       309ms   6%    kl           0.085    │
+│ To go     16m 57s 637ms      Misc          1ms   0%    clipfrac     0.298    │
+│                                                                              │
+│ perf                         -0.206   score                        -0.206    │
+│ episode_return            -1779.982   episode_length             8640.000    │
+│ comfort_dev_K                 2.527   worst_dev_K                  17.325    │
+│ out_of_band_frac              0.551   productivity                 -0.294    │
+│ energy_cost_norm              0.051   carbon_norm                   0.096    │
+│ elec_kwh                   5571.485   gas_kwh                   65319.582    │
+│ episode_score_scen_mean       0.219   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0      🐡          GPU: 100%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 416  93%    Losses       1.070    │
+│ Params           729.6K      Model         0ms   0%    policy       0.128    │
+│ Steps            285.9M      Env           0ms   0%    value        1.885    │
+│ SPS               13.8K      Copy          0ms   0%    entropy    100.783    │
+│ Epoch              4363    Train         309ms   6%    old_kl       0.169    │
+│ Uptime    0d 5h 39m 35s      Model       308ms   6%    kl           0.054    │
+│ To go     17m 01s 733ms      Misc          1ms   0%    clipfrac     0.235    │
+│                                                                              │
+│ perf                         -0.246   score                        -0.246    │
+│ episode_return            -2124.876   episode_length             8640.000    │
+│ comfort_dev_K                 3.028   worst_dev_K                  19.007    │
+│ out_of_band_frac              0.588   productivity                 -0.349    │
+│ energy_cost_norm              0.062   carbon_norm                   0.120    │
+│ elec_kwh                   5994.810   gas_kwh                   82537.469    │
+│ episode_score_scen_mean       0.222   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0     🐡           GPU:  95%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 358  93%    Losses       1.580    │
+│ Params           729.6K      Model         0ms   0%    policy       0.097    │
+│ Steps            286.0M      Env           0ms   0%    value        2.966    │
+│ SPS               14.0K      Copy          0ms   0%    entropy    100.555    │
+│ Epoch              4364    Train         312ms   6%    old_kl       0.181    │
+│ Uptime    0d 5h 39m 40s      Model       311ms   6%    kl           0.057    │
+│ To go     16m 44s 790ms      Misc          1ms   0%    clipfrac     0.261    │
+│                                                                              │
+│ perf                         -0.260   score                        -0.260    │
+│ episode_return            -2250.450   episode_length             8640.000    │
+│ comfort_dev_K                 3.199   worst_dev_K                  19.236    │
+│ out_of_band_frac              0.600   productivity                 -0.372    │
+│ energy_cost_norm              0.063   carbon_norm                   0.124    │
+│ elec_kwh                   6019.000   gas_kwh                   84741.547    │
+│ episode_score_scen_mean       0.229   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0    🐡            GPU:  21%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 351  93%    Losses       0.826    │
+│ Params           729.6K      Model         0ms   0%    policy      -0.081    │
+│ Steps            286.1M      Env           0ms   0%    value        1.813    │
+│ SPS               14.0K      Copy          0ms   0%    entropy    100.336    │
+│ Epoch              4365    Train         311ms   6%    old_kl       0.105    │
+│ Uptime    0d 5h 39m 45s      Model       310ms   6%    kl           0.034    │
+│ To go     16m 38s 397ms      Misc          1ms   0%    clipfrac     0.139    │
+│                                                                              │
+│ perf                         -0.193   score                        -0.193    │
+│ episode_return            -1665.244   episode_length             8640.000    │
+│ comfort_dev_K                 2.398   worst_dev_K                  16.615    │
+│ out_of_band_frac              0.551   productivity                 -0.280    │
+│ energy_cost_norm              0.044   carbon_norm                   0.081    │
+│ elec_kwh                   5096.231   gas_kwh                   54696.609    │
+│ episode_score_scen_mean       0.227   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0   🐡             GPU: 100%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 350  93%    Losses       0.951    │
+│ Params           729.6K      Model         0ms   0%    policy      -0.006    │
+│ Steps            286.1M      Env           0ms   0%    value        1.914    │
+│ SPS               14.0K      Copy          0ms   0%    entropy    100.110    │
+│ Epoch              4366    Train         310ms   6%    old_kl       0.115    │
+│ Uptime    0d 5h 39m 49s      Model       309ms   6%    kl           0.040    │
+│ To go     16m 33s 365ms      Misc          1ms   0%    clipfrac     0.144    │
+│                                                                              │
+│ perf                         -0.256   score                        -0.256    │
+│ episode_return            -2207.923   episode_length             8640.000    │
+│ comfort_dev_K                 3.122   worst_dev_K                  18.938    │
+│ out_of_band_frac              0.600   productivity                 -0.366    │
+│ energy_cost_norm              0.061   carbon_norm                   0.119    │
+│ elec_kwh                   5925.912   gas_kwh                   81785.570    │
+│ episode_score_scen_mean       0.230   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0  🐡              GPU:  87%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 328  93%    Losses       1.221    │
+│ Params           729.6K      Model         0ms   0%    policy       0.272    │
+│ Steps            286.2M      Env           0ms   0%    value        1.898    │
+│ SPS               14.1K      Copy          0ms   0%    entropy     99.848    │
+│ Epoch              4367    Train         310ms   6%    old_kl       0.169    │
+│ Uptime    0d 5h 39m 54s      Model       309ms   6%    kl           0.055    │
+│ To go     16m 23s 718ms      Misc          1ms   0%    clipfrac     0.231    │
+│                                                                              │
+│ perf                         -0.155   score                        -0.155    │
+│ episode_return            -1341.941   episode_length             8640.000    │
+│ comfort_dev_K                 1.923   worst_dev_K                  14.820    │
+│ out_of_band_frac              0.523   productivity                 -0.230    │
+│ energy_cost_norm              0.032   carbon_norm                   0.053    │
+│ elec_kwh                   4533.022   gas_kwh                   35411.352    │
+│ episode_score_scen_mean       0.235   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0 🐡               GPU:  53%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 332  93%    Losses       1.507    │
+│ Params           729.6K      Model         0ms   0%    policy      -0.079    │
+│ Steps            286.3M      Env           0ms   0%    value        3.171    │
+│ SPS               14.0K      Copy          0ms   0%    entropy     99.656    │
+│ Epoch              4368    Train         310ms   6%    old_kl       0.153    │
+│ Uptime    0d 5h 39m 59s      Model       309ms   6%    kl           0.048    │
+│ To go     16m 20s 092ms      Misc          1ms   0%    clipfrac     0.221    │
+│                                                                              │
+│ perf                         -0.264   score                        -0.264    │
+│ episode_return            -2279.759   episode_length             8640.000    │
+│ comfort_dev_K                 3.162   worst_dev_K                  18.782    │
+│ out_of_band_frac              0.604   productivity                 -0.380    │
+│ energy_cost_norm              0.061   carbon_norm                   0.118    │
+│ elec_kwh                   5844.697   gas_kwh                   81146.547    │
+│ episode_score_scen_mean       0.237   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0🐡                GPU: 100%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 359  93%    Losses       1.039    │
+│ Params           729.6K      Model         0ms   0%    policy       0.125    │
+│ Steps            286.3M      Env           0ms   0%    value        1.828    │
+│ SPS               14.0K      Copy          0ms   0%    entropy     99.421    │
+│ Epoch              4369    Train         312ms   6%    old_kl       0.169    │
+│ Uptime     0d 5h 40m 3s      Model       311ms   6%    kl           0.049    │
+│ To go     16m 21s 327ms      Misc          1ms   0%    clipfrac     0.264    │
+│                                                                              │
+│ perf                         -0.280   score                        -0.280    │
+│ episode_return            -2415.798   episode_length             8640.000    │
+│ comfort_dev_K                 3.363   worst_dev_K                  19.541    │
+│ out_of_band_frac              0.618   productivity                 -0.401    │
+│ energy_cost_norm              0.065   carbon_norm                   0.129    │
+│ elec_kwh                   6113.731   gas_kwh                   88644.289    │
+│ episode_score_scen_mean       0.235   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0               🐡 GPU:  62%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 352  93%    Losses       0.668    │
+│ Params           729.6K      Model         0ms   0%    policy      -0.081    │
+│ Steps            286.4M      Env           0ms   0%    value        1.498    │
+│ SPS               14.0K      Copy          0ms   0%    entropy     99.195    │
+│ Epoch              4370    Train         310ms   6%    old_kl       0.107    │
+│ Uptime     0d 5h 40m 8s      Model       309ms   6%    kl           0.032    │
+│ To go     16m 15s 079ms      Misc          1ms   0%    clipfrac     0.154    │
+│                                                                              │
+│ perf                         -0.219   score                        -0.219    │
+│ episode_return            -1890.970   episode_length             8640.000    │
+│ comfort_dev_K                 2.663   worst_dev_K                  17.389    │
+│ out_of_band_frac              0.569   productivity                 -0.317    │
+│ energy_cost_norm              0.049   carbon_norm                   0.093    │
+│ elec_kwh                   5322.717   gas_kwh                   63260.250    │
+│ episode_score_scen_mean       0.233   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0              🐡  GPU:  84%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 323  93%    Losses       0.958    │
+│ Params           729.6K      Model         0ms   0%    policy       0.168    │
+│ Steps            286.5M      Env           0ms   0%    value        1.579    │
+│ SPS               14.1K      Copy          0ms   0%    entropy     98.962    │
+│ Epoch              4371    Train         311ms   6%    old_kl       0.133    │
+│ Uptime    0d 5h 40m 13s      Model       310ms   6%    kl           0.045    │
+│ To go     16m 04s 355ms      Misc          1ms   0%    clipfrac     0.173    │
+│                                                                              │
+│ perf                         -0.197   score                        -0.197    │
+│ episode_return            -1700.140   episode_length             8640.000    │
+│ comfort_dev_K                 2.376   worst_dev_K                  16.584    │
+│ out_of_band_frac              0.547   productivity                 -0.285    │
+│ energy_cost_norm              0.045   carbon_norm                   0.083    │
+│ elec_kwh                   5138.265   gas_kwh                   56164.961    │
+│ episode_score_scen_mean       0.229   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0             🐡   GPU: 100%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 329  93%    Losses       0.903    │
+│ Params           729.6K      Model         0ms   0%    policy       0.061    │
+│ Steps            286.5M      Env           0ms   0%    value        1.685    │
+│ SPS               14.1K      Copy          0ms   0%    entropy     98.741    │
+│ Epoch              4372    Train         310ms   6%    old_kl       0.133    │
+│ Uptime    0d 5h 40m 17s      Model       309ms   6%    kl           0.049    │
+│ To go     16m 00s 851ms      Misc          1ms   0%    clipfrac     0.157    │
+│                                                                              │
+│ perf                         -0.204   score                        -0.204    │
+│ episode_return            -1759.877   episode_length             8640.000    │
+│ comfort_dev_K                 2.508   worst_dev_K                  16.919    │
+│ out_of_band_frac              0.557   productivity                 -0.293    │
+│ energy_cost_norm              0.048   carbon_norm                   0.090    │
+│ elec_kwh                   5314.721   gas_kwh                   61116.500    │
+│ episode_score_scen_mean       0.224   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0            🐡    GPU:   0%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 320  93%    Losses       0.726    │
+│ Params           729.6K      Model         0ms   0%    policy       0.081    │
+│ Steps            286.6M      Env           0ms   0%    value        1.290    │
+│ SPS               14.1K      Copy          0ms   0%    entropy     98.520    │
+│ Epoch              4373    Train         310ms   6%    old_kl       0.192    │
+│ Uptime    0d 5h 40m 22s      Model       309ms   6%    kl           0.073    │
+│ To go     15m 54s 275ms      Misc          1ms   0%    clipfrac     0.217    │
+│                                                                              │
+│ perf                         -0.257   score                        -0.257    │
+│ episode_return            -2219.605   episode_length             8640.000    │
+│ comfort_dev_K                 3.005   worst_dev_K                  19.430    │
+│ out_of_band_frac              0.574   productivity                 -0.360    │
+│ energy_cost_norm              0.068   carbon_norm                   0.135    │
+│ elec_kwh                   6408.127   gas_kwh                   92430.758    │
+│ episode_score_scen_mean       0.217   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0           🐡     GPU: 100%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 312  93%    Losses       0.880    │
+│ Params           729.6K      Model         0ms   0%    policy       0.083    │
+│ Steps            286.7M      Env           0ms   0%    value        1.593    │
+│ SPS               14.1K      Copy          0ms   0%    entropy     98.276    │
+│ Epoch              4374    Train         310ms   6%    old_kl       0.135    │
+│ Uptime    0d 5h 40m 27s      Model       309ms   6%    kl           0.046    │
+│ To go     15m 48s 063ms      Misc          1ms   0%    clipfrac     0.172    │
+│                                                                              │
+│ perf                         -0.235   score                        -0.235    │
+│ episode_return            -2032.110   episode_length             8640.000    │
+│ comfort_dev_K                 2.794   worst_dev_K                  18.491    │
+│ out_of_band_frac              0.566   productivity                 -0.332    │
+│ energy_cost_norm              0.061   carbon_norm                   0.118    │
+│ elec_kwh                   6036.527   gas_kwh                   80775.961    │
+│ episode_score_scen_mean       0.218   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0          🐡      GPU:  74%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 333  93%    Losses       1.771    │
+│ Params           729.6K      Model         0ms   0%    policy      -0.079    │
+│ Steps            286.7M      Env           0ms   0%    value        3.700    │
+│ SPS               14.0K      Copy          0ms   0%    entropy     98.058    │
+│ Epoch              4375    Train         310ms   6%    old_kl       0.189    │
+│ Uptime    0d 5h 40m 31s      Model       309ms   6%    kl           0.073    │
+│ To go     15m 47s 604ms      Misc          1ms   0%    clipfrac     0.204    │
+│                                                                              │
+│ perf                         -0.233   score                        -0.233    │
+│ episode_return            -2016.783   episode_length             8640.000    │
+│ comfort_dev_K                 2.928   worst_dev_K                  18.216    │
+│ out_of_band_frac              0.583   productivity                 -0.332    │
+│ energy_cost_norm              0.058   carbon_norm                   0.112    │
+│ elec_kwh                   5807.489   gas_kwh                   76603.016    │
+│ episode_score_scen_mean       0.220   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0         🐡       GPU:  51%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 336  93%    Losses       0.678    │
+│ Params           729.6K      Model         0ms   0%    policy      -0.135    │
+│ Steps            286.8M      Env           0ms   0%    value        1.625    │
+│ SPS               14.0K      Copy          0ms   0%    entropy     97.827    │
+│ Epoch              4376    Train         324ms   6%    old_kl       0.168    │
+│ Uptime    0d 5h 40m 36s      Model       323ms   6%    kl           0.062    │
+│ To go     15m 46s 509ms      Misc          1ms   0%    clipfrac     0.185    │
+│                                                                              │
+│ perf                         -0.135   score                        -0.135    │
+│ episode_return            -1169.530   episode_length             8640.000    │
+│ comfort_dev_K                 1.731   worst_dev_K                  14.346    │
+│ out_of_band_frac              0.501   productivity                 -0.200    │
+│ energy_cost_norm              0.030   carbon_norm                   0.047    │
+│ elec_kwh                   4511.911   gas_kwh                   31280.678    │
+│ episode_score_scen_mean       0.212   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0        🐡        GPU: 100%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 426  93%    Losses       0.856    │
+│ Params           729.6K      Model         0ms   0%    policy      -0.196    │
+│ Steps            286.9M      Env           0ms   0%    value        2.105    │
+│ SPS               13.7K      Copy          0ms   0%    entropy     97.606    │
+│ Epoch              4377    Train         322ms   6%    old_kl       0.116    │
+│ Uptime    0d 5h 40m 41s      Model       321ms   6%    kl           0.040    │
+│ To go     15m 59s 404ms      Misc          1ms   0%    clipfrac     0.140    │
+│                                                                              │
+│ perf                         -0.244   score                        -0.244    │
+│ episode_return            -2108.009   episode_length             8640.000    │
+│ comfort_dev_K                 3.013   worst_dev_K                  18.696    │
+│ out_of_band_frac              0.587   productivity                 -0.346    │
+│ energy_cost_norm              0.061   carbon_norm                   0.120    │
+│ elec_kwh                   5951.652   gas_kwh                   82068.023    │
+│ episode_score_scen_mean       0.219   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0       🐡         GPU:  74%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 544  93%    Losses       2.325    │
+│ Params           729.6K      Model         0ms   0%    policy       0.102    │
+│ Steps            286.9M      Env           0ms   0%    value        4.448    │
+│ SPS               13.4K      Copy          0ms   0%    entropy     97.374    │
+│ Epoch              4378    Train         325ms   6%    old_kl       0.169    │
+│ Uptime    0d 5h 40m 46s      Model       324ms   6%    kl           0.056    │
+│ To go     16m 18s 931ms      Misc          1ms   0%    clipfrac     0.225    │
+│                                                                              │
+│ perf                         -0.204   score                        -0.204    │
+│ episode_return            -1760.865   episode_length             8640.000    │
+│ comfort_dev_K                 2.526   worst_dev_K                  16.429    │
+│ out_of_band_frac              0.558   productivity                 -0.293    │
+│ energy_cost_norm              0.049   carbon_norm                   0.091    │
+│ elec_kwh                   5345.858   gas_kwh                   61924.199    │
+│ episode_score_scen_mean       0.222   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0      🐡          GPU:   2%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 573  93%    Losses       7.301    │
+│ Params           729.6K      Model         0ms   0%    policy      -0.197    │
+│ Steps            287.0M      Env           0ms   0%    value       14.996    │
+│ SPS               13.3K      Copy          0ms   0%    entropy     97.157    │
+│ Epoch              4379    Train         325ms   6%    old_kl       0.164    │
+│ Uptime    0d 5h 40m 51s      Model       323ms   6%    kl           0.058    │
+│ To go     16m 19s 688ms      Misc          1ms   0%    clipfrac     0.196    │
+│                                                                              │
+│ perf                         -0.265   score                        -0.265    │
+│ episode_return            -2287.432   episode_length             8640.000    │
+│ comfort_dev_K                 3.257   worst_dev_K                  19.213    │
+│ out_of_band_frac              0.606   productivity                 -0.376    │
+│ energy_cost_norm              0.066   carbon_norm                   0.130    │
+│ elec_kwh                   6124.773   gas_kwh                   89462.289    │
+│ episode_score_scen_mean       0.223   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0     🐡           GPU:   3%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 549  93%    Losses      12.397    │
+│ Params           729.6K      Model         0ms   0%    policy      -0.025    │
+│ Steps            287.0M      Env           0ms   0%    value       24.843    │
+│ SPS               13.4K      Copy          0ms   0%    entropy     96.938    │
+│ Epoch              4380    Train         324ms   6%    old_kl       0.134    │
+│ Uptime    0d 5h 40m 55s      Model       323ms   6%    kl           0.044    │
+│ To go     16m 09s 898ms      Misc          1ms   0%    clipfrac     0.173    │
+│                                                                              │
+│ perf                         -0.199   score                        -0.199    │
+│ episode_return            -1719.566   episode_length             8640.000    │
+│ comfort_dev_K                 2.405   worst_dev_K                  15.771    │
+│ out_of_band_frac              0.544   productivity                 -0.287    │
+│ energy_cost_norm              0.048   carbon_norm                   0.087    │
+│ elec_kwh                   5597.702   gas_kwh                   58692.312    │
+│ episode_score_scen_mean       0.226   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0    🐡            GPU:  63%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 557  93%    Losses       7.975    │
+│ Params           729.6K      Model         0ms   0%    policy      -0.027    │
+│ Steps            287.1M      Env           0ms   0%    value       16.003    │
+│ SPS               13.4K      Copy          0ms   0%    entropy     96.706    │
+│ Epoch              4381    Train         318ms   6%    old_kl       0.133    │
+│ Uptime     0d 5h 41m 0s      Model       317ms   6%    kl           0.048    │
+│ To go     16m 05s 433ms      Misc          1ms   0%    clipfrac     0.157    │
+│                                                                              │
+│ perf                         -0.194   score                        -0.194    │
+│ episode_return            -1673.537   episode_length             8640.000    │
+│ comfort_dev_K                 2.342   worst_dev_K                  15.817    │
+│ out_of_band_frac              0.537   productivity                 -0.278    │
+│ energy_cost_norm              0.048   carbon_norm                   0.086    │
+│ elec_kwh                   5625.241   gas_kwh                   58583.539    │
+│ episode_score_scen_mean       0.219   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0   🐡             GPU:  17%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 435  93%    Losses       5.060    │
+│ Params           729.6K      Model         0ms   0%    policy      -0.010    │
+│ Steps            287.2M      Env           0ms   0%    value       10.140    │
+│ SPS               13.7K      Copy          0ms   0%    entropy     96.475    │
+│ Epoch              4382    Train         311ms   6%    old_kl       0.142    │
+│ Uptime     0d 5h 41m 5s      Model       310ms   6%    kl           0.049    │
+│ To go     15m 36s 593ms      Misc          1ms   0%    clipfrac     0.176    │
+│                                                                              │
+│ perf                         -0.203   score                        -0.203    │
+│ episode_return            -1751.310   episode_length             8640.000    │
+│ comfort_dev_K                 2.487   worst_dev_K                  16.375    │
+│ out_of_band_frac              0.549   productivity                 -0.291    │
+│ energy_cost_norm              0.049   carbon_norm                   0.091    │
+│ elec_kwh                   5472.761   gas_kwh                   61563.980    │
+│ episode_score_scen_mean       0.221   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0  🐡              GPU:  77%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 357  93%    Losses       1.652    │
+│ Params           729.6K      Model         0ms   0%    policy       0.053    │
+│ Steps            287.2M      Env           0ms   0%    value        3.196    │
+│ SPS               14.0K      Copy          0ms   0%    entropy     96.253    │
+│ Epoch              4383    Train         310ms   6%    old_kl       0.138    │
+│ Uptime    0d 5h 41m 10s      Model       309ms   6%    kl           0.044    │
+│ To go     15m 15s 195ms      Misc          1ms   0%    clipfrac     0.190    │
+│                                                                              │
+│ perf                         -0.212   score                        -0.212    │
+│ episode_return            -1830.515   episode_length             8640.000    │
+│ comfort_dev_K                 2.531   worst_dev_K                  16.807    │
+│ out_of_band_frac              0.555   productivity                 -0.306    │
+│ energy_cost_norm              0.050   carbon_norm                   0.092    │
+│ elec_kwh                   5418.247   gas_kwh                   62880.355    │
+│ episode_score_scen_mean       0.230   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0 🐡               GPU: 100%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 373  93%    Losses       1.511    │
+│ Params           729.6K      Model         0ms   0%    policy      -0.060    │
+│ Steps            287.3M      Env           0ms   0%    value        3.143    │
+│ SPS               13.9K      Copy          0ms   0%    entropy     96.031    │
+│ Epoch              4384    Train         309ms   6%    old_kl       0.126    │
+│ Uptime    0d 5h 41m 14s      Model       308ms   6%    kl           0.040    │
+│ To go     15m 13s 390ms      Misc          1ms   0%    clipfrac     0.166    │
+│                                                                              │
+│ perf                         -0.370   score                        -0.370    │
+│ episode_return            -3200.050   episode_length             8640.000    │
+│ comfort_dev_K                 4.406   worst_dev_K                  22.794    │
+│ out_of_band_frac              0.680   productivity                 -0.525    │
+│ energy_cost_norm              0.090   carbon_norm                   0.186    │
+│ elec_kwh                   7169.214   gas_kwh                   128500.35    │
+│ episode_score_scen_mean       0.236   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ PufferLib 5.0🐡                GPU:   0%   VRAM:   4.8/24G    RAM:  1.3G     │
+│                                                                              │
+│ Env       smart_buildin    Evaluate     4s 322  93%    Losses       2.936    │
+│ Params           729.6K      Model         0ms   0%    policy      -0.148    │
+│ Steps            287.4M      Env           0ms   0%    value        6.167    │
+│ SPS               14.1K      Copy          0ms   0%    entropy     95.804    │
+│ Epoch              4385    Train         310ms   6%    old_kl       0.120    │
+│ Uptime    0d 5h 41m 19s      Model       309ms   6%    kl           0.041    │
+│ To go     14m 59s 075ms      Misc          1ms   0%    clipfrac     0.149    │
+│                                                                              │
+│ perf                         -0.284   score                        -0.284    │
+│ episode_return            -2449.855   episode_length             8640.000    │
+│ comfort_dev_K                 3.375   worst_dev_K                  19.764    │
+│ out_of_band_frac              0.610   productivity                 -0.404    │
+│ energy_cost_norm              0.069   carbon_norm                   0.138    │
+│ elec_kwh                   6232.926   gas_kwh                   94578.992    │
+│ episode_score_scen_mean       0.232   episode_score_n_scen          2.000    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──

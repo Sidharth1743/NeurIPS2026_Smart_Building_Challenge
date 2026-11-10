@@ -1,0 +1,14 @@
+{
+ "scenario": "building_train_7__fairbanks_6",
+ "policy": "pid_water",
+ "steps": 8640,
+ "seconds": 424.41009974479675,
+ "score": 0.0385473446902016,
+ "mean_reward": -0.038547344708514,
+ "productivity": -0.06108116213516176,
+ "energy_cost": 0.004630719209751954,
+ "carbon": 0.004862517835770766,
+ "electricity_cost_sum": 196.86147217825055,
+ "gas_cost_sum": 66.58972331436962,
+ "zone_temps_last": null
+}

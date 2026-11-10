@@ -1,0 +1,333 @@
+{
+ "policy": "pid_water",
+ "source": "the organiser's starter-kit baseline, deterministic fp64 month per scenario",
+ "n_scenarios": 54,
+ "complete": true,
+ "score": 0.04373251585272917,
+ "scenarios": {
+  "building_train_4__atlanta_4": {
+   "mean_reward": -0.026299582444087307,
+   "productivity": -0.027837398213835143,
+   "energy_cost": 0.03886594629841737,
+   "carbon": 0.009119771288705234
+  },
+  "building_train_4__atlanta_7": {
+   "mean_reward": -0.025239022699856853,
+   "productivity": -0.03514575981284401,
+   "energy_cost": 0.015977538685715612,
+   "carbon": 0.004780295430790644
+  },
+  "building_train_4__denver_1": {
+   "mean_reward": -0.05568757981750318,
+   "productivity": -0.06775390464185707,
+   "energy_cost": 0.02805111427266735,
+   "carbon": 0.04712507117046698
+  },
+  "building_train_4__denver_4": {
+   "mean_reward": -0.02327977422800721,
+   "productivity": -0.03138850400041036,
+   "energy_cost": 0.017617308063049793,
+   "carbon": 0.004616050967649488
+  },
+  "building_train_4__fairbanks_3": {
+   "mean_reward": -0.05815058893848152,
+   "productivity": -0.07295058049143571,
+   "energy_cost": 0.026082928258885776,
+   "carbon": 0.04581827487028965
+  },
+  "building_train_4__fairbanks_6": {
+   "mean_reward": -0.027552164498117523,
+   "productivity": -0.042857626014894644,
+   "energy_cost": 0.007189294184097729,
+   "carbon": 0.0019986504197163414
+  },
+  "building_train_4__minneapolis_1": {
+   "mean_reward": -0.07077545378526372,
+   "productivity": -0.06174480322477865,
+   "energy_cost": 0.06278814001256613,
+   "carbon": 0.10585471952249295
+  },
+  "building_train_4__minneapolis_2": {
+   "mean_reward": -0.0562966196667722,
+   "productivity": -0.061219073925894915,
+   "energy_cost": 0.035854876317455785,
+   "carbon": 0.06197099992906951
+  },
+  "building_train_4__minneapolis_3": {
+   "mean_reward": -0.0470639174339807,
+   "productivity": -0.0694254747655291,
+   "energy_cost": 0.012469279469687703,
+   "carbon": 0.014573883226527777
+  },
+  "building_train_4__minneapolis_4": {
+   "mean_reward": -0.02546818968397607,
+   "productivity": -0.03328227350699767,
+   "energy_cost": 0.021015407493060863,
+   "carbon": 0.00647872042957871
+  },
+  "building_train_4__minneapolis_5": {
+   "mean_reward": -0.02334007506962405,
+   "productivity": -0.027609963097599652,
+   "energy_cost": 0.027399554624080873,
+   "carbon": 0.0064709315956138075
+  },
+  "building_train_4__minneapolis_6": {
+   "mean_reward": -0.021965545683958174,
+   "productivity": -0.027000294559926023,
+   "energy_cost": 0.023335127091115106,
+   "carbon": 0.005491717743311037
+  },
+  "building_train_4__minneapolis_7": {
+   "mean_reward": -0.03466202370218662,
+   "productivity": -0.053635839881558324,
+   "energy_cost": 0.008930562718607017,
+   "carbon": 0.0034720361276945957
+  },
+  "building_train_4__minneapolis_8": {
+   "mean_reward": -0.050434703889716194,
+   "productivity": -0.07002116827380733,
+   "energy_cost": 0.015551469866927535,
+   "carbon": 0.026558545033377515
+  },
+  "building_train_4__phoenix_2": {
+   "mean_reward": -0.023344077365791385,
+   "productivity": -0.030403552359565662,
+   "energy_cost": 0.02053494712653345,
+   "carbon": 0.004974782643068499
+  },
+  "building_train_4__phoenix_7": {
+   "mean_reward": -0.023951871465046248,
+   "productivity": -0.028524298432729512,
+   "energy_cost": 0.02758783035008621,
+   "carbon": 0.0065986316390834075
+  },
+  "building_train_4__singapore_2": {
+   "mean_reward": -0.030486353352705726,
+   "productivity": -0.03204329941305654,
+   "energy_cost": 0.045024937732327325,
+   "carbon": 0.01127693081339666
+  },
+  "building_train_4__singapore_5": {
+   "mean_reward": -0.033040691349094896,
+   "productivity": -0.034350902199643575,
+   "energy_cost": 0.0490779517895313,
+   "carbon": 0.013072798405033836
+  },
+  "building_train_5__atlanta_4": {
+   "mean_reward": -0.043681599445167606,
+   "productivity": -0.04514608224587454,
+   "energy_cost": 0.059548214584259594,
+   "carbon": 0.023421536127978648
+  },
+  "building_train_5__atlanta_7": {
+   "mean_reward": -0.02880042572222034,
+   "productivity": -0.041347454308474516,
+   "energy_cost": 0.01311549152380712,
+   "carbon": 0.006844274004552104
+  },
+  "building_train_5__denver_1": {
+   "mean_reward": -0.062383443149979116,
+   "productivity": -0.05640892652138266,
+   "energy_cost": 0.05355144508286571,
+   "carbon": 0.08913899122563651
+  },
+  "building_train_5__denver_4": {
+   "mean_reward": -0.020815177175736967,
+   "productivity": -0.029497235426283117,
+   "energy_cost": 0.011057801420023937,
+   "carbon": 0.004526378165325519
+  },
+  "building_train_5__fairbanks_3": {
+   "mean_reward": -0.06266464793136745,
+   "productivity": -0.060937915198115256,
+   "energy_cost": 0.04782179390410959,
+   "carbon": 0.08268770025619722
+  },
+  "building_train_5__fairbanks_6": {
+   "mean_reward": -0.031935776213325454,
+   "productivity": -0.051577562997381726,
+   "energy_cost": 0.0031591512678479225,
+   "carbon": 0.0017870408480205326
+  },
+  "building_train_5__minneapolis_1": {
+   "mean_reward": -0.09784655449174483,
+   "productivity": -0.0682977391159309,
+   "energy_cost": 0.10792515217982471,
+   "carbon": 0.17641440310753415
+  },
+  "building_train_5__minneapolis_2": {
+   "mean_reward": -0.07042035444939011,
+   "productivity": -0.05842611450942867,
+   "energy_cost": 0.06565814683836409,
+   "carbon": 0.11116528185598369
+  },
+  "building_train_5__minneapolis_3": {
+   "mean_reward": -0.042466583110073154,
+   "productivity": -0.05123880791219946,
+   "energy_cost": 0.022997973453050814,
+   "carbon": 0.035618518320867286
+  },
+  "building_train_5__minneapolis_4": {
+   "mean_reward": -0.02372513251472086,
+   "productivity": -0.03218159291651747,
+   "energy_cost": 0.01517467944862295,
+   "carbon": 0.006906204367533906
+  },
+  "building_train_5__minneapolis_5": {
+   "mean_reward": -0.02035424872239078,
+   "productivity": -0.0244564069828183,
+   "energy_cost": 0.02222754724345453,
+   "carbon": 0.006174475365841553
+  },
+  "building_train_5__minneapolis_6": {
+   "mean_reward": -0.017005613237793787,
+   "productivity": -0.022164580782119057,
+   "energy_cost": 0.014997283795683393,
+   "carbon": 0.003537040094388683
+  },
+  "building_train_5__minneapolis_7": {
+   "mean_reward": -0.0357494696338352,
+   "productivity": -0.054126670972831796,
+   "energy_cost": 0.008443429543591735,
+   "carbon": 0.007923905585091604
+  },
+  "building_train_5__minneapolis_8": {
+   "mean_reward": -0.04921829825567472,
+   "productivity": -0.05113450007694256,
+   "energy_cost": 0.033912874172397814,
+   "carbon": 0.058775117072469095
+  },
+  "building_train_5__phoenix_2": {
+   "mean_reward": -0.01943756414807567,
+   "productivity": -0.027162629071498797,
+   "energy_cost": 0.012614692218990238,
+   "carbon": 0.0030852413409466753
+  },
+  "building_train_5__phoenix_7": {
+   "mean_reward": -0.02017591185837149,
+   "productivity": -0.025373231751911814,
+   "energy_cost": 0.019963143509265535,
+   "carbon": 0.004796720469246591
+  },
+  "building_train_5__singapore_2": {
+   "mean_reward": -0.10353600001177907,
+   "productivity": -0.10436442404534656,
+   "energy_cost": 0.1345985717533251,
+   "carbon": 0.06998815643700974
+  },
+  "building_train_5__singapore_5": {
+   "mean_reward": -0.11069536703710317,
+   "productivity": -0.111480630384499,
+   "energy_cost": 0.14447830539875156,
+   "carbon": 0.07455663845086033
+  },
+  "building_train_7__atlanta_4": {
+   "mean_reward": -0.03321663270967392,
+   "productivity": -0.03422526678041996,
+   "energy_cost": 0.0472133462915477,
+   "carbon": 0.016194016919518862
+  },
+  "building_train_7__atlanta_7": {
+   "mean_reward": -0.027900097164660177,
+   "productivity": -0.03960482249371193,
+   "energy_cost": 0.01212852608433671,
+   "carbon": 0.008557492204134733
+  },
+  "building_train_7__denver_1": {
+   "mean_reward": -0.07991779102240057,
+   "productivity": -0.07388183017356588,
+   "energy_cost": 0.068233940178578,
+   "carbon": 0.10970952438107849
+  },
+  "building_train_7__denver_4": {
+   "mean_reward": -0.023615845348488703,
+   "productivity": -0.03137617346640885,
+   "energy_cost": 0.015285851646052185,
+   "carbon": 0.008664854439003075
+  },
+  "building_train_7__fairbanks_3": {
+   "mean_reward": -0.07489627126115558,
+   "productivity": -0.07501431084842976,
+   "energy_cost": 0.054575325189086844,
+   "carbon": 0.09486309871586114
+  },
+  "building_train_7__fairbanks_6": {
+   "mean_reward": -0.038547344708514,
+   "productivity": -0.06108116213516176,
+   "energy_cost": 0.004630719209751954,
+   "carbon": 0.004862517835770766
+  },
+  "building_train_7__minneapolis_1": {
+   "mean_reward": -0.11624322837186961,
+   "productivity": -0.08463977823901385,
+   "energy_cost": 0.12703255710564967,
+   "carbon": 0.20026425002812445
+  },
+  "building_train_7__minneapolis_2": {
+   "mean_reward": -0.08825902864380926,
+   "productivity": -0.07654890930100886,
+   "energy_cost": 0.08035636683480797,
+   "carbon": 0.13129204857517396
+  },
+  "building_train_7__minneapolis_3": {
+   "mean_reward": -0.05260814119830475,
+   "productivity": -0.06226958363115121,
+   "energy_cost": 0.029164067885114442,
+   "carbon": 0.04706788734889347
+  },
+  "building_train_7__minneapolis_4": {
+   "mean_reward": -0.025559073924977554,
+   "productivity": -0.03420542124469177,
+   "energy_cost": 0.016416366261916508,
+   "carbon": 0.008762739611481047
+  },
+  "building_train_7__minneapolis_5": {
+   "mean_reward": -0.0230410269728052,
+   "productivity": -0.02838067669117326,
+   "energy_cost": 0.02306722133237055,
+   "carbon": 0.0069958833154234725
+  },
+  "building_train_7__minneapolis_6": {
+   "mean_reward": -0.017829581058703598,
+   "productivity": -0.02355014580146299,
+   "energy_cost": 0.014875060429579468,
+   "carbon": 0.0036224074162937037
+  },
+  "building_train_7__minneapolis_7": {
+   "mean_reward": -0.04034406689894141,
+   "productivity": -0.057828873760357696,
+   "energy_cost": 0.012694598210120384,
+   "carbon": 0.015539115188238384
+  },
+  "building_train_7__minneapolis_8": {
+   "mean_reward": -0.06363942855563377,
+   "productivity": -0.06553354102265817,
+   "energy_cost": 0.044968161165967205,
+   "carbon": 0.0766283584756635
+  },
+  "building_train_7__phoenix_2": {
+   "mean_reward": -0.022392759428760727,
+   "productivity": -0.031476632050934886,
+   "energy_cost": 0.013684218078879616,
+   "carbon": 0.003849682970836612
+  },
+  "building_train_7__phoenix_7": {
+   "mean_reward": -0.02608026443188915,
+   "productivity": -0.032216736437010556,
+   "energy_cost": 0.02569903494176268,
+   "carbon": 0.008052077970997802
+  },
+  "building_train_7__singapore_2": {
+   "mean_reward": -0.044100353564170997,
+   "productivity": -0.04576033756042374,
+   "energy_cost": 0.06049151537707684,
+   "carbon": 0.0227292397492506
+  },
+  "building_train_7__singapore_5": {
+   "mean_reward": -0.04541451859969715,
+   "productivity": -0.04640512701621973,
+   "energy_cost": 0.0639489456112602,
+   "carbon": 0.023908266238760866
+  }
+ }
+}

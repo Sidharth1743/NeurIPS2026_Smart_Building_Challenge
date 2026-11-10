@@ -1,0 +1,14 @@
+{
+ "scenario": "building_train_8__atlanta_7",
+ "policy": "pid_water",
+ "steps": 8640,
+ "seconds": 239.13263297080994,
+ "score": 0.022176194536009965,
+ "mean_reward": -0.022176194532954486,
+ "productivity": -0.030566012744374246,
+ "energy_cost": 0.012523165372694907,
+ "carbon": 0.006659769074232187,
+ "electricity_cost_sum": 488.01719712954946,
+ "gas_cost_sum": 52.27856455523579,
+ "zone_temps_last": null
+}

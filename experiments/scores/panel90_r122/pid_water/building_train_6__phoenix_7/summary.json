@@ -1,0 +1,14 @@
+{
+ "scenario": "building_train_6__phoenix_7",
+ "policy": "pid_water",
+ "steps": 8640,
+ "seconds": 1241.4418349266052,
+ "score": 0.029587472983665326,
+ "mean_reward": -0.029587472976009183,
+ "productivity": -0.034463194207354615,
+ "energy_cost": 0.03598070026342376,
+ "carbon": 0.008567082032839027,
+ "electricity_cost_sum": 3131.83402639837,
+ "gas_cost_sum": 1.5228632338785246,
+ "zone_temps_last": null
+}

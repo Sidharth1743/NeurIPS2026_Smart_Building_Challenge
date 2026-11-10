@@ -1,0 +1,17 @@
+{
+  "step": 79626240,
+  "components": [
+    {
+      "file": "0000000079626240.bin",
+      "bytes": 1812032,
+      "sha256": "048d55e61dafbf756612c4fb5d09e402beac700e4c081bf2b5e9b8a708b096e8"
+    },
+    {
+      "file": "0000000079626240.bin.mb",
+      "bytes": 3624068,
+      "sha256": "6f287fe66b55a02dde2e754f212d7c82ee4fb887178d23f5732b82a64f378d87"
+    }
+  ],
+  "binary_sha256": "f761da99d67eb0e54767b9c772b7b78f4fe52f8a6d33c2fdf9485ae75df1a773",
+  "archive_sha256": "492c483e29ab64e79665ae1886dc60ed961b6da9ae0440f1206024932d51abda"
+}
