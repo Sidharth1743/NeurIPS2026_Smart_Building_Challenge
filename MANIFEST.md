@@ -5,9 +5,9 @@
 | file | bytes | sha256 |
 |---|---|---|
 | `.gitignore` | 797 | `dbb5851e99f6ac22` |
-| `CITATION.cff` | 827 | `424900d55e39816b` |
+| `CITATION.cff` | 828 | `0a8cc428236b9917` |
 | `LICENSE` | 11,358 | `cfc7749b96f63bd3` |
-| `README.md` | 12,669 | `4fd98d9de89966e0` |
+| `README.md` | 12,670 | `37de85fb3fa02ca3` |
 | `STARTER_KIT.md` | 558 | `5968163db44d0ff0` |
 | `complete_port/README.md` | 22,893 | `9ddff720caf9550f` |
 | `complete_port/config/smart_buildings.ini` | 23,568 | `e42ee142261ee9b9` |
@@ -1394,9 +1394,9 @@
 | `paper/figures/make_results_figs_v2.py` | 9,922 | `520f280fbbc461ab` |
 | `paper/figures/results_fig_data.py` | 4,816 | `bccde0c1fb3d8243` |
 | `paper/neurips_2026.sty` | 13,741 | `e29cf2ada13902af` |
-| `paper/neurips_3_method.pdf` | 177,284 | `736aac832464f5d2` |
-| `paper/neurips_3_method.tex` | 36,801 | `2bf753d4394097ff` |
-| `paper/neurips_3_method_appendix.pdf` | 571,411 | `88275de41a39b974` |
-| `paper/neurips_3_method_appendix.tex` | 93,874 | `cf87a6f5006c0ff0` |
+| `paper/neurips_3_method.pdf` | 189,363 | `3f916afd25948734` |
+| `paper/neurips_3_method.tex` | 36,802 | `407f3af6f0d90937` |
+| `paper/neurips_3_method_appendix.pdf` | 571,406 | `d88351703160f04b` |
+| `paper/neurips_3_method_appendix.tex` | 93,875 | `ba5ad4d57458f91e` |
 | `paper/references.bib` | 10,009 | `b2175b2c7881b025` |
 | `run.sh` | 8,416 | `73b5f5ff87a64e17` |

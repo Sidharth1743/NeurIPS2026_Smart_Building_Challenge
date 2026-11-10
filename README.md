@@ -219,7 +219,7 @@ Our code is Apache-2.0. `starter-kit/` is the organisers' Apache-2.0 work and st
 ```bibtex
 @inproceedings{siddharth2026smartbuildings,
   title  = {One Shared PPO Policy for Heterogeneous Commercial Building HVAC Control},
-  author = {Siddharth S},
+  author = {Sidharthan S},
   booktitle = {NeurIPS 2026 Smart Buildings Challenge},
   year   = {2026}
 }
