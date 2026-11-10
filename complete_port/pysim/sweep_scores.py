@@ -13,11 +13,8 @@ risk); the C core supplies the simulation. Step order mirrors the PufferLib env.
 """
 from __future__ import annotations
 
-SB_ROOT = Path(os.environ.get("SB_ROOT", next(
-    (p for p in [Path(__file__).resolve().parent, *Path(__file__).resolve().parent.parents]
-     if (p / 'complete_port').is_dir()), Path(__file__).resolve().parent)))
+ROOT = Path(os.environ.get("SB_ROOT", Path(__file__).resolve().parents[2]))
 
-import os
 import argparse, ctypes, json, os, pickle, sys, time
 from pathlib import Path
 
@@ -37,7 +34,7 @@ LIB.sb_action_dims.argtypes = [ctypes.c_void_p, ctypes.POINTER(ctypes.c_int),
 LIB.sb_reset.argtypes = [ctypes.c_void_p, F]
 LIB.sb_step.argtypes = [ctypes.c_void_p, F, I, F, D]
 
-SK = SB_ROOT / "starter-kit"
+SK = ROOT / "starter-kit"
 # The kit's gin configs reference scenario paths relative to its own root,
 # so every env load must happen with that as the working directory.
 os.chdir(SK)
@@ -223,7 +220,7 @@ def main():
                 results.append(r)
 
     out = {"results": results}
-    ref = SB_ROOT / "reference_baselines.json"
+    ref = ROOT / "reference_baselines.json"
     if ref.exists():
         rj = json.load(open(ref))
         out["reference"] = rj.get("scores")

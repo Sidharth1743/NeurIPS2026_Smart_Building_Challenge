@@ -5,7 +5,6 @@ point below the identity line is a month the policy wins. Colour encodes the bui
 on a single sequential blue ramp; the two buildings never seen in training are drawn
 open, so "unseen" reads as a shape difference and does not need its own hue.
 """
-import os
 from pathlib import Path
 
 import matplotlib
@@ -15,12 +14,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from matplotlib.lines import Line2D
-SB_ROOT = Path(os.environ.get("SB_ROOT", next(
-    (p for p in [Path(__file__).resolve().parent, *Path(__file__).resolve().parent.parents]
-     if (p / 'complete_port').is_dir()), Path(__file__).resolve().parent)))
 
-
-REPO = SB_ROOT
+REPO = Path(os.environ.get("SB_ROOT", Path(__file__).resolve().parents[1]))
 D = REPO / 'results/eval90_analysis/r139_199065600/data'
 OUT = REPO / 'paper-writing/figures'
 

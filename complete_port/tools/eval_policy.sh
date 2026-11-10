@@ -12,6 +12,19 @@ set -euo pipefail
 SET="$1"; OUT="$2"; MODEL="${3:--}"; shift 3 || shift $#
 PL="${PUFFERLIB:-${SB_PL_ROOT:-${XDG_CACHE_HOME:-$HOME/.cache}/sb/pufferlib}/plverify}"
 BIN="${SB_BIN:-puffer}"
+# A score must never come from the training-only fp32 solve. The symbol sits in the mangled name of
+# the fp32 LU solve; tools/score_eval90.py checks the same thing for puffer_shared. Training with
+# SB_F32=1 leaves ./puffer as the fp32 build, so without this check an evaluation silently scores a
+# different physics from the one the paper reports.
+if [ -f "$PL/$BIN" ] && grep -aq 'EEv5LuDevPf' "$PL/$BIN"; then
+  cat >&2 <<'MSG'
+refusing to score: the binary contains the fp32 solve (EEv5LuDevPf).
+
+Rebuild it in fp64 (in the checkout: ./build.sh smart_buildings, with SB_F32 unset), or point
+SB_BIN at an fp64 binary such as puffer_f64.
+MSG
+  exit 1
+fi
 N=$(ls "$ART/$SET"/*.sbb | wc -l)
 M=""; [ "$MODEL" != "-" ] && M="$MODEL"
 mkdir -p "$(dirname "$CP/results/$OUT")"
@@ -29,7 +42,11 @@ if [ -n "${SB_EVAL_SPLITS:-}" ]; then
   exit 0
 fi
 RAWLOG="$CP/results/$OUT.log"
-[ ! -e "$RAWLOG" ] || { echo "Preserving existing log: $RAWLOG" >&2; exit 1; }
+# a previous attempt that failed keeps its log; SB_EVAL_FORCE=1 allows the retry
+if [ -e "$RAWLOG" ] && [ -n "${SB_EVAL_FORCE:-}" ]; then
+  mv "$RAWLOG" "$RAWLOG.prev.$(date +%Y%m%d_%H%M%S)"
+fi
+[ ! -e "$RAWLOG" ] || { echo "Preserving existing log: $RAWLOG (set SB_EVAL_FORCE=1 to retry)" >&2; exit 1; }
 EVAL=(docker run --rm "${DEVS[@]}" -e SB_EVAL_OUT="/res/$OUT" \
   -v "$PL":/work:ro -v "$ART":/art:ro -v "$CP/results":/res -w /work "$IMAGE" \
   "./$BIN" eval)
@@ -38,11 +55,7 @@ if [ -n "${SB_CONTAINER_NAME:-}" ]; then EVAL=(docker run --rm --name "$SB_CONTA
 EVAL+=(--headless "--env.blob_dir=/art/$SET" "--env.groups=$N" "--base.eval_agents=$N" "--base.eval_episodes=$N"
   --env.desync=0 --base.deterministic=1 --base.cudagraphs=-1 "$@")
 rc=0
-if [ -n "${SB_GPU:-}" ] && [ "${SB_GPU}" != all ]; then
-  "${EVAL[@]}" >"$RAWLOG" 2>&1 || rc=$?
-else
-  "$CP/../research/tools/gpu.sh" main "eval-$(basename "$OUT")" -- "${EVAL[@]}" >"$RAWLOG" 2>&1 || rc=$?
-fi
+"${EVAL[@]}" >"$RAWLOG" 2>&1 || rc=$?    # SB_GPU already pins the device through ${DEVS[@]}
 if [ "$rc" -ne 0 ]; then tail -30 "$RAWLOG" >&2; exit "$rc"; fi
 if [ ! -s "$CP/results/$OUT" ]; then echo "Missing score output; full log: $RAWLOG" >&2; tail -15 "$RAWLOG" >&2; exit 1; fi
 python3 -c "import json;d=json.load(open('$CP/results/$OUT'));print('$OUT: complete',d['complete'],'scenarios',d['n_scenarios_done'],'score %.6f'%d['score'])"

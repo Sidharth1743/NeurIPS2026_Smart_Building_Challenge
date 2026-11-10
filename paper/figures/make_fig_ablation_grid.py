@@ -3,7 +3,6 @@
 Panel labels sit under each panel; the figure caption carries the encoding and the final
 numbers. Only the four large effects and the six small ones share axes.
 """
-import os
 import re
 from pathlib import Path
 
@@ -12,12 +11,8 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-SB_ROOT = Path(os.environ.get("SB_ROOT", next(
-    (p for p in [Path(__file__).resolve().parent, *Path(__file__).resolve().parent.parents]
-     if (p / 'complete_port').is_dir()), Path(__file__).resolve().parent)))
 
-
-RUNS = SB_ROOT / "complete_port/results/runs"
+RUNS = Path(os.environ.get("SB_ROOT", Path(__file__).resolve().parents[1])) / "complete_port" / "results" / "runs"
 OUT = Path(__file__).resolve().parent / "figures"
 RED, TEAL, GREY, DARK = "#B64342", "#2F7F8A", "#8A8A8A", "#3A3A3A"
 BAND = "#ECECEC"

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """One graph smoke and checkpoint round-trip, inside the existing trainer gate."""
-import os
-PL_ROOT = os.environ.get("SB_PL_ROOT", os.path.expanduser("~/.cache/sb/pufferlib"))  # release: root of the PufferLib checkouts
 import argparse, math, re, shlex, struct, subprocess
 from pathlib import Path
+import os
+PL_ROOT = os.environ.get("SB_PL_ROOT", os.path.expanduser("~/.cache/sb/pufferlib"))
 CP=Path(__file__).resolve().parents[1]
 
 def hadam(path):

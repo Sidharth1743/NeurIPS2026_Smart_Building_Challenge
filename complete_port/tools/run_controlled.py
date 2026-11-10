@@ -68,10 +68,14 @@ def main() -> None:
              f"--base.checkpoint_dir=/res/runs/{args.name}",
              f"--base.log_dir=/res/runs/{args.name}", "--base.run_id=ckpt", *options]
     docker_env = []
-    if os.environ.get("SB_TRAJ"):
-        docker_env += ["-e", f"SB_TRAJ={os.environ['SB_TRAJ']}"]
-    if os.environ.get("SB_BLEND_PROBE"):
-        docker_env += ["-e", "SB_BLEND_PROBE=1"]
+    # diagnostics switches the trainer reads from its environment; SB_CREDIT is the number of
+    # agents in one group, and update_diagnostics=1 refuses to start without it
+    for var in ("SB_TRAJ", "SB_BLEND_PROBE", "SB_CREDIT", "SB_VALVE_DIAG", "SB_DETAIL_METRICS",
+                "SB_ROLESTEP", "SB_ZONE_STATS", "SB_ZONE_EMPTY_OBS", "SB_ZONE_CREDIT_AUDIT",
+                "SB_ZONE_MLP", "SB_F32"):
+        value = os.environ.get(var)
+        if value:
+            docker_env += ["-e", f"{var}={value}"]
     command = [str(CP / "tools/with_gpu.sh"), str(args.gpu), "--",
                "docker", "run", "--rm", "--name", f"sb-{args.name}",
                "--gpus", f"device={args.gpu}",

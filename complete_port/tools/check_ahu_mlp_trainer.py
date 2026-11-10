@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Mixed-group async graph and role-Adam checks inside the trainer gate."""
-import os
-PL_ROOT = os.environ.get("SB_PL_ROOT", os.path.expanduser("~/.cache/sb/pufferlib"))  # release: root of the PufferLib checkouts
 import argparse, math, re, shlex, struct, subprocess
 from pathlib import Path
 from check_zone_residual_trainer import hadam
+import os
+PL_ROOT = os.environ.get("SB_PL_ROOT", os.path.expanduser("~/.cache/sb/pufferlib"))
 CP=Path(__file__).resolve().parents[1]
 
 def main():

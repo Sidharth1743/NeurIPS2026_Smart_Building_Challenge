@@ -1,6 +1,7 @@
 #!/bin/bash
 # Train PPO on the GPU env (TensorBoard logging on).
 #   PUFFERLIB=/path/to/patched/checkout tools/train.sh [<scenario-name>] [extra ./puffer train args]
+#   SB_TRAIN_BIN=puffer_shared trains with the shared canonical policy (beta head, zone MLP)
 # Default = multi-building: every .sbb in artifacts/train (the 30 shipped scenarios, bake them with
 # tools/bake_training_set.sh), 32 envs each; the weathers of a building share a group (6 groups x 160 envs). With a scenario name
 # (a blob in artifacts/blobs) it trains on that single scenario with 256 envs.
@@ -28,7 +29,8 @@ VARIANT=f64; [ -n "${SB_F32:-}" ] && { SNAPENV+=(-e SB_F32=1); VARIANT=f32; }
 mkdir -p "$CP/results"; LOG="$CP/results/train_$(date +%Y%m%d_%H%M%S).log"
 echo "TensorBoard:  tools/tb.sh $PL/logs/smart_buildings/tb      log: $LOG"
 docker run --rm "${DEVS[@]}" "${SNAPENV[@]}" -v "$PL":/work -v "$ART":/art -v "$CP/results":/res -w /work "$IMAGE" bash -lc \
-  "have=none; [ -x ./puffer ] && { have=f64; grep -aq 'lu_solve_t.*EEv5LuDevPf' ./puffer && have=f32; }; \
-   [ \"\$have\" = $VARIANT ] || ./build.sh smart_buildings; \
-   grep -aq 'lu_solve_t.*EEv5LuDevPf' ./puffer && echo 'variant: fp32 solve' || echo 'variant: fp64 solve'; \
-   ./puffer train $SET $*" 2>&1 | tr '\r' '\n' | tee "$LOG"
+  "BIN=${SB_TRAIN_BIN:-puffer}; \
+   have=none; [ -x ./\$BIN ] && { have=f64; grep -aq 'lu_solve_t.*EEv5LuDevPf' ./\$BIN && have=f32; }; \
+   [ \"\$have\" = $VARIANT ] || { if [ \"\$BIN\" = puffer_shared ]; then NVCC_EXTRA=-DSB_SHARED_POLICY ./build.sh smart_buildings puffer_shared; else ./build.sh smart_buildings; fi; }; \
+   grep -aq 'lu_solve_t.*EEv5LuDevPf' ./\$BIN && echo 'variant: fp32 solve' || echo 'variant: fp64 solve'; \
+   ./\$BIN train $SET $*" 2>&1 | tr '\r' '\n' | tee "$LOG"

@@ -1,6 +1,5 @@
 #!/bin/bash
-SB_ROOT="${SB_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)}"
-while [ ! -d "$SB_ROOT/complete_port" ] && [ "$SB_ROOT" != "/" ]; do SB_ROOT="$(dirname "$SB_ROOT")"; done
+SB_ROOT="${SB_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 # Bake every scenario in training_set.yaml into csim/baked/<b>__<w>.sbb (skipping
 # ones that already carry the observation sections). Run from anywhere.
 set -u

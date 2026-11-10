@@ -1,6 +1,5 @@
 #!/bin/bash
-SB_ROOT="${SB_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)}"
-while [ ! -d "$SB_ROOT/complete_port" ] && [ "$SB_ROOT" != "/" ]; do SB_ROOT="$(dirname "$SB_ROOT")"; done
+SB_ROOT="${SB_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 # End-to-end gate for one shipped scenario: bake -> dump oracle trace -> compare.
 # usage: ./gate.sh <building> <weather> [steps]
 set -e

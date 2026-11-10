@@ -33,13 +33,19 @@ build, and `tools/eval_policy.sh` refuses to score with a binary that contains t
 
 | job | VRAM |
 |---|---|
-| 960 agents, fp64, CUDA graphs | 16 to 18 GB |
-| 960 agents, fp32 | 11 GB |
-| 480 agents (the 12 GB card) | 6.3 to 6.6 GB |
+| 960 agents, fp64, plain policy | 16 to 18 GB |
+| 960 agents, fp32, plain policy | 11 GB |
+| 480 agents, shared canonical policy (the reported recipe) | about 20 GB |
 | one evaluation group, 18 scenarios | 4 to 6 GB |
 
-A 12 GB card can train, but not the 960-agent fp64 batch: graph capture for that layout does not fit.
-Use `--env.groups=3 --vec.total_agents=480`.
+Two limits measured on a 24 GB RTX 3090, both with `cudaMalloc failed` rather than a slowdown:
+
+- the **shared canonical policy** at 960 agents does not fit: the Beta head doubles the output block
+  and the allocation exceeds 23.6 GB of free memory. 480 agents (6 groups x 80) fits and runs at
+  7,045 steps/s measured over one epoch, so 50.1M steps is about two hours. The reported 199M run
+  used 960 agents on a 46 GB L40S.
+- on a 12 GB card the plain policy needs `--env.groups=3 --vec.total_agents=480` as well, because
+  the CUDA graph capture for the larger layout does not fit.
 
 ## Reproducing the environment
 

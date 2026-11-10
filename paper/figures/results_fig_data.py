@@ -6,14 +6,12 @@ Writes nothing; other scripts import load().
 """
 from __future__ import annotations
 
-import os
-
 import json
 from pathlib import Path
 
 import numpy as np
 
-CP = Path(os.environ.get("SB_CP", Path(__file__).resolve().parents[1]))
+CP = Path(os.environ.get("SB_ROOT", Path(__file__).resolve().parents[1])) / "complete_port"
 RES = CP / "results"
 SET = CP / "artifacts/sets/eval5_heldout18"
 H, N = 8640, 18

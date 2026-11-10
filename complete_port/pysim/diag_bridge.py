@@ -1,22 +1,18 @@
 #!/usr/bin/env python3
 """Lockstep diagnostic: oracle env vs the C bridge, same policy, per-step."""
-import os
 import ctypes, os, sys
 from pathlib import Path
 import numpy as np
 
-SK = SB_ROOT / "starter-kit"
+ROOT = Path(os.environ.get("SB_ROOT", Path(__file__).resolve().parents[2]))
+SK = ROOT / "starter-kit"
 os.chdir(SK)
-sys.path.insert(0, str(SB_ROOT / "complete_port/pysim"))
+sys.path.insert(0, str(ROOT / "complete_port" / "pysim"))
 import sweep_scores as S
 
 b, w, steps, pkey = sys.argv[1], sys.argv[2], int(sys.argv[3]), sys.argv[4]
 cfg = SK / "smart_buildings" / "training_scenarios" / b / w / "config.gin"
 from smart_buildings import evaluate
-SB_ROOT = Path(os.environ.get("SB_ROOT", next(
-    (p for p in [Path(__file__).resolve().parent, *Path(__file__).resolve().parent.parents]
-     if (p / 'complete_port').is_dir()), Path(__file__).resolve().parent)))
-
 env = evaluate.load_hybrid_environment(cfg)
 meta = evaluate.create_building_meta_data(env, cfg.parent)
 po = evaluate.initialize_policy(evaluate.POLICY_MAP[pkey], meta, env.action_spec())

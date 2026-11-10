@@ -6,7 +6,6 @@ flipped. Two settings score off the axis and are drawn as arrows at the break.
 E2: the training panel of the reported run on a logarithmic ordinate, so 0.01 and 0.02 get
 the same room as 0.1 and 0.2.
 """
-import os
 import re
 from pathlib import Path
 
@@ -15,13 +14,9 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-SB_ROOT = Path(os.environ.get("SB_ROOT", next(
-    (p for p in [Path(__file__).resolve().parent, *Path(__file__).resolve().parent.parents]
-     if (p / 'complete_port').is_dir()), Path(__file__).resolve().parent)))
-
 
 OUT = Path(__file__).resolve().parent / "figures"
-RUNS = SB_ROOT / "complete_port/results/runs"
+RUNS = Path(os.environ.get("SB_ROOT", Path(__file__).resolve().parents[1])) / "complete_port" / "results" / "runs"
 BLUE, TEAL, RED, GREY = "#0F4D92", "#2F7F8A", "#B64342", "#8A8A8A"
 
 plt.rcParams.update({

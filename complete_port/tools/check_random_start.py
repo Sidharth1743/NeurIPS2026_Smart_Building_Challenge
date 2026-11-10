@@ -4,7 +4,6 @@ import argparse
 import collections
 import json
 import os
-PL_ROOT = os.environ.get("SB_PL_ROOT", os.path.expanduser("~/.cache/sb/pufferlib"))  # release: root of the PufferLib checkouts
 from pathlib import Path
 import re
 import subprocess
@@ -17,6 +16,7 @@ CP = Path(__file__).resolve().parents[1]
 SK = CP.parent / "starter-kit"
 sys.path.insert(0, str(CP / "pysim"))
 from sbb import BlobReader  # noqa: E402
+PL_ROOT = os.environ.get("SB_PL_ROOT", os.path.expanduser("~/.cache/sb/pufferlib"))
 
 
 def run(args, *, cwd=None, env=None, timeout=600):

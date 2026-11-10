@@ -10,8 +10,10 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import os
 from pathlib import Path
 import subprocess
+PL_ROOT = os.environ.get("SB_PL_ROOT", os.path.expanduser("~/.cache/sb/pufferlib"))
 
 CP = Path(__file__).resolve().parents[1]
 
@@ -651,7 +653,7 @@ int main() {
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--checkout", type=Path, default=Path("/data/puffer-work/plverify"))
+    parser.add_argument("--checkout", type=Path, default=Path(PL_ROOT + "/plverify"))
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--gpu", type=int, default=0)
     parser.add_argument("--canonical", action="store_true", help="Read source reconstructed from the canonical patch")

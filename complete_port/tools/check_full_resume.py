@@ -3,13 +3,13 @@
 import argparse
 import hashlib
 import os
-PL_ROOT = os.environ.get("SB_PL_ROOT", os.path.expanduser("~/.cache/sb/pufferlib"))  # release: root of the PufferLib checkouts
 import re
 import shlex
 import shutil
 import struct
 import subprocess
 from pathlib import Path
+PL_ROOT = os.environ.get("SB_PL_ROOT", os.path.expanduser("~/.cache/sb/pufferlib"))
 
 CP = Path(__file__).resolve().parents[1]
 

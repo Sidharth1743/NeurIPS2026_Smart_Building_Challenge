@@ -123,6 +123,10 @@ data)
   "$CP/tools/bake_training_set.sh"
   say "oracle traces and CPU references"
   "$CP/tools/make_artifacts.sh"
+  if [ $# -ge 1 ]; then
+    say "an evaluation set as well: $1"
+    "$CP/tools/bake_eval_set.sh" "$HERE/data/scenarios/sets/$1.txt" 2
+  fi
   say "done; next: ./run.sh verify"
   ;;
 verify)
@@ -133,16 +137,40 @@ verify)
 train)
   need docker
   [ -d "$PL" ] || { echo "no checkout at $PL: run ./run.sh setup" >&2; exit 1; }
-  say "PPO on the 30 shipped scenarios"
+  # the beta head and the zone MLP live in the shared canonical policy build, not in the plain one
+  for arg in "$@"; do
+    case "$arg" in
+      --policy.beta=1*|--policy.zone_mlp=1*) export SB_TRAIN_BIN="${SB_TRAIN_BIN:-puffer_shared}" ;;
+    esac
+  done
+  say "PPO on the 30 shipped scenarios${SB_TRAIN_BIN:+ ($SB_TRAIN_BIN)}"
   PUFFERLIB="$PL" "$CP/tools/train.sh" "$@"
   ;;
 eval)
   need docker
   [ -x "$PL/puffer_f64" ] || [ -x "$PL/puffer" ] || { echo "no trainer binary in $PL: run ./run.sh setup and ./run.sh verify first" >&2; exit 1; }
-  SET="${1:-eval5_heldout18}"; OUTJSON="${2:-eval_$(date +%Y%m%d_%H%M%S).json}"; CKPT="${3:--}"
+  SET="${1:-eval5_heldout18}"; OUTJSON="${2:-eval_$(date +%Y%m%d_%H%M%S).json}"
+  CKPT="${3:--}"; RUNSRC="${4:-}"
   DIR="$(make_set "$SET")"
+  # The binary builds the network from its flags, so a trained checkpoint needs the recipe it was
+  # trained with: without them the loader rejects the weight-file size.
+  FLAGS=()
+  if [ -n "$RUNSRC" ]; then
+    RUNSRC="$(find_run "$RUNSRC")"
+    mapfile -t FLAGS < <(python3 "$HERE/complete_port/tools/decode_flags.py" "$RUNSRC")
+  fi
+  # the canonical shared policy (beta head, zone MLP) is a separate build; use it when present
+  [ -x "$PL/puffer_shared" ] && export SB_BIN="${SB_BIN:-puffer_shared}"
+  # the container mounts complete_port/results at /res and nothing else, so the weights are copied in
+  MODEL="$CKPT"
+  if [ "$CKPT" != "-" ]; then
+    [ -f "$CKPT" ] || { echo "no checkpoint at $CKPT" >&2; exit 1; }
+    mkdir -p "$CP/results"
+    cp "$CKPT" "$CP/results/_eval_weights.bin"
+    MODEL="/res/_eval_weights.bin"
+  fi
   say "eval $SET ($(ls "$DIR"/*.sbb | wc -l) scenarios) -> results/$OUTJSON"
-  PUFFERLIB="$PL" "$CP/tools/eval_policy.sh" "sets/$SET" "$OUTJSON" "$CKPT" "${@:4}"
+  PUFFERLIB="$PL" "$CP/tools/eval_policy.sh" "sets/$SET" "$OUTJSON" "$MODEL" "${FLAGS[@]}" "${@:5}"
   ;;
 score)
   need docker
@@ -158,7 +186,7 @@ score)
   OUT="$CP/results/score_$(basename "$DIRRUN")_$STEP"
   say "score $DIRRUN @ $STEP on $SET -> $OUT"
   python3 "$CP/tools/score_eval90.py" \
-    --run "$DIRRUN" --runtime "$PL" --set "$SET" \
+    --run "$DIRRUN" --runtime "$PL" --set "artifacts/sets/$SET" \
     --out "$OUT" --gpu "${SB_GPU:-0}" \
     --ckpt-bytes "$BYTES" --checkpoints "$STEP=$BIN"
   ;;

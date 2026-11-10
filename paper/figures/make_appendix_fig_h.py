@@ -1,5 +1,4 @@
 """Appendix Figure H1: per-head spread by role, and where the zone deficit sits."""
-import os
 import json
 from pathlib import Path
 
@@ -8,13 +7,10 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-SB_ROOT = Path(os.environ.get("SB_ROOT", next(
-    (p for p in [Path(__file__).resolve().parent, *Path(__file__).resolve().parent.parents]
-     if (p / 'complete_port').is_dir()), Path(__file__).resolve().parent)))
-
 
 OUT = Path(__file__).resolve().parent / "figures"
-DATA = SB_ROOT / "results/eval90_analysis/r139_199065600/09_behaviour.json"
+DATA = Path(os.environ.get("SB_ROOT", Path(__file__).resolve().parents[1])) / "results" / "eval90_analysis" / (
+            "r139_199065600/09_behaviour.json")
 BLUE, RED, GREY = "#0F4D92", "#B64342", "#9A9A9A"
 COLS = ["#0F4D92", "#2F7F8A", "#7FA6CC", "#8A8A8A", "#C97B5A"]
 

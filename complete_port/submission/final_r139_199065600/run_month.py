@@ -8,19 +8,27 @@ GPU and without running the whole 30-scenario set.
 """
 from __future__ import annotations
 
-SB_ROOT = Path(os.environ.get("SB_ROOT", next(
-    (p for p in [Path(__file__).resolve().parent, *Path(__file__).resolve().parent.parents]
-     if (p / 'complete_port').is_dir()), Path(__file__).resolve().parent)))
-
 import os
-
 import sys
 import time
 from pathlib import Path
 
 import numpy as np
 
-REPO = SB_ROOT
+def _repo_root() -> Path:
+    """The root that holds complete_port/, wherever this file sits: results/r139_submission/ in the
+    development tree, complete_port/submission/<policy>/ in the release."""
+    env = os.environ.get("SB_ROOT")
+    if env:
+        return Path(env).resolve()
+    here = Path(__file__).resolve().parent
+    for parent in [here, *here.parents]:
+        if (parent / "complete_port").is_dir():
+            return parent
+    return here
+
+
+REPO = _repo_root()
 SB = REPO / 'starter-kit'
 sys.path.insert(0, str(SB))
 sys.path.insert(0, str(REPO))
@@ -31,10 +39,13 @@ from smart_buildings.evaluate import (  # noqa: E402
 )
 import submission as S  # noqa: E402
 
-CKPT = sys.argv[1]
+CKPT = str(Path(sys.argv[1]).resolve())
 SCEN = sys.argv[2]
 STEPS = int(sys.argv[3]) if len(sys.argv) > 3 else 8640
-path = SB / 'smart_buildings/training_scenarios' / SCEN
+path = (SB / 'smart_buildings/training_scenarios' / SCEN).resolve()
+# a scenario config names its floor plan and zone map relative to the simulator root, so the
+# loader has to run from there; the weights path is absolute before the change of directory
+os.chdir(SB)
 
 env = load_hybrid_environment(path / 'config.gin')
 env.metrics_path = None

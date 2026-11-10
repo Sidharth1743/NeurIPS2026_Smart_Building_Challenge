@@ -1,74 +1,77 @@
 # Verification record
 
-The release was run end to end from a clean copy, not from the development workspace.
+Two rounds, both from a clean copy of this repository, never from the development workspace.
+
+## Round 1: the gates, on a 12 GB card
 
 | | |
 |---|---|
 | date | 2026-11-10, 15:49 to 16:23 UTC |
-| host | Linux, one NVIDIA RTX 3060, 12 GB (the smaller card; the paper's numbers come from a 3090 and an L40S) |
+| host | Linux, one NVIDIA RTX 3060, 12 GB |
 | container | `pufferai/puffertank:5.0` (CUDA 13.0.88) |
 | copy | the tracked files of this repository, `rsync`ed to an empty directory, no build output |
 | upstreams | starter kit cloned at `23a4560`, PufferLib cloned at `6ffa5b1` and patched, both by `./run.sh setup` |
-| commands | `./run.sh setup` then `./run.sh data` then `SB_GPU=1 ./run.sh verify` |
-| result | **67 checks passed, 0 failed, `ALL CHECKS PASSED`** |
+| commands | `./run.sh setup`, `./run.sh data`, `SB_GPU=1 ./run.sh verify` |
+| result | **67 checks passed, 0 failed, `ALL CHECKS PASSED`** in 34 minutes |
 
-```
-PASS  trainer: ./build.sh smart_buildings from base commit + patch + complete_port
-PASS  trainer: actual mixed-head PPO kernels match finite-difference reference
-PASS  trainer: random starts, seven oracle clocks, full episodes and CUDA graph resets
-PASS  trainer: complete asynchronous checkpoint resumes optimizer, RNG, simulator and pending rollout
-PASS  shared policy: derivatives, permutation equivariance, masked outputs, CUDA graph
-PASS  building_train_1__fairbanks_1: trace gate (oracle) + reset observation, 8 envs
-PASS  building_train_1__fairbanks_1: multi-episode vs CPU env, host reset
-PASS  building_train_1__fairbanks_1: multi-episode vs CPU env, in-step restart
-PASS  building_train_1__fairbanks_1: trace gate through a CUDA graph
-PASS  building_train_1__fairbanks_1: device solve == sb_lu_solve bit for bit (5, 40 envs)
-PASS  building_train_1__fairbanks_1: convection == sb_conv_apply bit for bit
-   ... one block of six per shipped building shape, then ...
-PASS  train_1: trace gate at 1, 64 and 256 envs
-PASS  train_1: bit-exact-solve build (SB_LU_EXACT) passes the oracle gate and the multi-episode diff
-PASS  train_1: training-only fp32 build (SB_F32) runs the gate, drift bounded
-PASS  generated buildings 0502/0511: bake, oracle gate, multi-episode
-PASS  generated 4-floor building 0500: SB_CONT_BIG oracle gate
-PASS  multi-scenario: sb_group_state.inc matches the sources
-PASS  weather merge: building_train_1 and building_train_8, merged == solo bit for bit
-PASS  per-env restart: env 0 alone == group restart, other envs untouched
-PASS  fused multi-group solve: 6 buildings x 40 envs, fused == solo bit for bit (CUDA graph)
-PASS  viewer: play replay writes a snapshot; terminal frame shows step 40/8640
-PASS  viewer: pygame window renders the snapshot (headless screenshot > 20 kB)
-ALL CHECKS PASSED
-```
+## Round 2: the whole pipeline, on a 24 GB card
 
-Wall clock: 33.6 minutes for `verify`, 6.5 minutes for `data` on an empty machine (it bakes 30
-scenarios and their oracle traces), and 36 seconds for a cold `setup` once the clones are on the
-network. A second `setup` against a provisioned checkout takes 6 seconds.
+| | |
+|---|---|
+| date | 2026-11-10 19:00 to 2026-11-11 03:30 UTC |
+| host | one NVIDIA RTX 3090, 24 GB; 12 cores |
+| commands | `./run.sh verify`, `./run.sh data eval5_heldout18`, `./run.sh score`, `./run.sh eval`, the exported policy through the organiser simulator |
+| gates | **67 passed, 0 failed, `ALL CHECKS PASSED`** |
+| the reported policy, 90 months | **0.016514** over 90/90 scenarios, complete. The paper reports 0.0165 |
+| one scenario, `./run.sh eval` | 0.008134 on `building_train_1/atlanta_4` |
+| the same month through the gateway and `submission.py` | 0.008189 |
 
-## Two defects the run found, both fixed
+The last two rows are two independent paths to the same month: the GPU environment with the canonical
+observation rebuild, and the organiser's Python simulator driven by the exported policy. They agree to
+0.7%, which is the check that matters for the leaderboard path.
 
-1. `git clone` of PufferLib died with `RPC failed; curl 92 HTTP/2 stream 5 was not closed cleanly`.
-   `./run.sh setup` now clones shallow and blob-less over HTTP/1.1, with three retries, and says what
-   to do if the network refuses: point `SB_PL_ROOT` at a directory that already holds `plclean`.
-2. The gate `trainer: random starts, seven oracle clocks` read TensorBoard through
-   `complete_port/viewer/.venv/bin/python`, an environment that is not part of a source checkout.
-   `./run.sh setup` now builds it (`pygame`, `numpy`, `tensorboard`), which also gives `tools/watch.sh`
-   its interpreter.
+The evaluation sets need 144 scenario blobs, 53 GB. They bake cleanly: 90/90 and 54/54, no failures.
+Two of the five buildings in the panels, `building_train_3` and `building_train_6`, are generated ones
+that the starter kit does not ship; their YAML configs are in `data/generated_buildings/` and
+`bake_eval_set.sh` installs them before generating. A rebuilt `building_train_3__atlanta_4.sbb` is
+byte-identical to the development blob, so the panel is exactly reproducible.
 
-A third issue was in this repository's own setup script rather than in the code: a second `setup`
-tried to apply the PufferLib patch again and failed with `patch does not apply`. It now tests
-`git apply --check` first and only patches an unpatched checkout.
+## Reproducing a score from a 50M run
 
-## What this proves, and what it does not
+As a last exercise the release trained the reported recipe from scratch for 50,135,040 steps and
+scored it on both panels. It ran the whole chain without intervention:
 
-It proves that a fresh checkout of this repository rebuilds both simulator variants, passes every
-bit-exactness gate against the unmodified organiser simulator and against the CPU core, trains, and
-renders a replay, without any file from the development workspace.
+| checkpoint | agents | steps | 90 months | 54 months |
+|---|---|---|---|---|
+| r140, fresh | 480 | 50,042,880 | 0.0222 | 0.0143 |
+| the paper's Final | 960 | 199,065,600 | 0.0165 | 0.0098 |
+| the paper's Mid | 960 | 159,252,480 | 0.0185 | 0.0112 |
+| the paper's Long | 960 | 89,579,520 | 0.0253 | 0.0192 |
 
-It does not reproduce a score: scoring needs the 90-month scenario set baked (about 20 minutes) and
-then `./run.sh score`, and it does not retrain the reported policy (200M steps, 4.6 hours on an L40S).
+The 50M run beats Long and loses to Mid and Final. Two caveats, both structural: it differs from the
+Final in batch as well as budget (see the memory note below), and it is one seed. Its own training
+panel read 0.0086 at 50M, better than the Final's 0.0109, and the frozen panels say the opposite,
+which is why a training panel is not a score.
 
-This document was added after the gates finished, and one build detail was fixed afterwards: the
-gzip header of the shipped scalar series carried a timestamp, so two builds of the same release
-differed byte for byte. It is written with `mtime=0` now, and two consecutive builds produce the
-same `SHA256SUMS`. The uncompressed content of those files is identical to what the gates ran
-against, and no gate reads them. Nothing else under `complete_port/`, `data/`, `experiments/` or
-`paper/` changed as a result of the run.
+## What the gates cover
+
+One line per check, all passing: the oracle trace match on all six shipped shapes, multi-episode
+against the CPU core with host reset and in-step restart, `sb_lu_solve` bit identical at 5 and 40
+environments, convection bit identical at `p=1e-4`, `0.5` and `1.0`, the `SB_LU_EXACT` build, the fp32
+training solve with bounded drift, the two generated buildings, the weather merge, the fused
+six-building solve, the trainer and shared-policy graphs, and both viewer checks.
+
+## Two measured limits
+
+- The **shared canonical policy** that the reported recipe uses does not fit 960 agents in 24 GB: the
+  Beta head doubles the output block and the allocation exceeds 23.6 GB of free memory. 480 agents
+  (6 groups x 80) fits and runs at 7,045 steps/s, so 50.1M steps is about 1.8 hours. The reported run
+  used 960 agents on a 46 GB L40S.
+- A 12 GB card needs `--env.groups=3 --vec.total_agents=480` even for the plain policy, because the
+  CUDA graph capture for the larger layout does not fit.
+
+## What this does not prove
+
+It does not retrain the reported policy: 199,895,040 steps on 960 agents needs a 46 GB card. It does
+not touch a real building, and it does not see the hidden evaluation set. Everything above is inside
+the organiser's simulator.

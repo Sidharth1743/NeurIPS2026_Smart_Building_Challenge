@@ -16,6 +16,7 @@ import shutil
 import subprocess
 import re
 from datetime import datetime, timezone
+PL_ROOT = os.environ.get("SB_PL_ROOT", os.path.expanduser("~/.cache/sb/pufferlib"))
 
 CP = Path(__file__).resolve().parents[1]
 ROOT = CP.parent
@@ -33,7 +34,7 @@ def sha256(path: Path) -> str:
 def snapshot() -> None:
     runtime = OUT / "historical_runtime"
     if (OUT / "provenance.json").exists():
-        old = Path("/data/puffer-work/plverify")
+        old = Path(PL_ROOT + "/plverify")
         saved = OUT / "sources_before"
         for src, dst in [(old / "puffer", runtime / "puffer_training_r22"),
                          (old / "build.sh", saved / "build.sh"),
@@ -47,7 +48,7 @@ def snapshot() -> None:
         if not deployed.exists(): shutil.copytree(old / "ocean/smart_buildings", deployed)
         print("Historical snapshot already exists; preserving it.", flush=True)
         return
-    old = Path("/data/puffer-work/plverify")
+    old = Path(PL_ROOT + "/plverify")
     runtime.mkdir(parents=True, exist_ok=False)
     shutil.copytree(old / "config", runtime / "config")
     shutil.copy2(old / "puffer_f64", runtime / "puffer_f64")
@@ -177,7 +178,7 @@ def stage_fixed(gate: Path) -> None:
     assert gate.read_text().rstrip().endswith("ALL CHECKS PASSED"), "The full verification gate has not passed"
     runtime = OUT / "fixed_runtime"
     runtime.mkdir(exist_ok=False)
-    deployed = Path("/data/puffer-work/plverify")
+    deployed = Path(PL_ROOT + "/plverify")
     binary = deployed / "puffer"
     assert re.search(rb"lu_solve_t[^\x00\n]*EEv5LuDevPf", binary.read_bytes()) is None, "Refuse fp32 physics"
     shutil.copy2(binary, runtime / "puffer")

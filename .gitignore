@@ -31,3 +31,6 @@ __pycache__/
 # ----- editors and OS
 .DS_Store
 *.swp
+
+# ----- the assembler stage
+/.stage/

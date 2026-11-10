@@ -19,6 +19,7 @@ import hashlib
 import json
 import os
 import shlex
+import shutil
 import subprocess
 import sys
 import time
@@ -47,7 +48,12 @@ def digest(path: Path):
 
 
 def flags(run: Path):
-    args = shlex.split((run / 'args.txt').read_text())
+    """The flags that decide how a checkpoint is decoded. A run archived without its launch
+    arguments carries them in flags.txt instead; both files hold the same token syntax."""
+    src = run / 'args.txt'
+    if not src.exists():
+        src = run / 'flags.txt'
+    args = shlex.split(src.read_text())
     out = {a.split('=', 1)[0]: a for a in args if a.startswith(PREF)}
     return list(out.values())
 
@@ -75,7 +81,8 @@ def main():
     a = ap.parse_args()
 
     run = Path(a.run).resolve(); runtime = Path(a.runtime).resolve()
-    out = Path(a.out) if Path(a.out).is_absolute() else CP / a.out
+    # a relative --out lands beside the other scores, not at the root of complete_port/
+    out = Path(a.out) if Path(a.out).is_absolute() else RESULTS / a.out
     set_dir = CP / a.set if not Path(a.set).is_absolute() else Path(a.set)
     binary = runtime / 'puffer_shared'
     assert binary.is_file(), binary
@@ -104,7 +111,6 @@ def main():
                 try:
                     os.link(b.resolve(), link)
                 except OSError:
-                    import shutil
                     shutil.copy2(b.resolve(), link)
             assert link.is_file() and not link.is_symlink(), f'part entry is not a real file: {link}'
             assert link.stat().st_size > 20_000_000, f'part blob too small: {link}'   # smallest shipped building is ~90 MB
@@ -123,7 +129,15 @@ def main():
         step = int(step); ck = Path(ck)
         assert ck.is_file() and ck.stat().st_size == a.ckpt_bytes, f'bad checkpoint {ck} ({ck.stat().st_size} B)'
         # The container sees results/ as /res and artifacts/ as /art; a host path is not visible.
+        # A checkpoint shipped in experiments/ is staged into results/ first.
         ck_abs = ck.resolve()
+        if RESULTS.resolve() not in ck_abs.parents:
+            stage = RESULTS / '_score_input'
+            stage.mkdir(parents=True, exist_ok=True)
+            staged = stage / ck_abs.name
+            if not staged.exists():
+                shutil.copy2(ck_abs, staged)
+            ck_abs = staged.resolve()
         assert RESULTS.resolve() in ck_abs.parents, f'checkpoint is outside results/: {ck}'
         ck_in = '/res/' + str(ck_abs.relative_to(RESULTS.resolve()))
         dest = out / f'{step:016d}'

@@ -1,5 +1,4 @@
 """Appendix figures: F1 (the 90 scored months), G1 (coverage grid), G2 (climate plane)."""
-import os
 import csv
 import json
 from datetime import datetime
@@ -11,13 +10,9 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.patches import Patch, Rectangle
-SB_ROOT = Path(os.environ.get("SB_ROOT", next(
-    (p for p in [Path(__file__).resolve().parent, *Path(__file__).resolve().parent.parents]
-     if (p / 'complete_port').is_dir()), Path(__file__).resolve().parent)))
-
 
 OUT = Path(__file__).resolve().parent / "figures"
-REPO = SB_ROOT
+REPO = Path(os.environ.get("SB_ROOT", Path(__file__).resolve().parents[1]))
 KIT = REPO / "starter-kit/smart_buildings"
 BLUE, RED, GREY, TEAL = "#0F4D92", "#B64342", "#8A8A8A", "#2F7F8A"
 SEEN, UNSEEN = "#DCE8F4", "#F2D9B8"

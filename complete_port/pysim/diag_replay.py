@@ -1,16 +1,13 @@
 #!/usr/bin/env python3
 """Feed a verified trace's actions through the bridge and compare obs/reward."""
-import os
 import ctypes, os, struct, sys
 from pathlib import Path
 import numpy as np
-SK = SB_ROOT / "starter-kit"; os.chdir(SK)
-sys.path.insert(0, str(SB_ROOT / "complete_port/pysim"))
+ROOT = Path(os.environ.get("SB_ROOT", Path(__file__).resolve().parents[2]))
+SK = ROOT / "starter-kit"
+os.chdir(SK)
+sys.path.insert(0, str(ROOT / "complete_port" / "pysim"))
 import sweep_scores as S
-SB_ROOT = Path(os.environ.get("SB_ROOT", next(
-    (p for p in [Path(__file__).resolve().parent, *Path(__file__).resolve().parent.parents]
-     if (p / 'complete_port').is_dir()), Path(__file__).resolve().parent)))
-
 
 building, weather, trace, steps = sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4])
 f = open(trace, "rb")
