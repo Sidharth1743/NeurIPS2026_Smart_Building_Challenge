@@ -4,7 +4,7 @@
 
 | file | bytes | sha256 |
 |---|---|---|
-| `.gitignore` | 589 | `04399d12f166dca4` |
+| `.gitignore` | 797 | `dbb5851e99f6ac22` |
 | `CITATION.cff` | 827 | `424900d55e39816b` |
 | `LICENSE` | 11,358 | `cfc7749b96f63bd3` |
 | `README.md` | 12,669 | `4fd98d9de89966e0` |

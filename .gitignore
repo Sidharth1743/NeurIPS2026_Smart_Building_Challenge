@@ -1,13 +1,18 @@
 # ----- what the release generates at run time
 /complete_port/artifacts/
 /complete_port/results/
+# built binaries; the sources live in complete_port/csim/test/ and are tracked
 /complete_port/csim/*.so
-/complete_port/csim/test_episodes
-/complete_port/csim/test_multi
+/complete_port/csim/test_load
+/complete_port/csim/test_chol
+/complete_port/csim/test_chol_big
+/complete_port/csim/test_fdm
 /complete_port/csim/test_step
+/complete_port/csim/test_multi
+/complete_port/csim/test_batch
 /complete_port/csim/test_step_batch
 /complete_port/csim/test_episode
-/complete_port/csim/test
+/complete_port/csim/test_episodes
 /complete_port/scratch/
 
 # ----- the two upstream checkouts, created by ./run.sh setup
