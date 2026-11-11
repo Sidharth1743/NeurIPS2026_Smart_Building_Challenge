@@ -1405,4 +1405,4 @@ Every digest is also in `../SHA256SUMS`, which `sha256sum -c` reads.
 | `paper/neurips_3_method_appendix.pdf` | 571,406 | `d88351703160f04b` |
 | `paper/neurips_3_method_appendix.tex` | 93,875 | `ba5ad4d57458f91e` |
 | `paper/references.bib` | 10,009 | `b2175b2c7881b025` |
-| `run.sh` | 10,159 | `b15d05775e4d59b6` |
+| `run.sh` | 10,191 | `9b3f9b8e1e721356` |

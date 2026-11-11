@@ -4,10 +4,10 @@
 #   ./run.sh setup       container, Python 3.12 oracle env, PufferLib at the pinned commit + our patch
 #   ./run.sh data        bake the 30 shipped scenarios, then the oracle traces and CPU references
 #   ./run.sh verify      35 bit-exactness gates; ends with ALL CHECKS PASSED
-#   ./run.sh train       PPO, 30 scenarios, 960 agents
+#   ./run.sh train       PPO, 30 scenarios, 960 agents (480 if 960 does not fit the card)
 #   ./run.sh eval        deterministic fp64 month for every scenario in a set
 #   ./run.sh score       the 90-month panel for one checkpoint, with per-step recordings
-#   ./run.sh reproduce   data + the 90-month panel of the shipped Final checkpoint + the score
+#   ./run.sh reproduce   data <set> + verify + the 90-month panel of the shipped checkpoint
 #   ./run.sh paper       rebuild both PDFs
 #   ./run.sh doctor      print what is installed and what is missing
 #
