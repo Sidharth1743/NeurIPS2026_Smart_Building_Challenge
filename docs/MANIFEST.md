@@ -1,6 +1,6 @@
 # File manifest
 
-1401 files, 402.8 MB, generated when this release was assembled.
+1407 files, 402.8 MB, generated when this release was assembled.
 Every digest is also in `../SHA256SUMS`, which `sha256sum -c` reads.
 
 | file | bytes | sha256 |
@@ -9,11 +9,12 @@ Every digest is also in `../SHA256SUMS`, which `sha256sum -c` reads.
 | `CITATION.cff` | 843 | `27714860d5c3b065` |
 | `LICENSE` | 18,657 | `9ba9550ad48438d0` |
 | `NOTICE` | 1,825 | `644c7cb6f4e15e55` |
-| `README.md` | 13,403 | `e7f397a5dc4556fa` |
+| `README.md` | 14,784 | `828cca52678a16a3` |
 | `STARTER_KIT.md` | 558 | `5968163db44d0ff0` |
 | `complete_port/README.md` | 23,292 | `c605e13e4785ec86` |
 | `complete_port/config/smart_buildings.ini` | 23,568 | `e42ee142261ee9b9` |
 | `complete_port/csim/Makefile` | 1,872 | `a1372b95df14f2b4` |
+| `complete_port/csim/README.md` | 1,982 | `7ee3c04113b62a57` |
 | `complete_port/csim/gate.sh` | 735 | `897613306f18fc61` |
 | `complete_port/csim/sb_baked.c` | 4,441 | `5f885713ece7221f` |
 | `complete_port/csim/sb_baked.h` | 2,224 | `10f21aeca45f81aa` |
@@ -122,6 +123,7 @@ Every digest is also in `../SHA256SUMS`, which `sha256sum -c` reads.
 | `complete_port/policy/smoke_gateway.py` | 3,179 | `6ddcc1dafb8837dc` |
 | `complete_port/pufferl_mixed_heads.diff` | 28,134 | `5364777f4aa24a7e` |
 | `complete_port/pufferlib_cpu_env.h` | 14,056 | `1e06d43511e5af9b` |
+| `complete_port/pysim/README.md` | 2,051 | `a1ac011621d03243` |
 | `complete_port/pysim/bake_all.sh` | 1,432 | `9355b688c9f9b93f` |
 | `complete_port/pysim/bake_env.py` | 19,002 | `270389c8791fa7e4` |
 | `complete_port/pysim/bake_scenario.py` | 10,447 | `caa65e12d11da35f` |
@@ -143,6 +145,7 @@ Every digest is also in `../SHA256SUMS`, which `sha256sum -c` reads.
 | `complete_port/submission/long_r122_268738560/submission.py` | 31,321 | `35679af7e4f5b6a6` |
 | `complete_port/submission/pidw_base.py` | 37,928 | `7211a38e5a323f6b` |
 | `complete_port/submission/residual_policy.py` | 14,526 | `4883cb9ae55d853d` |
+| `complete_port/tools/README.md` | 6,326 | `831146670d0b9c34` |
 | `complete_port/tools/bake_eval_set.sh` | 3,029 | `520d9dd5e559510b` |
 | `complete_port/tools/bake_training_set.sh` | 1,062 | `dc0726bddb01da73` |
 | `complete_port/tools/bench.sh` | 4,718 | `7391d463cee2b0be` |
@@ -190,8 +193,10 @@ Every digest is also in `../SHA256SUMS`, which `sha256sum -c` reads.
 | `complete_port/tools/watch.sh` | 2,514 | `29161506c71dcc4c` |
 | `complete_port/tools/with_gpu.sh` | 1,843 | `9f3ee9ac2a0d0d18` |
 | `complete_port/tools/zone_empty_obs.py` | 1,970 | `d30d5573d758ced8` |
+| `complete_port/viewer/README.md` | 1,300 | `f197f07552c7ad4e` |
 | `complete_port/viewer/sb_viewer.py` | 15,953 | `13d0540427833129` |
 | `data/DATA_CARD.md` | 3,876 | `6120db9a35847a75` |
+| `data/README.md` | 2,100 | `82ad1df2df5a29f6` |
 | `data/blob_meta/building_0500__fairbanks_1.json` | 8,428 | `3a22da72726f08d1` |
 | `data/blob_meta/building_0502__fairbanks_1.json` | 3,739 | `9b0809a34f19dc54` |
 | `data/blob_meta/building_0502__phoenix_5.json` | 3,722 | `3ed5eff37cb9aa97` |
@@ -468,6 +473,7 @@ Every digest is also in `../SHA256SUMS`, which `sha256sum -c` reads.
 | `data/scenarios/training_set.yaml` | 2,367 | `d3b7d54345f3534d` |
 | `data/train_blobs.sha256` | 2,958 | `9552e970f3c9edfc` |
 | `docs/HARDWARE.md` | 2,766 | `0976f6890a7737f8` |
+| `docs/README.md` | 642 | `69f695725770d9b1` |
 | `docs/RELEASE_EDITS.md` | 1,279 | `984009779b2f0442` |
 | `docs/VERIFICATION.md` | 4,204 | `199f22b2b55fc527` |
 | `experiments/00_baseline_r116_s75_s76/README.md` | 997 | `b6f1c05b561b15b1` |
@@ -523,7 +529,7 @@ Every digest is also in `../SHA256SUMS`, which `sha256sum -c` reads.
 | `experiments/19_final_r139_30_scenario_200m/train.log.tail` | 62,309 | `d815308b0033d7ab` |
 | `experiments/ABLATIONS.md` | 56,319 | `7db25542fef0b389` |
 | `experiments/EXPERIMENTS.md` | 329,848 | `5102a4c5822a63a7` |
-| `experiments/README.md` | 3,928 | `a27a06c5766ee44c` |
+| `experiments/README.md` | 4,949 | `1301886341e7a95a` |
 | `experiments/_tools/tb_to_csv.py` | 3,854 | `db1691630b5f9aac` |
 | `experiments/ablation_01_desync_on_vs_off/README.md` | 1,083 | `429ea4361699b6f9` |
 | `experiments/ablation_01_desync_on_vs_off/args.txt` | 1,849 | `bf8437d9fac48a62` |
@@ -1357,7 +1363,7 @@ Every digest is also in `../SHA256SUMS`, which `sha256sum -c` reads.
 | `kaggle_evaluation/standard_gateways/__init__.py` | 0 | `e3b0c44298fc1c14` |
 | `kaggle_evaluation/standard_gateways/gateway_config_template.json` | 134 | `0d975305f792d995` |
 | `kaggle_evaluation/standard_gateways/standard.py` | 14,309 | `083cc5bca710173c` |
-| `paper/README.md` | 1,290 | `aae371b84636c0ec` |
+| `paper/README.md` | 1,721 | `22b68c2aa08e6248` |
 | `paper/build.sh` | 501 | `fc54409dd4a86281` |
 | `paper/figures/fig_ablation_A.pdf` | 175,151 | `8aec5a1fbd239072` |
 | `paper/figures/fig_ablation_B.pdf` | 198,540 | `31794919c4f00bf2` |
@@ -1405,4 +1411,4 @@ Every digest is also in `../SHA256SUMS`, which `sha256sum -c` reads.
 | `paper/neurips_3_method_appendix.pdf` | 571,406 | `d88351703160f04b` |
 | `paper/neurips_3_method_appendix.tex` | 93,875 | `ba5ad4d57458f91e` |
 | `paper/references.bib` | 10,009 | `b2175b2c7881b025` |
-| `run.sh` | 10,191 | `9b3f9b8e1e721356` |
+| `run.sh` | 10,651 | `b2365794eae1196b` |

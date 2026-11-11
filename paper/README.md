@@ -14,8 +14,10 @@ The source of the submitted paper and both PDFs.
 | `build.sh` | rebuilds both PDFs with `tectonic` |
 
 ```bash
-./build.sh                       # both PDFs, in place
-tectonic -X compile neurips_3_method.tex
+./build.sh                                  # both PDFs, in place
+./build.sh neurips_3_method.tex             # one of them
+tectonic -X compile neurips_3_method.tex    # or directly
+../run.sh paper [file.tex ...]              # the same from the repository root
 ```
 
 ## The figures
@@ -27,3 +29,7 @@ figures in this folder are the ones the paper uses, so the paper builds without 
 
 `results_fig_data.py` takes `SB_CP` to point at a workspace that holds the recordings, and defaults to
 the directory above `complete_port/`.
+
+The figure scripts take no arguments: each reads its data, writes its PDF beside itself, and is run as
+`python make_results_figs_v2.py` from this folder. `results_fig_data.py` is the shared data layer and
+reads `SB_CP` if the recordings live outside the checkout.

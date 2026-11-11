@@ -65,6 +65,13 @@ cmd="${1:-help}"; shift || true
 case "$cmd" in
 setup)
   need docker
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --image) IMAGE="$2"; shift 2 ;;
+      --pl-root) PL_ROOT="$2"; PL="${PUFFERLIB:-$PL_ROOT/plverify}"; export SB_PL_ROOT="$PL_ROOT"; shift 2 ;;
+      *) echo "setup: unknown option $1 (supported: --image <image>, --pl-root <dir>)" >&2; exit 2 ;;
+    esac
+  done
   say "container"
   docker pull "$IMAGE"
   say "starter kit at $KIT_SHA"
@@ -125,14 +132,14 @@ data)
   "$CP/tools/make_artifacts.sh"
   if [ $# -ge 1 ]; then
     say "an evaluation set as well: $1"
-    "$CP/tools/bake_eval_set.sh" "$HERE/data/scenarios/sets/$1.txt" 2
+    "$CP/tools/bake_eval_set.sh" "$HERE/data/scenarios/sets/$1.txt" "${2:-2}"
   fi
   say "done; next: ./run.sh verify"
   ;;
 verify)
   need docker
   say "verify_all --trainer; this builds both variants and runs 35 gates"
-  PUFFERLIB="$PL" "$CP/tools/verify_all.sh" --trainer
+  PUFFERLIB="$PL" "$CP/tools/verify_all.sh" --trainer "$@"
   ;;
 train)
   need docker
@@ -188,20 +195,26 @@ score)
   python3 "$CP/tools/score_eval90.py" \
     --run "$DIRRUN" --runtime "$PL" --set "artifacts/sets/$SET" \
     --out "$OUT" --gpu "${SB_GPU:-0}" \
-    --ckpt-bytes "$BYTES" --checkpoints "$STEP=$BIN"
+    --ckpt-bytes "$BYTES" --checkpoints "$STEP=$BIN" "${@:4}"
   ;;
 reproduce)
-  say "data, including the 90-month evaluation set (53 GB of blobs in total)"
-  "$0" data eval5_heldout18
+  SET="${1:-eval5_heldout18}"
+  say "data, including the $SET set"
+  "$0" data "$SET" "${2:-2}"
   say "verify, which also builds the shared-policy binary the scorer records with"
   "$0" verify
-  say "the 90-month panel of the shipped Final checkpoint; the paper reports 0.0165"
-  "$0" score 19_final_r139_30_scenario_200m 199065600 eval5_heldout18
+  say "the $SET panel of the shipped Final checkpoint; the paper reports 0.0165 at 90 months"
+  "$0" score 19_final_r139_30_scenario_200m 199065600 "$SET"
   ;;
 paper)
   need tectonic
-  say "both PDFs"
-  ( cd "$HERE/paper" && tectonic -X compile neurips_3_method.tex && tectonic -X compile neurips_3_method_appendix.tex )
+  if [ $# -ge 1 ]; then
+    say "compiling $*"
+    ( cd "$HERE/paper" && for f in "$@"; do tectonic -X compile "$f"; done )
+  else
+    say "both PDFs"
+    ( cd "$HERE/paper" && tectonic -X compile neurips_3_method.tex && tectonic -X compile neurips_3_method_appendix.tex )
+  fi
   ;;
 doctor)
   say "commands"

@@ -77,3 +77,16 @@ diff 00_baseline_r116_s75_s76/r116_zone_mlp_headwise_s75/args.txt \
 
 shows one changed token. `../complete_port/config/smart_buildings.ini` holds the defaults and
 `../run.sh train` trains with them.
+
+## Commands that read this archive
+
+| command | arguments | what it does |
+|---|---|---|
+| `../run.sh score <run> <step> [set]` | folder name, checkpoint step, one of `eval5_heldout18` or `eval3_heldout18` | the frozen panel of that checkpoint, with recordings |
+| `../run.sh eval <set> <out.json> <ckpt> [run]` | the run folder supplies the decode flags, without which the loader refuses the weights | one month per scenario, no recordings |
+| `../complete_port/tools/decode_flags.py <run>` | any folder here | prints the flags that decide how a checkpoint is decoded, from `args.txt` or `flags.txt` |
+| `../complete_port/tools/tbread.py <run>/tb <tag>` | a tag substring, e.g. `env/episode_score` | prints a series from the raw event files; `tb/scalars.csv.gz` already holds every epoch of it |
+
+A checkpoint folder holds `args.txt` (the exact launch), `command.txt` (the launch as it ran), the
+head and tail of the log, the epoch scalars and the weights. `diff` two `args.txt` files to see the one
+flag that changed.

@@ -68,7 +68,28 @@ Everything runs from the repository root. Each command prints what it is doing a
 | `score` | `tools/score_eval90.py` over three parts, merged by `tools/merge_eval_json.py` | 10 min per 90 months |
 
 Training budget: 199,895,040 steps at 17.4K steps/s measured with 960 agents on the exact fp64 build
-is 3.2 h; the paper quotes 4.6 h on one L40S. A 24 GB card runs the same batch in 16 to 18 GB.
+is 3.2 h; the paper quotes 4.6 h on one L40S. A 24 GB card runs the same batch in 16 to 18 GB for the
+plain policy, and 480 agents for the shared one; `docs/HARDWARE.md` has the measured limits.
+
+### Arguments each command accepts
+
+Every command passes what you give it to the tool underneath, so the tool's own flags work here.
+
+| command | accepted | example |
+|---|---|---|
+| `setup` | `--image <image>`, `--pl-root <dir>` | `./run.sh setup --pl-root ~/pufferlib` |
+| `data` | `[scenario set] [jobs]` | `./run.sh data eval5_heldout18 4` |
+| `verify` | anything `tools/verify_all.sh` takes | `SB_GPU=0 ./run.sh verify` |
+| `train` | `[scenario] [puffer flags...]` | `./run.sh train --env.max_steps=1000` |
+| `eval` | `<set> <out.json> <checkpoint> [run folder] [puffer flags...]` | `./run.sh eval eval9 out.json ckpt.bin 17_composition_r139_bestof` |
+| `score` | `<run-folder> <step> [set] [scorer flags...]` | `./run.sh score 19_final_r139_30_scenario_200m 199065600 eval3_heldout18` |
+| `reproduce` | `[set] [jobs]` | `./run.sh reproduce eval3_heldout18` |
+| `paper` | `[.tex files...]`, default both | `./run.sh paper neurips_3_method.tex` |
+
+The full argument list of every tool is in `complete_port/tools/README.md`, and each folder documents
+the tools that live in it: `complete_port/pysim/README.md`, `complete_port/csim/README.md`,
+`complete_port/viewer/README.md`, `complete_port/submission/README.md`, `data/README.md`,
+`experiments/README.md`, `paper/README.md`.
 
 Evaluation is deterministic: `env.desync=0`, one fresh episode per scenario, 8,640 steps, fp64 solve.
 The same checkpoint always produces the same number, which is why the panels in the table can be
