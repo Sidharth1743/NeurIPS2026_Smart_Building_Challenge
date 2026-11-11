@@ -191,9 +191,11 @@ score)
     --ckpt-bytes "$BYTES" --checkpoints "$STEP=$BIN"
   ;;
 reproduce)
-  say "data"
-  "$0" data
-  say "the 90-month panel of the shipped Final checkpoint"
+  say "data, including the 90-month evaluation set (53 GB of blobs in total)"
+  "$0" data eval5_heldout18
+  say "verify, which also builds the shared-policy binary the scorer records with"
+  "$0" verify
+  say "the 90-month panel of the shipped Final checkpoint; the paper reports 0.0165"
   "$0" score 19_final_r139_30_scenario_200m 199065600 eval5_heldout18
   ;;
 paper)
