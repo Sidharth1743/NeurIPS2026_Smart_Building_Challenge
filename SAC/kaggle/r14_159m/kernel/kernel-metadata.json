@@ -1,0 +1,15 @@
+{
+  "id": "sidharth1743/submission-sac-r14-159m",
+  "title": "submission_sac_r14_159m",
+  "code_file": "submission.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": "true",
+  "enable_gpu": "false",
+  "enable_tpu": "false",
+  "enable_internet": "false",
+  "dataset_sources": ["sidharth1743/submission-sac-r14-159m-model"],
+  "competition_sources": ["neurips-2026-smart-buildings"],
+  "kernel_sources": [],
+  "model_sources": []
+}

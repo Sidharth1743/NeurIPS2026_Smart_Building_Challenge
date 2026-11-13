@@ -1,0 +1,8 @@
+{
+  "run": "r14_structured_200m_s75",
+  "out": "results/r14_structured_200m_s75",
+  "gpu": 0,
+  "config": "config/structured_b2048_anneal_200m_local.json",
+  "port": 0,
+  "binary": null
+}

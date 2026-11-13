@@ -1,0 +1,7 @@
+{
+  "run": "r07_utd15_ln_960_1m_s75",
+  "out": "results/r07_utd15_ln_960_1m_s75",
+  "gpu": 0,
+  "config": "config/utd15_ln_960_1m.json",
+  "port": 0
+}

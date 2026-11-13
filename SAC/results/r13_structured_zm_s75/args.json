@@ -1,0 +1,7 @@
+{
+  "run": "r13_structured_zm_s75",
+  "out": "results/r13_structured_zm_s75",
+  "gpu": 0,
+  "config": "config/structured_zm_960.json",
+  "port": 0
+}

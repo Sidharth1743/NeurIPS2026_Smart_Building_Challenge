@@ -1,0 +1,19 @@
+{
+  "seed": 75,
+  "total_timesteps": 512000,
+  "groups": 4,
+  "agents": 256,
+  "batch_size": 256,
+  "buffer_size": 262144,
+  "gamma": 0.99,
+  "tau": 0.005,
+  "learning_starts": 5000,
+  "policy_lr": 0.0003,
+  "q_lr": 0.001,
+  "policy_frequency": 2,
+  "target_network_frequency": 1,
+  "hidden": 256,
+  "checkpoint_every_vector_steps": 1000,
+  "note": "engineering smoke only, never report this as a result",
+  "utd": 4
+}

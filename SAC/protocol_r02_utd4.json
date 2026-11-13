@@ -1,0 +1,12 @@
+{
+  "name": "r02_utd4_s75",
+  "approval": "User instruction 2026-11-11: re-run with UTD 1 -> 4 only, training on the 3090, no scoring.",
+  "control": "r01_cleanrl_sac_s75 (same batch, seed, steps, config; utd 1)",
+  "single_change": "train[utd] 1 -> 4: the whole CleanRL update block runs 4 times per vector step, each on a fresh minibatch, so critic:actor:target ratios are unchanged and every pass is 4x",
+  "fixed": "r85_four / 256 agents / seed 75 / 50,135,040 steps / CleanRL defaults / mask / per-sample entropy target / rew_norm=1 / terminal at truncation",
+  "question": "Is r01 data-starved? Diagnosis F3: one pass over 50.1M transitions, qf1_loss rising 4.1->6.5 while the panel flattened at 30M.",
+  "expected_cost": "smoke measured 5232 steps/s vs 6718 at utd 1, so 50.1M in ~2h40",
+  "evaluation": "none (user instruction). Read the training-side panel, qf1_loss/qf1_values, alpha, and the per-month episode scores; a scored comparison needs approval.",
+  "gates": "not run (user instruction); the offline SAC-math gate and the env bridge are unchanged by a loop-count",
+  "readings": {"works": "qf1_loss falls instead of rising and the training panel keeps falling past 30M, fairbanks_2 included", "fails": "same flat panel with the same rising critic loss"}
+}

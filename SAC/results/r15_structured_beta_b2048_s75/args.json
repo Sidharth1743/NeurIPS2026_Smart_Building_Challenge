@@ -1,0 +1,8 @@
+{
+  "run": "r15_structured_beta_b2048_s75",
+  "out": "results/r15_structured_beta_b2048_s75",
+  "gpu": 0,
+  "config": "config/structured_b2048_beta_50m.json",
+  "port": 0,
+  "binary": null
+}

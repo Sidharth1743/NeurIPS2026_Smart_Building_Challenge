@@ -99,7 +99,7 @@ def fig_breakdown():
     s = D.load_scores(); s54 = D.load_scores54()
     fig, (ax, bx) = plt.subplots(1, 2, figsize=(7.0, 2.5),
                                  gridspec_kw={"width_ratios": [1.5, 1.0]})
-    off = {"PID": -0.30, "Long": -0.10, "Mid": 0.10, "Final": 0.30}
+    off = {p: (i - (len(D.POL) - 1) / 2) * 0.16 for i, p in enumerate(D.POL)}
     pos = {b: i for i, b in enumerate(D.BUILDINGS)}
     for i, b in enumerate(D.EXT):
         pos[b] = 6.0 + i
@@ -163,8 +163,8 @@ def fig_breakdown():
 def fig_time():
     st = D.load_steps(); s = D.load_scores()
     months = {n: D.month_of(n) for n in s["Final"]}
-    fig, (ax, bx, cx) = plt.subplots(1, 3, figsize=(7.0, 2.3),
-                                     gridspec_kw={"width_ratios": [1.25, 1.0, 1.0]})
+    fig, (ax, cx) = plt.subplots(1, 2, figsize=(7.0, 2.15),
+                                 gridspec_kw={"width_ratios": [1.15, 1.0]})
     for p in D.POL:
         r = np.concatenate([st[p][n] for n in sorted(st[p])])
         hrs = np.tile(D.HOUR, len(st[p]))
@@ -179,21 +179,6 @@ def fig_time():
     ax.annotate("06:00", xy=(6, 0.128), xytext=(8.4, 0.10), fontsize=6.8,
                 arrowprops=dict(arrowstyle="-", lw=0.7, color="#555555"))
 
-    r_by = {p: np.concatenate([st[p][n] for n in sorted(st[p])]) for p in D.POL}
-    bins_t = np.tile(D.BIN, len(st["Final"]))
-    w = 0.2
-    for k, p in enumerate(D.POL):
-        vals = [-r_by[p][bins_t == b].mean() for b in D.BINS]
-        bx.bar(np.arange(len(D.BINS)) + (k - 1.5) * w, vals, width=w, color=D.COL[p],
-               edgecolor="white", linewidth=0.3)
-    bx.set_yscale("log"); bx.set_ylim(5e-4, 3e-1)
-    dec(bx, [0.001, 0.01, 0.1])
-    bx.set_xticks(range(len(D.BINS)))
-    bx.set_xticklabels(["night", "morn", "aft", "eve", "wknd day", "wknd night"],
-                       fontsize=7, rotation=25, ha="right")
-    bx.set_xlabel("day-part (weekday unless marked)")
-    bx.tick_params(axis="x", length=0)
-
     mo = sorted(set(months.values()))
     for p in D.POL:
         vals = [np.mean([s[p][n][0] for n in s[p] if months[n] == m]) for m in mo]
@@ -201,12 +186,15 @@ def fig_time():
     cx.set_yscale("log"); cx.set_ylim(0.006, 0.12)
     dec(cx, [0.01, 0.02, 0.05, 0.1])
     cx.set_xticks(range(len(mo)))
-    cx.set_xticklabels(["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct"][:len(mo)], fontsize=6.8, rotation=45, ha="right")
+    cx.set_xticklabels(["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct"][:len(mo)], fontsize=6.2, rotation=60, ha="right")
     cx.set_xlabel("month the window starts")
     h = [Line2D([], [], color=D.COL[p], marker="o", ms=3.2, lw=1.3, label=p) for p in D.POL]
-    fig.legend(handles=h, loc="upper center", ncol=4, bbox_to_anchor=(0.5, 1.03),
-               handlelength=1.1, columnspacing=1.4)
-    fig.tight_layout(pad=0.5, rect=(0, 0, 1, 0.92))
+    fig.legend(handles=h, loc="upper center", ncol=5, bbox_to_anchor=(0.5, 1.03),
+               handlelength=0.9, columnspacing=1.0, fontsize=6.8)
+    fig.tight_layout(pad=0.5, rect=(0, 0.06, 1, 0.92))
+    for lab, a in zip(("a", "b"), (ax, cx)):
+        pos = a.get_position()
+        fig.text((pos.x0 + pos.x1) / 2, 0.012, f"({lab})", ha="center", va="bottom", fontsize=8)
     save(fig, "fig_results_time4")
     plt.close(fig)
 

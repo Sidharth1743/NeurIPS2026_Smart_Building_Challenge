@@ -1,0 +1,7 @@
+{
+  "run": "r11_structured_b2048_s75",
+  "out": "results/r11_structured_b2048_s75",
+  "gpu": 0,
+  "config": "config/structured_b2048.json",
+  "port": 0
+}

@@ -1,0 +1,3 @@
+with_gpu.sh: GPU 0 is busy, waiting for /tmp/sb_gpu_0.lock ...
+PufferTank 5.0 (CUDA V13.0.88)
+smart_buildings: no scenario. Set env.blob or env.blob_dir (or SB_BLOB_DIR).

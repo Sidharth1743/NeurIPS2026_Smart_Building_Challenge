@@ -1,0 +1,7 @@
+{
+  "run": "r05_utd4_async_960_1m_frozen_s75",
+  "out": "results/r05_utd4_async_960_1m_frozen_s75",
+  "gpu": 0,
+  "config": "config/utd4_960_1m_frozen.json",
+  "port": 0
+}

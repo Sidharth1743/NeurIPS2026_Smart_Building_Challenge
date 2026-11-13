@@ -1,0 +1,11 @@
+{
+  "name": "r07_utd15_ln_960_1m_s75",
+  "approval": "User instruction 2026-11-11: check arm 1, then start the next arm; no scoring.",
+  "control": "r06_utd15_async_960_1m_s75 (identical except the Q body)",
+  "arm1_result": "utd 4 -> 15 helped: panel 0.0789 -> 0.0712 (-10%), better at every window from 15M, qf1_loss ~30% lower and flatter, comfort 1.72 -> 1.42 K, gas 22.5 -> 24.3 kW",
+  "single_change": "LayerNorm after each hidden linear in both twin-Q networks (before the activation), actor untouched",
+  "why": "with 4 passes the critic still loses the race: qf1_loss 2.71 (15-20M) -> 6.16 (45-50M) and the panel is flat from 30M. LayerNorm is the standard stabiliser for high-dimensional critics (REDQ 2021; FastTD3/FastDSAC 2024).",
+  "fixed": "30 scenarios / 960 agents, batch 256, utd 15, async, 1,048,320 buffer, running EMA normalizer, CleanRL defaults, seed 75, 50,135,040 steps",
+  "evaluation": "none (user instruction)",
+  "readings": {"works": "qf1_loss flattens instead of climbing and the panel breaks below 0.063 (r06's floor from 30M)", "fails": "same plateau with the same rising critic loss -> the residual is the action parameterisation"}
+}

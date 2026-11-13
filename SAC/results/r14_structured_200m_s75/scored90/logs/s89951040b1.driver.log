@@ -1,0 +1,54 @@
+PufferTank 5.0 (CUDA V13.0.88)
+smart_buildings: canonical layout (983 obs, 219 continuous heads), absolute actions
+smart_buildings: group 1/1, weather 0: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__atlanta_4.sbb
+smart_buildings: group 1/1, weather 1: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__atlanta_7.sbb
+smart_buildings: group 1/1, weather 2: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__denver_1.sbb
+smart_buildings: group 1/1, weather 3: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__denver_4.sbb
+smart_buildings: group 1/1, weather 4: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__fairbanks_3.sbb
+smart_buildings: group 1/1, weather 5: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__fairbanks_6.sbb
+smart_buildings: group 1/1, weather 6: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__minneapolis_1.sbb
+smart_buildings: group 1/1, weather 7: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__minneapolis_2.sbb
+smart_buildings: group 1/1, weather 8: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__minneapolis_3.sbb
+smart_buildings: group 1/1, weather 9: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__minneapolis_4.sbb
+smart_buildings: group 1/1, weather 10: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__minneapolis_5.sbb
+smart_buildings: group 1/1, weather 11: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__minneapolis_6.sbb
+smart_buildings: group 1/1, weather 12: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__minneapolis_7.sbb
+smart_buildings: group 1/1, weather 13: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__minneapolis_8.sbb
+smart_buildings: group 1/1, weather 14: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__phoenix_2.sbb
+smart_buildings: group 1/1, weather 15: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__phoenix_7.sbb
+smart_buildings: group 1/1, weather 16: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__singapore_2.sbb
+smart_buildings: group 1/1, weather 17: 1 envs, episode length 8640 steps, /w/SAC/artifacts/eval90/building_train_1/building_train_1__singapore_5.sbb
+smart_buildings: group 1/1: 18 envs, 18 scenario(s), ld 32, 1 env(s)/lane, value mode 1 (weathers share 32-env slabs: per-lane values)
+smart_buildings: mask 1/1: 97/288 active heads
+sb_env: 18 agents, obs 983/1024, act 219/272, mask 288, ep_len 8640, graph 0, rew_norm 0
+sb_env: ready on /w/SAC/run/r/6937cce7fc73.sock
+sb_env: 576 steps, 13.83 ms/step
+sb_env: 864 steps, 13.67 ms/step
+sb_env: 1152 steps, 13.52 ms/step
+sb_env: 1440 steps, 13.54 ms/step
+sb_env: 1728 steps, 13.36 ms/step
+sb_env: 2016 steps, 13.57 ms/step
+sb_env: 2304 steps, 13.84 ms/step
+sb_env: 2592 steps, 13.53 ms/step
+sb_env: 2880 steps, 13.64 ms/step
+sb_env: 3168 steps, 13.48 ms/step
+sb_env: 3456 steps, 13.37 ms/step
+sb_env: 3744 steps, 13.43 ms/step
+sb_env: 4032 steps, 13.66 ms/step
+sb_env: 4320 steps, 13.34 ms/step
+sb_env: 4608 steps, 13.72 ms/step
+sb_env: 4896 steps, 13.41 ms/step
+sb_env: 5184 steps, 13.77 ms/step
+sb_env: 5472 steps, 13.63 ms/step
+sb_env: 5760 steps, 13.76 ms/step
+sb_env: 6048 steps, 13.39 ms/step
+sb_env: 6336 steps, 13.38 ms/step
+sb_env: 6624 steps, 13.75 ms/step
+sb_env: 6912 steps, 13.69 ms/step
+sb_env: 7200 steps, 13.76 ms/step
+sb_env: 7488 steps, 13.66 ms/step
+sb_env: 7776 steps, 13.55 ms/step
+sb_env: 8064 steps, 13.59 ms/step
+sb_env: 8352 steps, 13.51 ms/step
+sb_env: 8640 steps, 13.58 ms/step
+sb_env: 8640 steps, exiting

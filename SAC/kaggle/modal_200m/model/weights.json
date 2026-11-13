@@ -1,0 +1,21 @@
+{
+  "checkpoint": "results/modal_r_sac200m_s75_full/r_sac200m_s75/snapshots/0000000199895040.0aef4e14307e4b2e8fba9e97a00216a7/000199895040.pt",
+  "step": 199895040,
+  "actor_type": "structured",
+  "floats": 36518,
+  "bytes": 146072,
+  "order": [
+    "trunk.weight",
+    "trunk.bias",
+    "r0.weight",
+    "r0.bias",
+    "r1.weight",
+    "r1.bias",
+    "r2.weight",
+    "r2.bias",
+    "zm1.weight",
+    "zm1.bias",
+    "zm2.weight",
+    "zm2.bias"
+  ]
+}

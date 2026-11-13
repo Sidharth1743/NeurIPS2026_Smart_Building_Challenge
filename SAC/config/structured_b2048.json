@@ -1,0 +1,33 @@
+{
+  "seed": 75,
+  "total_timesteps": 50135040,
+  "groups": 30,
+  "agents": 960,
+  "batch_size": 2048,
+  "buffer_size": 1048320,
+  "gamma": 0.99,
+  "tau": 0.005,
+  "learning_starts": 5000,
+  "policy_lr": 0.0003,
+  "q_lr": 0.001,
+  "policy_frequency": 2,
+  "target_network_frequency": 1,
+  "hidden": 256,
+  "checkpoint_every_vector_steps": 2604,
+  "batch_set": "complete_port/artifacts/sets/r85_four",
+  "eval_set": "SAC/artifacts/eval10",
+  "algorithm": "CleanRL sac_continuous_action.py, defaults kept",
+  "adaptations": [
+    "masked 219-head action",
+    "per-sample entropy target -n_active",
+    "env.rew_norm=1 per-scenario reward normalisation",
+    "terminal at truncation (no bootstrap)"
+  ],
+  "utd": 2,
+  "note": "P1+P2: batch 256->2048 and utd 15->2 (same 4.27 passes/transition), features compiled with torch.compile",
+  "async": 1,
+  "queue_depth": 2,
+  "blob_dir": "complete_port/artifacts/sets/tr23_shipped30",
+  "actor": "structured",
+  "compile_features": 1
+}

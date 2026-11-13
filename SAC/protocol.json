@@ -1,0 +1,36 @@
+{
+  "name": "r01_cleanrl_sac_s75",
+  "approval": "User approved the standard-CleanRL-SAC proposal on 2026-11-10 (standard CleanRL SAC, UTD 1, RTX 3090, r139's 50M batch and months).",
+  "question": "Does textbook off-policy SAC learn on the 219-head competition contract, and where does it sit against r139 (PPO) at the same batch, seed and step budget?",
+  "control": "r139_bestof_s75 (r139 recipe, r85_four, 256 agents, seed 75, 50,135,040 steps, 8095 s). Scored on the same 10-month fp64 grid, then SAC on the same grid.",
+  "single_change": "the learner: PPO -> CleanRL SAC. Contract, reward, observation, action bounds, batch, seed and step budget are unchanged.",
+  "algorithm": "CleanRL sac_continuous_action.py, defaults kept: gamma 0.99, tau 0.005, batch 256, q_lr 1e-3, policy_lr 3e-4, policy_frequency 2, target_frequency 1, autotune alpha (log_alpha init 0), buffer 1e6, learning_starts 5e3, actor 983-256-256-219x2, twin Q 1202-256-256-1, no grad clip, no obs normalisation, constant lr.",
+  "adaptations": [
+    "masked 219-head action: inactive heads hold 0 and are excluded from the log-prob/entropy and from the Q input (the head set is 97/209/135/193 per building)",
+    "per-sample entropy target -n_active (CleanRL's -dim(A) applied per sample; a single -219 is unreachable for a 97-head building)",
+    "env.rew_norm=1 per-scenario reward normalisation (affine per scenario; logs and the scored reward keep raw)",
+    "terminal at truncation, no bootstrap (CleanRL's handle_timeout_termination=False and r139's timeout_bootstrap=0)"
+  ],
+  "fixed": "r85_four, 64 agents/building, canonical layout, fp64 solve, desync 1, reward_scale 1, residual/comfort_shape/guard/zone_command/beta/zone_memory all 0, from scratch, fresh optimizer",
+  "steps": 50135040,
+  "vector_steps": 195840,
+  "seed": 75,
+  "gpu": "RTX 3090 (GPU 0)",
+  "updates": "1 critic update per vector step, 2 actor updates every 2 steps (CleanRL policy_frequency), 1 target soft update per step",
+  "checkpoint_steps": [2506752, 5013504, 7520256, 10027008, 12533760, 15040512, 17547264, 20054016, 22560768, 25067520, 27574272, 30081024, 32587776, 35094528, 37601280, 40108032, 42614784, 45121536, 47628288, 50135040],
+  "scored_steps": [10027008, 20054016, 30081024, 40108032, 50135040],
+  "evaluation": "10 fp64 months (r85_four's 4 + train_1 phoenix_5, train_2 fairbanks_2, train_4 atlanta_5, train_5 denver_3, train_8 denver_6, train_8 phoenix_4), one env per month, desync 0, deterministic tanh(mean), SB_EVAL_OUT written by the env",
+  "gates": [
+    "GATE1 smoke_env.py: 256 agents, obs 983, act 219/272, mask 288, ep_len 8640, active 97/135/193/209, reset obs reproducible, graph replay bit-identical to the direct step",
+    "GATE2 check_sac_math.py: masked tanh log-prob, twin-Q target, actor loss, alpha loss and gradient, soft update, replay ring map, all against numpy",
+    "GATE3 check_bridge.py: replay a recorded teacher rollout's actions through the driver and match the recorder's observations"
+  ],
+  "readings": {
+    "works": "panel falls across the 5 scored saves and ends below 0.20",
+    "competitive": "final panel <= r139_bestof_s75 final panel + 0.02",
+    "beats": "below r139_bestof_s75 and held over two consecutive saves",
+    "fails": "panel flat (|delta| < 0.01) while alpha is bounded off 0 and off its cap and the Q loss is stable",
+    "void": "a gate fails, the Q diverges, or the across-zone action std stays < 0.01 with the panel 10x worse"
+  },
+  "rules": "no parity run, no resume, no checkpoint selection on the training scenario, report productivity/energy/carbon and both fuels with every month, ask before any relaunch"
+}

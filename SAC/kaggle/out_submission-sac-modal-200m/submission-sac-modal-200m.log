@@ -1,0 +1,11 @@
+[{"stream_name":"stdout","time":22.517904415,"data":"loaded weights /kaggle/input/datasets/sidharth1743/submission-sac-modal-200m-model/weights.bin floats 36518\n"}
+,{"stream_name":"stdout","time":1002.874640635,"data":"Episode finished! Total reward: {'agent_0': -215.80418490302304}\n"}
+,{"stream_name":"stdout","time":1002.874746717,"data":"[gateway] building_train_1/atlanta_2: mean reward=-0.0250 over 8641 steps in 998s\n"}
+,{"stream_name":"stdout","time":1003.018650541,"data":"[gateway] mean scenario reward total, for logs only: -0.0250\n"}
+,{"stream_name":"stderr","time":1006.584839802,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1006.584896438,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1006.862668567,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1006.86271047,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1007.845239696,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1008.683254171,"data":"[NbConvertApp] Writing 465101 bytes to __results__.html\n"}
+]

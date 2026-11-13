@@ -1,0 +1,10 @@
+{
+  "name": "r05_utd4_async_960_1m_frozen_s75",
+  "approval": "User instruction 2026-11-11: run with the reward normalizer frozen; no scoring.",
+  "control": "r04_utd4_async_960_1m_s75 (identical except the normalizer)",
+  "single_change": "freeze the per-scenario learning-reward normalizer at 10,000,000 env steps (host EMA + device mirror held; metrics keep flowing)",
+  "why": "r04 F4: inv_std 5.7 -> 8.2 -> 13.0 -> 14.9 while qf1_loss rose 4.1 -> 8.7 and Q drifted -17 -> -69; a TD target whose scale moves 2.6x under the critic",
+  "fixed": "30 scenarios / 6 groups x 160 = 960 agents, UTD 4, async, 1,048,320-transition buffer, CleanRL defaults, seed 75, 50,135,040 steps",
+  "evaluation": "none (user instruction)",
+  "readings": {"works": "norm/reward_inv_std flat after 10M, qf1_loss stops rising, panel keeps falling past 30M on the hard months", "fails": "same plateau with the same rising critic loss"}
+}

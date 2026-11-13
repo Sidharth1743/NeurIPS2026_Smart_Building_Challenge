@@ -53,8 +53,6 @@ for i, (a, b, rng, name, note) in enumerate(BOUND):
 
 # ------------------------------------------------------------- one zone slot
 C, GX, GY = 0.245, 0.72, 0.40
-FEAT = ["presence", "T", "T $-$ $H_s$", "$C_s$ $-$ T", "$H_s$", "damper",
-        "reheat", "base damper", "base reheat"]
 for i in range(9):
     ax.add_patch(Rectangle((GX + i * C, GY), C - 0.014, 0.22, facecolor="#EAF1F8",
                            edgecolor=BLUE, linewidth=0.4))

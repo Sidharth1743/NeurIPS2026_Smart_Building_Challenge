@@ -1,0 +1,12 @@
+{
+  "name": "r08_structured_960_1m_s75",
+  "approval": "User instruction 2026-11-11: do the structured per-zone actor the right/standard way, verify before running, then run on the 3090.",
+  "control": "r06_utd15_async_960_1m_s75 (identical except the actor)",
+  "single_change": "actor: flat 983-256-256-438 MLP -> r139 structured readout (pool80 -> Linear(80,256) trunk -> per-role per-node readouts [trunk|local] -> (mu,logsigma); zone role adds a 32-unit tanh branch with a zero-output skip). Critic unchanged (983+219 MLP).",
+  "why": "r06 residual: three Fairbanks months hold 40% of the sum and the same weather is solved in train_4/train_5 but not train_1/2/8 (0.12 K vs 6.6 K cold) -> the flat trunk must memorise six per-building control laws. r01 (7.5x the per-scenario share) did better on that month, and the control's policy is structurally per-zone.",
+  "constraint": "no PID and no rule-based action inside the agent: the 219 heads are tanh(learned linear map); env.zone_command=0, residual=0, plant_pair=0; the feature code reads sensor columns only and the check proves that filling the base-controller proposal columns changes nothing; env.zone_memory=0 so the hand-built memory block is identically zero.",
+  "verification": "tools/check_features.py: numpy-vs-torch 2.2e-16 on all four blocks; proposal-column invariance bit-identical; memory block exactly 0; inactive heads exactly 0; zone branch zero at init; forward/backward finite with 12/12 grads",
+  "fixed": "30 scenarios / 960 agents, batch 256, utd 15, async, 1,048,320 buffer, running EMA normalizer, CleanRL defaults, seed 75, 50,135,040 steps",
+  "evaluation": "none",
+  "readings": {"works": "the three Fairbanks months fall below 0.16 (r06's worst is 0.468) and the panel goes below 0.063", "fails": "same panel with the same month ranking -> the residual is not the readout layout"}
+}

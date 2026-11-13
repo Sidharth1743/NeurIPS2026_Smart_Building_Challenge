@@ -7,6 +7,7 @@ Writes nothing; other scripts import load().
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 import numpy as np
@@ -19,8 +20,10 @@ BUILDINGS = ["building_train_1", "building_train_2", "building_train_3",
              "building_train_6", "building_train_8"]
 EXT = ["building_train_4", "building_train_5", "building_train_7"]
 STATIONS = ["atlanta", "denver", "fairbanks", "minneapolis", "phoenix", "singapore"]
-POL = ["PID", "Long", "Mid", "Final"]
-COL = {"PID": "#B64342", "Long": "#767676", "Mid": "#3775BA", "Final": "#0F4D92"}
+POL = ["PID", "SAC", "Long", "Mid", "Final"]
+COL = {"PID": "#B64342", "SAC": "#9A4D8E", "Long": "#767676", "Mid": "#42949E", "Final": "#0F4D92"}
+SAC90 = CP.parent / "SAC/results/r15_structured_beta_b2048_s75/scored90"
+SAC54 = CP.parent / "SAC/results/r15_structured_beta_b2048_s75/scored54"
 
 N90 = RES / "study_r139_eval90/gpu"
 CK = {
@@ -69,6 +72,12 @@ def load_scores():
         pid[v["scenario"]] = (v["score"], 0.6 * abs(v["productivity"]),
                               0.2 * v["energy_cost"], 0.2 * v["carbon"])
     out["PID"] = pid
+    sac = {}
+    for f in SAC90.glob("50135040_b*.json"):
+        for k, v in json.loads(f.read_text())["scenarios"].items():
+            sac[k] = (abs(v["mean_reward"]), 0.6 * abs(v["productivity"]),
+                      0.2 * v["energy_cost"], 0.2 * v["carbon"])
+    out["SAC"] = sac
     return out
 
 
@@ -82,6 +91,11 @@ def load_scores54():
         v = json.loads(s.read_text())
         pid[v["scenario"]] = v["score"]
     out["PID"] = pid
+    sac = {}
+    for f in SAC54.glob("50135040_b*.json"):
+        for k, v in json.loads(f.read_text())["scenarios"].items():
+            sac[k] = abs(v["mean_reward"])
+    out["SAC"] = sac
     return out
 
 
@@ -99,6 +113,13 @@ def load_steps():
             r = (0.6 * parts[:, :, 0] - 0.2 * parts[:, :, 1] - 0.2 * parts[:, :, 2]).astype(np.float32)
             for i, n in enumerate(scenario_names(b)):
                 out[p][n] = r[:, i]
+    out["SAC"] = {}
+    sac_rec = SAC90.parent / "record90" / "50135040"
+    for b in BUILDINGS:
+        parts = np.fromfile(sac_rec / b / "parts.bin", dtype=np.float64).reshape(H, N, 8)
+        r = (0.6 * parts[:, :, 0] - 0.2 * parts[:, :, 1] - 0.2 * parts[:, :, 2]).astype(np.float32)
+        for i, n in enumerate(scenario_names(b)):
+            out["SAC"][n] = r[:, i]
     out["PID"] = {}
     for n in sorted({k for k in load_scores()["PID"]}):
         import pandas as pd

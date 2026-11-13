@@ -1,0 +1,21 @@
+{
+  "checkpoint": "results/r14_structured_200m_s75/ckpt/000159912960.pt",
+  "step": 159912960,
+  "actor_type": "structured",
+  "floats": 36518,
+  "bytes": 146072,
+  "order": [
+    "trunk.weight",
+    "trunk.bias",
+    "r0.weight",
+    "r0.bias",
+    "r1.weight",
+    "r1.bias",
+    "r2.weight",
+    "r2.bias",
+    "zm1.weight",
+    "zm1.bias",
+    "zm2.weight",
+    "zm2.bias"
+  ]
+}

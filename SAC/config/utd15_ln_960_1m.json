@@ -1,0 +1,32 @@
+{
+  "seed": 75,
+  "total_timesteps": 50135040,
+  "groups": 30,
+  "agents": 960,
+  "batch_size": 256,
+  "buffer_size": 1048320,
+  "gamma": 0.99,
+  "tau": 0.005,
+  "learning_starts": 5000,
+  "policy_lr": 0.0003,
+  "q_lr": 0.001,
+  "policy_frequency": 2,
+  "target_network_frequency": 1,
+  "hidden": 256,
+  "checkpoint_every_vector_steps": 2604,
+  "batch_set": "complete_port/artifacts/sets/r85_four",
+  "eval_set": "SAC/artifacts/eval10",
+  "algorithm": "CleanRL sac_continuous_action.py, defaults kept",
+  "adaptations": [
+    "masked 219-head action",
+    "per-sample entropy target -n_active",
+    "env.rew_norm=1 per-scenario reward normalisation",
+    "terminal at truncation (no bootstrap)"
+  ],
+  "utd": 15,
+  "note": "arm 2: LayerNorm after each hidden linear in both twin-Q nets. Base = r06 (utd 15, async, running normalizer).",
+  "async": 1,
+  "queue_depth": 2,
+  "blob_dir": "complete_port/artifacts/sets/tr23_shipped30",
+  "q_layernorm": 1
+}

@@ -1,0 +1,24 @@
+{
+  "checkpoint": "results/r15_structured_beta_b2048_s75/ckpt/000050135040.pt",
+  "step": 50135040,
+  "actor_type": "structured",
+  "floats": 36518,
+  "bytes": 146072,
+  "order": [
+    "trunk.weight",
+    "trunk.bias",
+    "r0.weight",
+    "r0.bias",
+    "r1.weight",
+    "r1.bias",
+    "r2.weight",
+    "r2.bias",
+    "zm1.weight",
+    "zm1.bias",
+    "zm2.weight",
+    "zm2.bias"
+  ],
+  "head": "beta",
+  "beta_floor": 0.5,
+  "beta_conc_max": 12.0
+}

@@ -16,8 +16,8 @@ import results_fig_data as D
 
 plt.rcParams.update({
     "font.family": ["DejaVu Sans"],
-    "font.size": 8.5, "axes.labelsize": 8.5, "axes.titlesize": 8.5,
-    "xtick.labelsize": 7.5, "ytick.labelsize": 7.5, "legend.fontsize": 7.2,
+    "font.size": 9.4, "axes.labelsize": 9.4, "axes.titlesize": 9.4,
+    "xtick.labelsize": 8.4, "ytick.labelsize": 8.4, "legend.fontsize": 7.8,
     "axes.linewidth": 1.0, "axes.spines.right": False, "axes.spines.top": False,
     "legend.frameon": False, "svg.fonttype": "none",
     "figure.dpi": 200, "savefig.dpi": 300,
@@ -26,7 +26,7 @@ plt.rcParams.update({
 FIG = D.CP.parent / "paper-writing/figures"
 TERM = ["#0F4D92", "#6C9BD2", "#BCD0EA"]
 TERM_NAMES = ["comfort", "energy", "carbon"]
-ORDER = ["Final", "Mid", "Long", "PID"]
+ORDER = ["Final", "Mid", "Long", "SAC", "PID"]
 GREY = "#8A8A8A"
 
 
@@ -65,8 +65,8 @@ def fig_scores():
         ax.text(left[i] + 0.0016, yi, f"{left[i]:.4f}", va="center", ha="left",
                 fontsize=8.0, color="#1A1A1A", fontweight="bold" if p == "Final" else "normal")
     ax.set_yticks(y); ax.set_yticklabels(ORDER, fontsize=8.5)
-    ax.set_xlim(0, 0.058)
-    dec(ax, [0.0, 0.01, 0.02, 0.03, 0.04, 0.05], axis="x")
+    ax.set_xlim(0, 0.066)
+    dec(ax, [0.0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06], axis="x")
     ax.set_xlabel("score (sum of the three terms)")
     ax.tick_params(axis="y", length=0)
     ax.xaxis.grid(True, color="#E6E6E6", lw=0.6, zorder=0)
@@ -99,24 +99,30 @@ def fig_scores():
         bx.plot(px, py, "--", color=D.COL[name], lw=1.2, zorder=4)
         bx.plot(px, py, "o", ms=6.0, mfc="white", mec=D.COL[name], mew=1.3, zorder=6)
 
-    bx.text(243, 0.0240, "Long", color=D.COL["Long"], fontsize=7.6, ha="left", va="center")
-    bx.text(152.5, 0.0181, "Mid", color=D.COL["Mid"], fontsize=7.6, ha="right", va="center")
-    bx.text(203, 0.0170, "Final", color=D.COL["Final"], fontsize=7.6, ha="left", va="center")
 
-    bx.text(300, 0.0322, "Long budget 1.5B,\nstopped at 507.6M", fontsize=6.8,
-            color="#6A6A6A", ha="left", va="center", linespacing=1.3)
-
-    bx.set_yscale("log"); bx.set_ylim(0.0125, 0.052); bx.set_xlim(0, 525)
+    # the SAC checkpoint on the 90 months (filled) and on the public split (open), joined
+    bx.plot([50.135, 50.135], [0.0338, 0.0252], "--", color=D.COL["SAC"], lw=1.0, alpha=0.55, zorder=3)
+    bx.plot([50.135], [0.0338], "o", ms=6.0, mfc=D.COL["SAC"], mec="white", mew=0.8, zorder=6)
+    bx.plot([50.135], [0.0252], "o", ms=6.0, mfc="white", mec=D.COL["SAC"], mew=1.3, zorder=6)
+    bx.set_yscale("log"); bx.set_ylim(0.0125, 0.066); bx.set_xlim(0, 525)
+    bx.text(57, 0.0348, "SAC, 50M", color=D.COL["SAC"], fontsize=7.4, ha="left", va="bottom")
     dec(bx, [0.02, 0.03, 0.04, 0.05])
     bx.set_xticks([0, 100, 200, 300, 400, 500])
     bx.yaxis.grid(True, color="#EDEDED", lw=0.6, zorder=0); bx.set_axisbelow(True)
     bx.set_xlabel("training steps (M)"); bx.set_ylabel("score (lower is better)")
-    h = [Line2D([], [], color="#4A4A4A", marker="o", ms=5.5, lw=1.2, label="90 months"),
-         Line2D([], [], color="#4A4A4A", marker="o", ms=5.5, lw=1.2, mfc="white", label="public")]
-    bx.legend(handles=h, loc="lower right", handlelength=1.6, borderaxespad=0.4,
-              labelspacing=0.35)
-    fig.tight_layout(pad=0.5)
-    save(fig, "fig_results_scores_v2")
+    hp = [Line2D([], [], color=D.COL[p], marker="o",
+                 ms=5.0, lw=1.2, label=p) for p in ("Final", "Mid", "Long", "SAC")]
+    hp.append(Line2D([], [], color=D.COL["PID"], lw=1.3, ls=(0, (1.4, 1.9)),
+                     label="PID, 90 months"))
+    hp += [Line2D([], [], color="#4D4D4D", marker="o", ms=5.0, lw=0, mfc="#4D4D4D",
+                  mec="white", mew=0.8, label="filled: 90 months"),
+           Line2D([], [], color="#4D4D4D", marker="o", ms=5.0, lw=0, mfc="white",
+                  mec="#4D4D4D", mew=1.3, label="open: public leaderboard")]
+    bx.legend(handles=hp, loc="lower center", bbox_to_anchor=(0.5, 1.02), ncol=2,
+              handlelength=1.4, columnspacing=1.1, labelspacing=0.22, fontsize=6.9,
+              frameon=False, borderaxespad=0.1)
+    fig.subplots_adjust(left=0.075, right=0.99, bottom=0.165, top=0.735)
+    save(fig, "fig_results_scores_v3")
     plt.close(fig)
 
 
@@ -127,9 +133,9 @@ def stat(vals):
 
 def fig_breakdown():
     s = D.load_scores(); s54 = D.load_scores54()
-    fig, (ax, bx) = plt.subplots(1, 2, figsize=(7.0, 2.45),
+    fig, (ax, bx) = plt.subplots(1, 2, figsize=(7.0, 3.05),
                                  gridspec_kw={"width_ratios": [1.55, 1.0]})
-    off = {"PID": -0.26, "Long": -0.09, "Mid": 0.09, "Final": 0.26}
+    off = {p: (i - (len(D.POL) - 1) / 2) * 0.16 for i, p in enumerate(D.POL)}
     pos = {b: i for i, b in enumerate(D.BUILDINGS)}
     for i, b in enumerate(D.EXT):
         pos[b] = 6.0 + i
@@ -147,9 +153,9 @@ def fig_breakdown():
             ax.vlines(xs, his, wst, color=D.COL[p], lw=0.5, alpha=0.18, zorder=1)
             ax.vlines(xs, los, his, color=D.COL[p], lw=1.0, alpha=0.38, zorder=2)
             ax.plot(xs, wst, "_", ms=5.0, mew=1.0, color=D.COL[p], alpha=0.6, zorder=3)
-            ax.plot(xs, mus, "o", ms=4.4 if p == "Final" else 3.6, color=D.COL[p],
-                    mec="white", mew=0.45, zorder=5)
-        # the staircase: the four means of each group, joined
+            ax.plot(xs, mus, "D" if p == "SAC" else "o",
+                    ms=4.6 if p == "Final" else 4.2 if p == "SAC" else 3.6,
+                    color=D.COL[p], mec="white", mew=0.45, zorder=5)
         for g in groups:
             ax.plot([xs_of(g) + off[p] for p in D.POL], [stats[g][p][0] for p in D.POL],
                     "-", color="#9A9A9A", lw=0.7, alpha=0.55, zorder=4)
@@ -188,6 +194,7 @@ def fig_breakdown():
     for g in D.STATIONS:
         bx.plot([D.STATIONS.index(g) + off[p] for p in D.POL],
                 [st2[g][p][0] for p in D.POL], "-", color="#9A9A9A", lw=0.7, alpha=0.55, zorder=4)
+
     bx.set_yscale("log"); bx.set_ylim(0.006, 0.135); bx.set_xlim(-0.7, 5.7)
     dec(bx, [0.01, 0.02, 0.05, 0.1])
     bx.set_xticks(range(6))
@@ -196,14 +203,15 @@ def fig_breakdown():
     bx.set_xlabel("climate (station)")
     bx.yaxis.grid(True, color="#EDEDED", lw=0.6, zorder=0); bx.set_axisbelow(True)
 
-    h = [Line2D([], [], color=D.COL[p], marker="o", ms=4.0, lw=1.0, label=p) for p in D.POL]
+    h = [Line2D([], [], color=D.COL[p], marker="D" if p == "SAC" else "o", ms=4.0, lw=1.0,
+                label=p) for p in D.POL]
     enc = [Line2D([], [], color="#555555", marker="o", ms=3.6, lw=0, label="mean"),
            Line2D([], [], color="#555555", lw=1.0, label="10th--90th"),
            Line2D([], [], color="#555555", marker="_", ms=5.0, mew=1.0, lw=0,
                   label="worst window")]
-    order = [h[0], enc[0], h[1], enc[1], h[2], enc[2], h[3]]
-    fig.legend(handles=order, loc="upper center", ncol=4, bbox_to_anchor=(0.5, 1.055),
-               handlelength=1.1, columnspacing=1.4, labelspacing=0.35, fontsize=6.8)
+    order = [h[0], enc[0], h[1], enc[1], h[2], enc[2], h[3], h[4]]
+    fig.legend(handles=order, loc="upper center", ncol=5, bbox_to_anchor=(0.5, 1.075),
+               handlelength=1.1, columnspacing=1.4, labelspacing=0.35, fontsize=7.2)
     fig.tight_layout(pad=0.4, rect=(0.01, 0.0, 1, 0.90))
     save(fig, "fig_results_breakdown4_v2")
     plt.close(fig)

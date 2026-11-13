@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Rebuild both PDFs from the current .tex and .bib.
+# Rebuild the paper PDF from SBchallenge26_round1.tex.
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -9,6 +9,6 @@ if [ -z "${TECTONIC}" ]; then
   exit 1
 fi
 
-"${TECTONIC}" -X compile neurips_3_method.tex
-"${TECTONIC}" -X compile neurips_3_method_appendix.tex
-echo "rebuilt neurips_3_method.pdf and neurips_3_method_appendix.pdf"
+TEX="${1:-SBchallenge26_round1.tex}"
+"${TECTONIC}" -X compile "${TEX}"
+echo "rebuilt ${TEX%.tex}.pdf"

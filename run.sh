@@ -212,8 +212,8 @@ paper)
     say "compiling $*"
     ( cd "$HERE/paper" && for f in "$@"; do tectonic -X compile "$f"; done )
   else
-    say "both PDFs"
-    ( cd "$HERE/paper" && tectonic -X compile neurips_3_method.tex && tectonic -X compile neurips_3_method_appendix.tex )
+    say "the paper PDF"
+    ( cd "$HERE/paper" && tectonic -X compile SBchallenge26_round1.tex )
   fi
   ;;
 doctor)

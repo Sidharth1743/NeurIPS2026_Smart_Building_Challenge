@@ -1,0 +1,11 @@
+{
+  "name": "r06_utd15_async_960_1m_s75",
+  "approval": "User instruction 2026-11-11: run arm 1 (replay ratio) on the 3090.",
+  "control": "r04_utd4_async_960_1m_s75 (identical except utd)",
+  "single_change": "utd 4 -> 15: 15 x 256 = 3,840 samples per 960 new transitions = 4.0 passes, matching r01's and PPO's replay_ratio=4 (r04 managed 1.07 passes)",
+  "base_is_r04_not_r05": "the frozen-normalizer arm (r05) finished at 0.172 panel against r04's 0.079 and blew up at 30M (qf1_loss 4.3 -> 11.0, qf1_values +167 -> -72): freezing the mean as well as the scale refuted the F4 hypothesis, so the running normalizer is kept",
+  "fixed": "30 scenarios / 960 agents, batch 256, async, 1,048,320 buffer, CleanRL defaults, seed 75, 50,135,040 steps",
+  "expected_cost": "learner 4 -> 15 updates per step (~33 ms of a ~100 ms step), mostly hidden by async",
+  "evaluation": "none",
+  "readings": {"works": "qf1_loss stops rising after 15M and the panel moves below 0.079", "fails": "same plateau with the same rising critic loss"}
+}

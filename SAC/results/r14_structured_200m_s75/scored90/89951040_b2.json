@@ -1,0 +1,137 @@
+{
+  "scenarios": {
+    "building_train_2__atlanta_4": {
+      "episodes": 1,
+      "mean_reward": -0.02360517346,
+      "productivity": -0.03061041981,
+      "energy_cost": 0.0212396197,
+      "carbon": 0.004955243785
+    },
+    "building_train_2__atlanta_7": {
+      "episodes": 1,
+      "mean_reward": -0.01518623423,
+      "productivity": -0.01880142651,
+      "energy_cost": 0.01358793676,
+      "carbon": 0.005938976537
+    },
+    "building_train_2__denver_1": {
+      "episodes": 1,
+      "mean_reward": -0.05595380183,
+      "productivity": -0.07161815464,
+      "energy_cost": 0.02120673656,
+      "carbon": 0.04370731488
+    },
+    "building_train_2__denver_4": {
+      "episodes": 1,
+      "mean_reward": -0.01372899804,
+      "productivity": -0.01717420481,
+      "energy_cost": 0.01304057799,
+      "carbon": 0.00408184994
+    },
+    "building_train_2__fairbanks_3": {
+      "episodes": 1,
+      "mean_reward": -0.05692620255,
+      "productivity": -0.07300236821,
+      "energy_cost": 0.02023215964,
+      "carbon": 0.04539112374
+    },
+    "building_train_2__fairbanks_6": {
+      "episodes": 1,
+      "mean_reward": -0.01602584314,
+      "productivity": -0.02227090858,
+      "energy_cost": 0.008965168148,
+      "carbon": 0.004351198673
+    },
+    "building_train_2__minneapolis_1": {
+      "episodes": 1,
+      "mean_reward": -0.08912867802,
+      "productivity": -0.1122692078,
+      "energy_cost": 0.0341896005,
+      "carbon": 0.07464690506
+    },
+    "building_train_2__minneapolis_2": {
+      "episodes": 1,
+      "mean_reward": -0.06320339241,
+      "productivity": -0.07650684565,
+      "energy_cost": 0.02663295716,
+      "carbon": 0.0598638691
+    },
+    "building_train_2__minneapolis_3": {
+      "episodes": 1,
+      "mean_reward": -0.03524260693,
+      "productivity": -0.0462709479,
+      "energy_cost": 0.01391999237,
+      "carbon": 0.02348001115
+    },
+    "building_train_2__minneapolis_4": {
+      "episodes": 1,
+      "mean_reward": -0.01708139816,
+      "productivity": -0.02125461027,
+      "energy_cost": 0.01529024635,
+      "carbon": 0.006353041623
+    },
+    "building_train_2__minneapolis_5": {
+      "episodes": 1,
+      "mean_reward": -0.01666458286,
+      "productivity": -0.02064871043,
+      "energy_cost": 0.01720937341,
+      "carbon": 0.004167257342
+    },
+    "building_train_2__minneapolis_6": {
+      "episodes": 1,
+      "mean_reward": -0.0128394309,
+      "productivity": -0.01484365482,
+      "energy_cost": 0.01592000946,
+      "carbon": 0.003746196628
+    },
+    "building_train_2__minneapolis_7": {
+      "episodes": 1,
+      "mean_reward": -0.020964212,
+      "productivity": -0.02897127904,
+      "energy_cost": 0.01022753026,
+      "carbon": 0.007679669186
+    },
+    "building_train_2__minneapolis_8": {
+      "episodes": 1,
+      "mean_reward": -0.04411120758,
+      "productivity": -0.05656505749,
+      "energy_cost": 0.01629039831,
+      "carbon": 0.03457056731
+    },
+    "building_train_2__phoenix_2": {
+      "episodes": 1,
+      "mean_reward": -0.01350824901,
+      "productivity": -0.01635767706,
+      "energy_cost": 0.0143510513,
+      "carbon": 0.004117241595
+    },
+    "building_train_2__phoenix_7": {
+      "episodes": 1,
+      "mean_reward": -0.01647836842,
+      "productivity": -0.02042786404,
+      "energy_cost": 0.0168318674,
+      "carbon": 0.004276218358
+    },
+    "building_train_2__singapore_2": {
+      "episodes": 1,
+      "mean_reward": -0.03201991047,
+      "productivity": -0.04406378418,
+      "energy_cost": 0.02256035246,
+      "carbon": 0.005348257255
+    },
+    "building_train_2__singapore_5": {
+      "episodes": 1,
+      "mean_reward": -0.03105910312,
+      "productivity": -0.04228507727,
+      "energy_cost": 0.02310532704,
+      "carbon": 0.005335246213
+    }
+  },
+  "n_scenarios_done": 18,
+  "n_scenarios": 18,
+  "complete": true,
+  "score": 0.03187374406,
+  "checkpoint": "/data/neurips-2026-smart-buildings/SAC/results/r14_structured_200m_s75/ckpt/000089951040.pt",
+  "step": 89951040,
+  "set": "/data/neurips-2026-smart-buildings/SAC/artifacts/eval90/building_train_2"
+}

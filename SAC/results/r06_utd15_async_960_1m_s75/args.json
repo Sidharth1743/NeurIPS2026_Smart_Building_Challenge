@@ -1,0 +1,7 @@
+{
+  "run": "r06_utd15_async_960_1m_s75",
+  "out": "results/r06_utd15_async_960_1m_s75",
+  "gpu": 0,
+  "config": "config/utd15_960_1m.json",
+  "port": 0
+}

@@ -1,0 +1,15 @@
+{
+  "id": "sidharth1743/submission-sac-modal-200m",
+  "title": "submission_sac_modal_200m",
+  "code_file": "submission.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": "true",
+  "enable_gpu": "false",
+  "enable_tpu": "false",
+  "enable_internet": "false",
+  "dataset_sources": ["sidharth1743/submission-sac-modal-200m-model"],
+  "competition_sources": ["neurips-2026-smart-buildings"],
+  "kernel_sources": [],
+  "model_sources": []
+}
